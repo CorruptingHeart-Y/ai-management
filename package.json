@@ -1,0 +1,17 @@
+{
+  "name": "ai-management",
+  "version": "1.0.0",
+  "description": "爱管理 —— 软件项目管理平台 Sprint 1 最小原型",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/members.test.js test/tasks.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
