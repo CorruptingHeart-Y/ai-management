@@ -18,6 +18,14 @@
 - [ ] 人工 diff review（记录：TBD）
 - [ ] DoD 验收结果（记录：TBD）
 
+当前已确认的代码级证据：
+
+- 测试命令：`npm test`
+- 当前结果：12/12 通过（包含 US04 用例）
+- Feature 提交：`f143bd5`、`40b9b4e`
+- 集成提交：`442ee8e`、`e8da461`
+- PR、人工 diff review、运行截图和正式 DoD 验收：TBD
+
 ## US05
 
 - [ ] 功能运行截图（路径：TBD）
@@ -26,6 +34,14 @@
 - [ ] Pull Request（地址：TBD）
 - [ ] 人工 diff review（记录：TBD）
 - [ ] DoD 验收结果（记录：TBD）
+
+当前已确认的代码级证据：
+
+- 测试命令：`npm test`
+- 当前结果：12/12 通过（包含 US05 用例）
+- Feature 提交：`8f74544`、`f6cad04`、`d3fa695`
+- 集成提交：`79948a5`、`e8da461`
+- PR、人工 diff review、运行截图和正式 DoD 验收：TBD
 
 ## Integrated Sprint Increment
 
@@ -39,4 +55,6 @@
 - [ ] 全量测试通过
 - [ ] 最终 Demo 截图 / 录屏
 
-证据路径、commit hash、PR 地址等当前均为 TBD，待实际开发、测试和审查发生后补充。
+尚未归档的证据路径、PR 地址等仍为 TBD；已确认的 commit hash 和测试结果见上文，待人工审查和正式验收后补充完整。
+
+补充说明：当前已经确认了代码提交和测试命令结果，但尚未形成浏览器运行截图、人工 diff review 记录或正式 DoD 验收结论。

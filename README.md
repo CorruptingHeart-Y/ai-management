@@ -51,7 +51,7 @@ npm install
 npm start
 ```
 
-打开浏览器访问 <http://localhost:3000>，即可查看成员、创建任务、查看任务列表。
+打开浏览器访问 <http://localhost:3000>，即可查看成员、创建任务、查看任务列表并修改任务状态。
 
 ## 测试
 
@@ -60,7 +60,8 @@ npm test
 ```
 
 覆盖 US04 的正常创建、空标题校验、无效负责人校验、创建后读取、以及持久化（刷新后仍在），
-并验证成员列表、id 唯一、成员数据可供分配使用。
+覆盖 US05 的 TODO → DOING、DOING → DONE、非法状态、404 和状态持久化，
+并验证成员列表、id 唯一、成员数据可供分配使用。当前合并后的测试结果为 12/12 通过。
 
 ## 统一数据约定
 
@@ -78,7 +79,7 @@ npm test
 | GET | `/api/members` | 查看项目成员列表 | US01（后端地基） |
 | GET | `/api/tasks` | 查看任务列表 | US04 / US05 共用 |
 | POST | `/api/tasks` | 创建并分配任务 | **US04** |
-| PATCH | `/api/tasks/:id/status` | 更新任务状态 | US05（待实现） |
+| PATCH | `/api/tasks/:id/status` | 更新任务状态 | US05 |
 
 ### POST /api/tasks
 
@@ -92,6 +93,18 @@ npm test
 - `assigneeId` 必须对应真实存在的成员，否则返回 `400`
 - 成功后返回 `201`，新任务 `status` 初始为 `TODO`，并记录 `createdAt`
 
+### PATCH /api/tasks/:id/status
+
+请求体：
+
+```json
+{ "status": "DOING" }
+```
+
+- `status` 只允许 `TODO`、`DOING`、`DONE`，非法状态返回 `400`
+- 任务不存在返回 `404`
+- 成功后返回更新后的任务，状态写回 `data/db.json`
+
 ## 目录结构
 
 ```
@@ -99,10 +112,11 @@ server.js              # 入口，读 PORT / DATA_FILE 并启动
 src/app.js             # createApp({ dataFile }) 工厂（测试复用）
 src/db.js              # 数据访问层，JSON 文件读写
 src/routes/members.js  # 成员接口
-src/routes/tasks.js    # 任务接口（US04）
+src/routes/tasks.js    # 任务接口（US04 创建 + US05 状态更新）
+src/domain/task.js     # 任务状态校验与更新逻辑
 data/db.json           # 预置成员 + 任务数据
 public/                # 前端页面
-test/                  # node:test 测试
+test/                  # node:test 测试（US01 / US04 / US05）
 ```
 
 ## DoD
