@@ -1,0 +1,114 @@
+/* 极简样式，满足可读可演示即可，不做复杂美化。 */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+}
+
+.topbar {
+  background: #1f6feb;
+  color: #fff;
+  padding: 20px 24px;
+}
+
+.topbar h1 { margin: 0 0 4px; font-size: 20px; }
+
+.subtitle { margin: 0; font-size: 13px; opacity: 0.85; }
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+
+.card h2 { margin: 0 0 12px; font-size: 16px; }
+
+.member-list, .task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.member-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #fafafa;
+  border: 1px solid #eef0f2;
+  border-radius: 6px;
+}
+
+.member-list .name { font-weight: 600; }
+.member-list .role { color: #6b7280; font-size: 13px; }
+
+.empty { color: #9ca3af; padding: 8px 10px; }
+
+form { display: flex; flex-direction: column; gap: 12px; }
+
+label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #374151; }
+
+input, textarea, select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #1f6feb;
+}
+
+.required { color: #dc2626; }
+
+button {
+  align-self: flex-start;
+  background: #1f6feb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 18px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover { background: #1a5fd0; }
+
+.message { margin: 0; color: #dc2626; font-size: 13px; min-height: 1em; }
+
+.task-list li {
+  border: 1px solid #eef0f2;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.task-title { font-weight: 600; margin-bottom: 4px; }
+.task-desc { color: #4b5563; font-size: 13px; margin-top: 4px; }
+.task-meta { display: flex; gap: 8px; margin-top: 4px; }
+
+.tag {
+  font-size: 12px;
+  color: #374151;
+  background: #eef0f2;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.tag.status { color: #1a5fd0; background: #e3ecff; }

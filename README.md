@@ -1,4 +1,4 @@
-# 《软件项目管理》实验二 Sprint 1
+# 爱管理 · 实验二 Sprint 1
 
 ## 项目背景
 
@@ -11,6 +11,13 @@
 查看项目成员 → 创建并分配任务 → 更新任务状态
 
 形成一个能够实际运行和演示的最小功能闭环。
+
+## 技术栈
+
+- 后端：Node.js + Express（REST API）
+- 持久化：单个 JSON 文件（`data/db.json`），满足「刷新后任务仍在」，不引入数据库
+- 前端：原生 HTML / CSS / JavaScript，无构建步骤
+- 测试：Node 内置 `node:test` + 内置 `fetch`，零额外测试依赖
 
 ## Sprint 1 用户故事
 
@@ -32,6 +39,72 @@
 
 验收目标：页面同步更新，刷新后状态仍然保留。
 
+## 运行指南
+
+环境要求：Node.js ≥ 18。
+
+```bash
+# 1. 安装依赖（仅 express 一个）
+npm install
+
+# 2. 启动服务（默认 http://localhost:3000）
+npm start
+```
+
+打开浏览器访问 <http://localhost:3000>，即可查看成员、创建任务、查看任务列表。
+
+## 测试
+
+```bash
+npm test
+```
+
+覆盖 US04 的正常创建、空标题校验、无效负责人校验、创建后读取、以及持久化（刷新后仍在），
+并验证成员列表、id 唯一、成员数据可供分配使用。
+
+## 统一数据约定
+
+三个用户故事（US01 / US04 / US05）共用同一份数据与同一套字段，不允许各自造假数据。
+
+- `Member`：`{ id, name, role }`
+- `Task`：`{ id, title, description, assigneeId, status, createdAt }`
+- `status ∈ { TODO, DOING, DONE }`，页面显示「待办 / 进行中 / 已完成」
+- `assigneeId` 必须对应真实存在的 `Member.id`
+
+## API 约定
+
+| 方法 | 路径 | 说明 | 归属 |
+|---|---|---|---|
+| GET | `/api/members` | 查看项目成员列表 | US01（后端地基） |
+| GET | `/api/tasks` | 查看任务列表 | US04 / US05 共用 |
+| POST | `/api/tasks` | 创建并分配任务 | **US04** |
+| PATCH | `/api/tasks/:id/status` | 更新任务状态 | US05（待实现） |
+
+### POST /api/tasks
+
+请求体：
+
+```json
+{ "title": "任务标题", "description": "选填描述", "assigneeId": 2 }
+```
+
+- `title` 不能为空，否则返回 `400`
+- `assigneeId` 必须对应真实存在的成员，否则返回 `400`
+- 成功后返回 `201`，新任务 `status` 初始为 `TODO`，并记录 `createdAt`
+
+## 目录结构
+
+```
+server.js              # 入口，读 PORT / DATA_FILE 并启动
+src/app.js             # createApp({ dataFile }) 工厂（测试复用）
+src/db.js              # 数据访问层，JSON 文件读写
+src/routes/members.js  # 成员接口
+src/routes/tasks.js    # 任务接口（US04）
+data/db.json           # 预置成员 + 任务数据
+public/                # 前端页面
+test/                  # node:test 测试
+```
+
 ## DoD
 
 1. 功能能够正常运行；
@@ -49,10 +122,10 @@
 - `main`：稳定、满足 DoD 的 Sprint 增量
 - `develop`：Sprint 1 集成分支
 - `feature/us01-members`：US01 查看项目成员
-- `feature/us04-create-task`：US04 创建并分配任务
+- `feature/us04-create-task`：US04 创建并分配任务（本分支）
 - `feature/us05-task-status`：US05 更新任务状态
 
-流程：`feature → develop → 测试/审查 → main`
+流程：`feature → develop → 测试/审查 → main`。
 
 ## 团队开发原则
 
@@ -60,4 +133,4 @@
 
 AI 编码智能体负责编写代码、编写测试、运行测试并根据错误修改代码。所有 AI 互动需要实时记录在 [docs/ai-interactions.md](docs/ai-interactions.md) 中。
 
-当前仓库仅完成 Sprint 1 初始化骨架，不包含 Sprint 2 / Sprint 3 功能或范围外复杂功能。
+当前仓库仅完成 Sprint 1 范围内的功能，不包含 Sprint 2 / Sprint 3 或范围外复杂功能。
