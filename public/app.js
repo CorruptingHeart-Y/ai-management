@@ -16,6 +16,7 @@ const taskListEl = document.getElementById('task-list');
 const assigneeEl = document.getElementById('task-assignee');
 const formEl = document.getElementById('task-form');
 const messageEl = document.getElementById('form-message');
+const taskMessageEl = document.getElementById('task-message');
 
 let members = [];
 
@@ -59,13 +60,46 @@ async function loadTasks() {
     li.innerHTML = `
       <div class="task-title">${escapeHtml(t.title)}</div>
       <div class="task-meta">
-        <span class="tag status">${STATUS_LABEL[t.status] || t.status}</span>
         <span class="tag">${assignee ? escapeHtml(assignee.name) : '未知成员'}</span>
       </div>
       ${t.description ? `<div class="task-desc">${escapeHtml(t.description)}</div>` : ''}
     `;
+
+    const statusLabel = document.createElement('label');
+    statusLabel.className = 'task-status-control';
+    statusLabel.textContent = '状态：';
+    const statusSelect = document.createElement('select');
+    statusSelect.setAttribute('aria-label', `修改任务 ${t.title} 状态`);
+    ['TODO', 'DOING', 'DONE'].forEach((status) => {
+      const option = document.createElement('option');
+      option.value = status;
+      option.textContent = STATUS_LABEL[status];
+      option.selected = status === t.status;
+      statusSelect.appendChild(option);
+    });
+    statusSelect.addEventListener('change', () => updateTaskStatus(t.id, statusSelect.value));
+    statusLabel.appendChild(statusSelect);
+    li.appendChild(statusLabel);
     taskListEl.appendChild(li);
   });
+}
+
+/** 更新任务状态；后端会再次校验状态并持久化。 */
+async function updateTaskStatus(taskId, status) {
+  taskMessageEl.textContent = '';
+  const res = await fetch(`/api/tasks/${taskId}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status }),
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    taskMessageEl.textContent = data.error || '状态更新失败';
+    return;
+  }
+
+  await loadTasks();
 }
 
 /** 提交创建任务；失败时在界面提示。 */

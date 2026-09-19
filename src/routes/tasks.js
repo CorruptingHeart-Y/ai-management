@@ -1,15 +1,15 @@
 'use strict';
 
 const express = require('express');
+const { isValidStatus, updateTaskStatus } = require('../domain/task');
 
 /**
  * 任务路由。
  *
  * 本任务负责 US04 创建并分配任务：
  *   - GET  /api/tasks   查看任务列表
- *   - POST /api/tasks   创建任务
- *
- * 状态更新（PATCH /api/tasks/:id/status）属于 US05，由何健翔在此基础上实现。
+ *   - POST  /api/tasks          创建任务
+ *   - PATCH /api/tasks/:id/status 更新任务状态
  */
 
 const VALID_STATUS = ['TODO', 'DOING', 'DONE'];
@@ -65,6 +65,26 @@ function createTasksRouter(db) {
     db.writeData(data);
 
     res.status(201).json(task);
+  });
+
+  // PATCH /api/tasks/:id/status —— 更新任务状态
+  router.patch('/:id/status', (req, res) => {
+    const id = Number(req.params.id);
+    const { status } = req.body || {};
+
+    if (!isValidStatus(status)) {
+      return res.status(400).json({ error: `非法任务状态: ${status}` });
+    }
+
+    const data = db.readData();
+    const taskIndex = data.tasks.findIndex((task) => task.id === id);
+    if (taskIndex === -1) {
+      return res.status(404).json({ error: `任务不存在: ${req.params.id}` });
+    }
+
+    data.tasks[taskIndex] = updateTaskStatus(data.tasks[taskIndex], status);
+    db.writeData(data);
+    return res.json(data.tasks[taskIndex]);
   });
 
   return router;

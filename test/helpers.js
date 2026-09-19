@@ -10,9 +10,12 @@ const path = require('node:path');
 const { createApp } = require('../src/app');
 
 /** 创建临时数据文件路径，并返回一个可在测试结束时清理的句柄。 */
-function makeTempDataFile(t) {
+function makeTempDataFile(t, initialData) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ai-mgmt-'));
   const dataFile = path.join(dir, 'db.json');
+  if (initialData) {
+    fs.writeFileSync(dataFile, JSON.stringify(initialData, null, 2) + '\n', 'utf8');
+  }
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
   return dataFile;
 }
