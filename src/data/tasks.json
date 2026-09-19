@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "title": "搭建项目初始化骨架",
+    "description": "完成 Sprint 1 仓库与文档初始化",
+    "assigneeId": "4",
+    "status": "TODO"
+  },
+  {
+    "id": "2",
+    "title": "实现查看项目成员",
+    "description": "US01 查看项目成员列表",
+    "assigneeId": "1",
+    "status": "TODO"
+  },
+  {
+    "id": "3",
+    "title": "实现创建并分配任务",
+    "description": "US04 创建并分配任务",
+    "assigneeId": "2",
+    "status": "DOING"
+  },
+  {
+    "id": "4",
+    "title": "实现更新任务状态",
+    "description": "US05 更新任务状态",
+    "assigneeId": "3",
+    "status": "TODO"
+  }
+]

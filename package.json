@@ -1,0 +1,17 @@
+{
+  "name": "ai-management",
+  "version": "1.0.0",
+  "description": "爱管理 Sprint 1 最小功能原型（查看成员 -> 创建分配任务 -> 更新任务状态）",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}

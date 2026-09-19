@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>爱管理 - 更新任务状态（US05）</title>
+  <style>
+    body { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; margin: 0; background: #f5f6f8; color: #1f2329; }
+    .container { max-width: 720px; margin: 32px auto; padding: 0 16px; }
+    h1 { font-size: 20px; }
+    .card { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .title { font-weight: 600; margin-bottom: 4px; }
+    .desc { color: #646a73; font-size: 13px; margin-bottom: 12px; }
+    .status-row { display: flex; align-items: center; gap: 8px; }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; }
+    .badge.TODO { background: #fff3e0; color: #b26a00; }
+    .badge.DOING { background: #e3f2fd; color: #0d47a1; }
+    .badge.DONE { background: #e8f5e9; color: #1b5e20; }
+    select { padding: 4px 8px; border-radius: 6px; border: 1px solid #dcdfe4; }
+    .msg { color: #2e7d32; font-size: 13px; min-height: 18px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>更新任务状态（US05）</h1>
+    <p style="color:#646a73;">修改任务状态后立即显示最新状态；刷新页面后状态仍然保留。</p>
+    <div id="task-list">加载中…</div>
+  </div>
+
+  <script>
+    // 状态对应的中文显示
+    const STATUS_LABELS = { TODO: '待办', DOING: '进行中', DONE: '已完成' };
+    const STATUS_OPTIONS = ['TODO', 'DOING', 'DONE'];
+
+    // 渲染任务列表，每个任务提供一个状态下拉框
+    function render(tasks) {
+      const list = document.getElementById('task-list');
+      if (!tasks.length) {
+        list.innerHTML = '<p style="color:#646a73;">暂无任务</p>';
+        return;
+      }
+      list.innerHTML = tasks.map((task) => {
+        const options = STATUS_OPTIONS
+          .map((s) => `<option value="${s}" ${s === task.status ? 'selected' : ''}>${STATUS_LABELS[s]}</option>`)
+          .join('');
+        return `
+          <div class="card" data-id="${task.id}">
+            <div class="title">${escapeHtml(task.title)}</div>
+            <div class="desc">${escapeHtml(task.description || '')}</div>
+            <div class="status-row">
+              <span class="badge ${task.status}">${STATUS_LABELS[task.status] || task.status}</span>
+              <select onchange="changeStatus('${task.id}', this.value)">
+                ${options}
+              </select>
+              <span class="msg" id="msg-${task.id}"></span>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // 调用后端接口更新状态，成功后立即刷新显示
+    async function changeStatus(id, status) {
+      const msg = document.getElementById('msg-' + id);
+      msg.textContent = '';
+      try {
+        const res = await fetch(`/api/tasks/${id}/status`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          msg.textContent = data.error || '更新失败';
+          msg.style.color = '#c62828';
+          loadTasks(); // 恢复为真实状态
+          return;
+        }
+        const updated = await res.json();
+        msg.textContent = '已保存';
+        msg.style.color = '#2e7d32';
+        loadTasks();
+      } catch (err) {
+        msg.textContent = '网络错误';
+        msg.style.color = '#c62828';
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[c]));
+    }
+
+    async function loadTasks() {
+      const res = await fetch('/api/tasks');
+      const tasks = await res.json();
+      render(tasks);
+    }
+
+    loadTasks();
+  </script>
+</body>
+</html>
