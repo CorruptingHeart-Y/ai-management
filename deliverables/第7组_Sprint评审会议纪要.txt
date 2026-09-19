@@ -1,0 +1,56 @@
+第7组《软件项目管理》实验二 Sprint 评审会议纪要
+
+一、基本信息
+
+会议时间：待填写
+地点：待填写
+主持人：杨浩伟
+参会人员：待确认
+
+二、Sprint Goal 回顾
+
+在本地演示环境中完成：
+查看项目成员 → 创建并分配任务 → 更新任务状态
+形成一个能够实际运行、测试和演示的最小功能闭环。
+
+当前仅记录 Sprint Goal 本身，是否达成待 Sprint Review 确认。
+
+三、用户故事演示记录
+
+1. 用户故事：US01 查看项目成员
+   Demo 结果：待 Sprint Review 确认
+   DoD：待 Sprint Review 确认
+   证据：TBD
+   备注：待 Sprint Review 确认
+
+2. 用户故事：US04 创建并分配任务
+   Demo 结果：待 Sprint Review 确认
+   DoD：待 Sprint Review 确认
+   证据：TBD
+   备注：待 Sprint Review 确认
+
+3. 用户故事：US05 更新任务状态
+   Demo 结果：待 Sprint Review 确认
+   DoD：待 Sprint Review 确认
+   证据：TBD
+   备注：待 Sprint Review 确认
+
+四、未完成用户故事
+
+待填写
+
+五、增量演示摘要
+
+待 Sprint Review 后填写
+
+六、干系人反馈
+
+待 Sprint Review 后填写
+
+七、Product Backlog 调整建议
+
+待 Sprint Review 后填写
+
+八、Action Items
+
+待 Sprint Review 后填写
