@@ -1,29 +1,46 @@
-# Sprint Review 会议记录
+# Sprint 1 Review
+
+## 基本信息
+
+会议时间：待填写<br>
+地点：待填写<br>
+主持人：杨浩伟<br>
+参会人员：待确认
 
 ## Sprint Goal 回顾
 
-待填写。
+在本地演示环境中完成：
 
-## 已完成故事
+查看项目成员 → 创建并分配任务 → 更新任务状态
 
-待填写。
+形成一个能够实际运行、测试和演示的最小功能闭环。
 
-## 未完成故事
+当前仅记录目标本身，是否达成待 Sprint Review 确认。
 
-待填写。
+## 用户故事演示记录
 
-## DoD 状态
+| Story | Demo Result | DoD | Evidence | Notes |
+|---|---|---|---|---|
+| US01 | 待 Sprint Review 确认 | 待 Sprint Review 确认 | TBD | 待 Sprint Review 确认 |
+| US04 | 待 Sprint Review 确认 | 待 Sprint Review 确认 | TBD | 待 Sprint Review 确认 |
+| US05 | 待 Sprint Review 确认 | 待 Sprint Review 确认 | TBD | 待 Sprint Review 确认 |
 
-待填写。
+## 未完成用户故事
 
-## Demo 结果
+待填写
 
-待填写。
+## 增量演示摘要
+
+待 Sprint Review 后填写
 
 ## 干系人反馈
 
-待填写。
+待 Sprint Review 后填写
 
-## 后续调整
+## Product Backlog 调整建议
 
-待填写。
+待 Sprint Review 后填写
+
+## Action Items
+
+待 Sprint Review 后填写
