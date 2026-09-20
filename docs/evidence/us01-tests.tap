@@ -1,0 +1,155 @@
+TAP version 13
+# Subtest: US01 默认初始化：准确返回实验一的四名成员及分工
+ok 1 - US01 默认初始化：准确返回实验一的四名成员及分工
+  ---
+  duration_ms: 122.9339
+  type: 'test'
+  ...
+# Subtest: US01 提交的预置数据与默认初始化一致
+ok 2 - US01 提交的预置数据与默认初始化一致
+  ---
+  duration_ms: 32.7054
+  type: 'test'
+  ...
+# Subtest: US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+ok 3 - US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+  ---
+  duration_ms: 40.5416
+  type: 'test'
+  ...
+# Subtest: US01 空成员列表：返回空数组且不重新填入预置成员
+ok 4 - US01 空成员列表：返回空数组且不重新填入预置成员
+  ---
+  duration_ms: 29.8844
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+ok 5 - US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+  ---
+  duration_ms: 137.1042
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+ok 6 - US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+  ---
+  duration_ms: 56.5963
+  type: 'test'
+  ...
+# Subtest: US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+ok 7 - US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+  ---
+  duration_ms: 36.0439
+  type: 'test'
+  ...
+# Subtest: US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+ok 8 - US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+  ---
+  duration_ms: 0.5402
+  type: 'test'
+  ...
+# Subtest: US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+    # Subtest: 重复 id
+    ok 1 - 重复 id
+      ---
+      duration_ms: 21.4047
+      type: 'test'
+      ...
+    # Subtest: 空成员条目
+    ok 2 - 空成员条目
+      ---
+      duration_ms: 20.3073
+      type: 'test'
+      ...
+    # Subtest: 非法 id
+    ok 3 - 非法 id
+      ---
+      duration_ms: 18.0414
+      type: 'test'
+      ...
+    # Subtest: 空白姓名
+    ok 4 - 空白姓名
+      ---
+      duration_ms: 18.3119
+      type: 'test'
+      ...
+    # Subtest: 缺少分工
+    ok 5 - 缺少分工
+      ---
+      duration_ms: 17.4443
+      type: 'test'
+      ...
+    1..5
+ok 9 - US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+  ---
+  duration_ms: 97.0085
+  type: 'test'
+  ...
+# Subtest: US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+ok 10 - US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+  ---
+  duration_ms: 18.9461
+  type: 'test'
+  ...
+# Subtest: 状态可以从 TODO 更新为 DOING
+ok 11 - 状态可以从 TODO 更新为 DOING
+  ---
+  duration_ms: 135.0562
+  type: 'test'
+  ...
+# Subtest: 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+ok 12 - 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+  ---
+  duration_ms: 63.2643
+  type: 'test'
+  ...
+# Subtest: 非法状态返回 400 且不修改任务
+ok 13 - 非法状态返回 400 且不修改任务
+  ---
+  duration_ms: 30.3026
+  type: 'test'
+  ...
+# Subtest: 不存在的任务返回 404
+ok 14 - 不存在的任务返回 404
+  ---
+  duration_ms: 19.2179
+  type: 'test'
+  ...
+# Subtest: 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+ok 15 - 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+  ---
+  duration_ms: 134.4037
+  type: 'test'
+  ...
+# Subtest: 空标题（含纯空白）创建失败，返回 400，且不落库
+ok 16 - 空标题（含纯空白）创建失败，返回 400，且不落库
+  ---
+  duration_ms: 56.7296
+  type: 'test'
+  ...
+# Subtest: 无效负责人创建失败，返回 400，且不落库
+ok 17 - 无效负责人创建失败，返回 400，且不落库
+  ---
+  duration_ms: 33.536
+  type: 'test'
+  ...
+# Subtest: 创建以后能够读取：任务列表包含新任务
+ok 18 - 创建以后能够读取：任务列表包含新任务
+  ---
+  duration_ms: 41.3096
+  type: 'test'
+  ...
+# Subtest: 持久化：用同一数据文件重新创建 app 后任务仍存在
+ok 19 - 持久化：用同一数据文件重新创建 app 后任务仍存在
+  ---
+  duration_ms: 34.5756
+  type: 'test'
+  ...
+1..19
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1036.4904

@@ -2,12 +2,14 @@
 
 ## US01
 
-- [ ] 功能运行截图（路径：TBD）
-- [ ] 对应测试结果（路径：TBD）
-- [ ] Feature commit（hash：TBD）
-- [ ] Pull Request（地址：TBD）
+- [x] 功能运行截图：[桌面](evidence/us01-members.png)、[手机](evidence/us01-members-mobile.png)
+- [x] 对应测试结果：[全量 24/24 TAP](evidence/us01-tests.tap)、[浏览器 8/8 记录](evidence/us01-browser-results.json)
+- [x] Feature commit：`8109119`（基线 `6906e49`）
+- [ ] Pull Request：尚未创建，见 [PR 草稿](us01-pr.md)
 - [ ] 人工 diff review（记录：TBD）
 - [ ] DoD 验收结果（记录：TBD）
+
+详细环境、命令、隔离数据和审查边界见 [US01 实际验证记录](evidence/us01-verification.md)。以下 US04/US05 为原有历史证据，保留原记录。
 
 ## US04
 
@@ -57,4 +59,4 @@
 
 尚未归档的证据路径、PR 地址等仍为 TBD；已确认的 commit hash 和测试结果见上文，待人工审查和正式验收后补充完整。
 
-补充说明：当前已经确认了代码提交和测试命令结果，但尚未形成浏览器运行截图、人工 diff review 记录或正式 DoD 验收结论。
+补充说明：US01 本次新增了代码提交、测试日志和浏览器截图；人工 diff review 及正式 DoD 验收仍待完成。其他故事的正式验收状态由对应负责人及 DRI 更新。

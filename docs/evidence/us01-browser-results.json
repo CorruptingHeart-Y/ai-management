@@ -1,0 +1,39 @@
+{
+  "time": "2026-09-20T13:03:00.979Z",
+  "browser": "Headless system Google Chrome via Playwright",
+  "isolatedData": true,
+  "results": [
+    {
+      "name": "four real members, roles and assignment options match API",
+      "result": "PASS"
+    },
+    {
+      "name": "create assigned task, refresh, TODO -> DOING -> DONE, refresh",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile layout at 390px fits viewport",
+      "result": "PASS"
+    },
+    {
+      "name": "empty member data disables creation and assignment",
+      "result": "PASS"
+    },
+    {
+      "name": "GET members 500 shows retry and successfully recovers",
+      "result": "PASS"
+    },
+    {
+      "name": "GET members network failure shows retry and recovers",
+      "result": "PASS"
+    },
+    {
+      "name": "GET tasks 500 preserves member list and assignment data",
+      "result": "PASS"
+    },
+    {
+      "name": "HTML member name and role are literal text without injection",
+      "result": "PASS"
+    }
+  ]
+}
