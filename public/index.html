@@ -14,11 +14,13 @@
 
   <main>
     <!-- US01 查看项目成员 -->
-    <section class="card">
-      <h2>项目成员</h2>
-      <ul id="member-list" class="member-list">
+    <section class="card" aria-labelledby="members-heading">
+      <h2 id="members-heading">项目成员</h2>
+      <p id="member-message" class="member-message" role="status" aria-live="polite">正在加载项目成员…</p>
+      <ul id="member-list" class="member-list" aria-busy="true">
         <li class="empty">加载中…</li>
       </ul>
+      <button id="member-retry" type="button" hidden>重新加载成员</button>
     </section>
 
     <!-- US04 创建并分配任务 -->
@@ -35,12 +37,12 @@
         </label>
         <label>
           负责人 <span class="required">*</span>
-          <select id="task-assignee" name="assigneeId">
+          <select id="task-assignee" name="assigneeId" disabled aria-describedby="member-message">
             <option value="">—— 请选择成员 ——</option>
           </select>
         </label>
         <p id="form-message" class="message" role="alert"></p>
-        <button type="submit">创建任务</button>
+        <button id="create-task" type="submit" disabled>创建任务</button>
       </form>
     </section>
 
