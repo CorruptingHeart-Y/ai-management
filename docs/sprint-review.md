@@ -2,9 +2,9 @@
 
 ## 基本信息
 
-会议时间：待填写<br>
-地点：待填写<br>
-主持人：杨浩伟<br>
+会议时间：待填写
+地点：待填写
+主持人：杨浩伟
 参会人员：待确认
 
 ## Sprint Goal 回顾
@@ -15,32 +15,50 @@
 
 形成一个能够实际运行、测试和演示的最小功能闭环。
 
-当前仅记录目标本身，是否达成待 Sprint Review 确认。
+代码状态：US01、US04、US05 已集成 `develop`。自动测试 24/24 通过，已有完整业务链路验证记录。Sprint Goal 是否正式达成仍待 Sprint Review 确认。
 
-## 用户故事演示记录
+## 用户故事演示准备
 
-| Story | Demo Result | DoD | Evidence | Notes |
+| Story | 代码与自动验证 | Demo Result | DoD | Evidence |
 |---|---|---|---|---|
-| US01 | 待 Sprint Review 确认 | 待 Sprint Review 确认 | TBD | 待 Sprint Review 确认 |
-| US04 | 待 Sprint Review 确认 | 待 Sprint Review 确认 | TBD | 待 Sprint Review 确认 |
-| US05 | 待 Sprint Review 确认 | 待 Sprint Review 确认 | TBD | 待 Sprint Review 确认 |
+| US01 | 已集成；15/15 通过 | 待会议确认 | 待人工确认 | `docs/evidence/` 中的截图、TAP 与浏览器记录 |
+| US04 | 已集成；5/5 通过 | 待会议确认 | 待人工确认 | 自动测试及完整链路验证记录 |
+| US05 | 已集成；4/4 通过 | 待会议确认 | 待人工确认 | 自动测试及完整链路验证记录 |
+
+## 演示脚本
+
+1. 启动并打开项目页面。
+2. 展示四名成员及各自分工。
+3. 打开创建任务表单。
+4. 从成员列表中选择负责人。
+5. 保存任务并确认初始状态为 TODO（待办）。
+6. 刷新页面，确认任务仍存在。
+7. 将状态从 TODO 改为 DOING（进行中）。
+8. 将状态从 DOING 改为 DONE（已完成）。
+9. 再次刷新页面。
+10. 确认 DONE 状态仍保持，并确认仍可继续创建任务。
+
+## Review Meeting Checklist
+
+- [ ] US01 演示成功
+- [ ] US04 演示成功
+- [ ] US05 演示成功
+- [ ] Sprint Goal 达成
+- [ ] 所有 Story 达到 DoD
+- [ ] 无未完成 Story
 
 ## 未完成用户故事
 
-待填写
+待会议填写
 
-## 增量演示摘要
+## Stakeholder Feedback
 
-待 Sprint Review 后填写
+待会议填写
 
-## 干系人反馈
+## Product Backlog Adjustment
 
-待 Sprint Review 后填写
-
-## Product Backlog 调整建议
-
-待 Sprint Review 后填写
+待会议填写
 
 ## Action Items
 
-待 Sprint Review 后填写
+待会议填写

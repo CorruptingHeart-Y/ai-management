@@ -1,39 +1,40 @@
 # Sprint 1 Backlog
 
-| User Story | Title | Priority | Acceptance Criteria Summary | Development Tasks | Owner | Branch | Status |
-|---|---|---|---|---|---|---|---|
-| US01 | 查看项目成员 | Must | 查看预置成员；展示姓名和分工；成员 id 唯一；为 US04 提供负责人来源 | Member 数据契约、共用数据、成员展示及异常处理、专项与联调测试 | 彭佳成 | `feature/us01-members` | 已集成，待人工审查与正式验收 |
-| US04 | 创建并分配任务 | Must | 标题、描述、负责人可填写；负责人有效；空标题和无效负责人被拒绝；保存后可重新读取 | Task 数据结构、负责人选择、输入校验、持久化、创建测试 | 朱传玺 | `feature/us04-create-task` | IN PROGRESS |
-| US05 | 更新任务状态 | Must | 支持 TODO / DOING / DONE；页面显示中文状态；非法状态被拒绝；刷新后状态保持 | 状态操作、中文展示、状态持久化、非法状态测试 | 何健翔 | `feature/us05-task-status` | IN PROGRESS |
+| User Story | Title | Priority | Owner | Branch | Status | Current Note |
+|---|---|---|---|---|---|---|
+| US01 | 查看项目成员 | Must | 彭佳成 | `feature/us01-members` | IMPLEMENTED / PENDING DOD | 代码已集成；15/15 通过；等待人工审查与正式 DoD / Sprint Review 确认 |
+| US04 | 创建并分配任务 | Must | 朱传玺 | `feature/us04-create-task` | IMPLEMENTED / PENDING DOD | 代码已集成；5/5 通过；等待人工审查与正式 DoD / Sprint Review 确认 |
+| US05 | 更新任务状态 | Must | 何健翔 | `feature/us05-task-status` | IMPLEMENTED / PENDING DOD | 代码已集成；4/4 通过；等待人工审查与正式 DoD / Sprint Review 确认 |
 
-US01、US04 和 US05 的代码及关键测试已经进入 `develop`。US01 已完成 AI 辅助集成审查、浏览器链路验证及合并后回归；人工 diff 审查和最终 DoD 验收仍未完成，因此三个故事均暂不标记为 Done。
+## Acceptance Criteria Summary
+
+### US01
+
+查看实验一确认的四名成员及分工；成员 id 唯一；成员列表同时作为 US04 的负责人来源。
+
+### US04
+
+填写标题、描述和负责人；拒绝空标题与不存在的成员；保存后能够重新读取，初始状态为 TODO。
+
+### US05
+
+支持 TODO、DOING、DONE；页面显示对应中文状态；拒绝非法状态；刷新后状态保持。
 
 ## Current Verification Notes
 
-- 2026-09-20 US01 feature 工作树：全量测试 24/24、真实 Chrome 浏览器场景 8/8 通过，见 [US01 验证记录](evidence/us01-verification.md)。
-- 2026-09-21 develop 集成：US01 15/15、US04 5/5、US05 4/4；完整成员查看、任务创建、状态更新及刷新持久化链路通过。
-- 以下 12/12 和集成提交为本次修改前的历史记录；不能将 feature 结果表述为合并后正式验收。
-
-- 合并后的 `npm test`：12/12 通过。
-- 集成提交：`e8da461`。
-- 当前仅确认代码级测试结果；浏览器演示截图、人工 diff review 和 DoD 验收仍为 TBD。
+- US01 15/15、US04 5/5、US05 4/4；全量 24/24 通过、0 失败。
+- 完整链路已验证：查看成员 → 创建并分配任务 → 刷新持久化 → TODO → DOING → DONE → 再次刷新。
+- US01 集成提交 `cc7c937`，合入 `develop` 的提交 `34b3df7`，文档状态同步 `6f96b9d`。
+- 上述是代码与自动验证状态，不等同于正式 DoD 或 Sprint Review 结论。
 
 ## Sprint Dependencies
 
 US01 → US04 → US05
 
-- US04 依赖 US01 提供统一成员数据；
-- US05 依赖 US04 的统一 Task 模型；
-- 三个故事共享同一 Member / Task 数据定义。
+- US04 使用 US01 的 Member 数据作为负责人来源。
+- US05 使用 US04 的 Task 模型和持久化数据。
+- 三个故事共享同一 JSON 数据源。
 
 ## Out of Scope
 
-- 登录注册
-- 复杂权限
-- 消息通知
-- 评论
-- 文件上传
-- 统计分析
-- 搜索
-- 甘特图
-- 拖拽看板
+登录注册、复杂权限、消息通知、评论、文件上传、统计分析、搜索、甘特图和拖拽看板均不在 Sprint 1 范围。

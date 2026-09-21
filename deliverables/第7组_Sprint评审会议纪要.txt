@@ -9,48 +9,66 @@
 
 二、Sprint Goal 回顾
 
-在本地演示环境中完成：
-查看项目成员 → 创建并分配任务 → 更新任务状态
-形成一个能够实际运行、测试和演示的最小功能闭环。
+目标：在本地演示环境中完成“查看项目成员 → 创建并分配任务 → 更新任务状态”，形成一个能够实际运行、测试和演示的最小功能闭环。
 
-当前仅记录 Sprint Goal 本身，是否达成待 Sprint Review 确认。
+代码状态：US01、US04、US05 已集成 develop。
+自动测试：24/24 通过，0 失败。
+正式结论：Sprint Goal 是否达成，待 Sprint Review 确认。
 
-三、用户故事演示记录
+三、用户故事演示准备
 
 1. 用户故事：US01 查看项目成员
-   Demo 结果：待 Sprint Review 确认
-   DoD：待 Sprint Review 确认
-   证据：TBD
-   备注：待 Sprint Review 确认
+   代码与自动验证：已集成；15/15 通过。
+   Demo 结果：待会议确认。
+   DoD：待人工确认。
+   证据：docs/evidence/ 中的截图、TAP 和浏览器记录。
 
 2. 用户故事：US04 创建并分配任务
-   Demo 结果：待 Sprint Review 确认
-   DoD：待 Sprint Review 确认
-   证据：TBD
-   备注：待 Sprint Review 确认
+   代码与自动验证：已集成；5/5 通过。
+   Demo 结果：待会议确认。
+   DoD：待人工确认。
+   证据：自动测试及完整链路验证记录。
 
 3. 用户故事：US05 更新任务状态
-   Demo 结果：待 Sprint Review 确认
-   DoD：待 Sprint Review 确认
-   证据：TBD
-   备注：待 Sprint Review 确认
+   代码与自动验证：已集成；4/4 通过。
+   Demo 结果：待会议确认。
+   DoD：待人工确认。
+   证据：自动测试及完整链路验证记录。
 
-四、未完成用户故事
+四、演示脚本
 
-待填写
+1. 启动并打开项目页面。
+2. 展示四名成员及各自分工。
+3. 打开创建任务表单。
+4. 从成员列表选择负责人。
+5. 保存任务并确认初始状态为 TODO（待办）。
+6. 刷新页面，确认任务仍存在。
+7. 将状态从 TODO 改为 DOING（进行中）。
+8. 将状态从 DOING 改为 DONE（已完成）。
+9. 再次刷新页面。
+10. 确认 DONE 状态仍保持，并确认仍可继续创建任务。
 
-五、增量演示摘要
+五、会议确认项
 
-待 Sprint Review 后填写
+US01 演示成功：待确认
+US04 演示成功：待确认
+US05 演示成功：待确认
+Sprint Goal 达成：待确认
+所有 Story 达到 DoD：待确认
+无未完成 Story：待确认
 
-六、干系人反馈
+六、未完成用户故事
 
-待 Sprint Review 后填写
+待会议填写
 
-七、Product Backlog 调整建议
+七、干系人反馈
 
-待 Sprint Review 后填写
+待会议填写
 
-八、Action Items
+八、Product Backlog 调整
 
-待 Sprint Review 后填写
+待会议填写
+
+九、Action Items
+
+待会议填写
