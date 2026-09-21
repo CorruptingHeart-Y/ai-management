@@ -1,10 +1,11 @@
 # Sprint 1 Definition of Done
 
-每个用户故事只有同时满足以下条件才能标记 Done。以下 US01 勾选项表示 feature 分支已有代码及自动验证证据；人工审查、合入及正式验收仍未完成，不能标记 Done。
+每个用户故事只有同时满足以下条件才能标记 Done。以下 US01 勾选项表示已有代码及自动验证证据；人工审查及正式验收仍未完成，不能标记 Done。
 
 ## Current Verification Notes
 
 - 2026-09-20：US01 的 `8109119` 在 `6906e49` 基线上完成代码、全量 24/24 测试与浏览器 8/8 检查，见 [US01 证据](evidence/us01-verification.md)。
+- 2026-09-21：US01 经 AI 辅助差异审查和完整链路验证后合入 `develop`，合并后运行 `npm test` 为 24/24 通过；这不代替人工审查或正式 DoD 验收。
 - 以下为原有 develop 的历史验证记录，保留其原始范围：
 
 - 已在 `develop` 上运行 `npm test`，结果为 12/12 通过。
@@ -31,8 +32,8 @@
 - [x] 测试实际运行通过
 - [x] 关键模块 / 函数具有必要注释
 - [ ] AI 生成代码经过人工 diff 审查
-- [ ] Feature 合入 develop 后仍可运行
-- [x] 基于既有 develop 的 feature 分支回归未破坏其他 Sprint 1 功能（合并后仍需复验）
+- [x] Feature 合入 develop 后仍可运行（合并后 24/24 回归通过）
+- [x] 集成测试未破坏其他 Sprint 1 功能（US04 5/5、US05 4/4）
 - [x] 有运行 / 测试证据
 - [x] AI 互动记录已经保留
 

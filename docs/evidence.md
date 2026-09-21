@@ -5,6 +5,7 @@
 - [x] 功能运行截图：[桌面](evidence/us01-members.png)、[手机](evidence/us01-members-mobile.png)
 - [x] 对应测试结果：[全量 24/24 TAP](evidence/us01-tests.tap)、[浏览器 8/8 记录](evidence/us01-browser-results.json)
 - [x] Feature commit：`8109119`（基线 `6906e49`）
+- [x] 集成记录：`integration/us01-merge` 提交 `cc7c937`；合入 `develop` 后全量 24/24 通过
 - [ ] Pull Request：尚未创建，见 [PR 草稿](us01-pr.md)
 - [ ] 人工 diff review（记录：TBD）
 - [ ] DoD 验收结果（记录：TBD）
