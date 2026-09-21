@@ -3,55 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>爱管理 · Sprint 1</title>
+  <title>爱管理 · Sprint 1 敏捷工作台</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- 顶部导航栏 -->
   <header class="topbar">
-    <h1>爱管理</h1>
-    <p class="subtitle">Sprint 1 最小功能闭环：查看成员 → 创建并分配任务 → 更新状态</p>
+    <div class="topbar-inner">
+      <div class="brand-group">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="title-row">
+            <h1>爱管理</h1>
+            <span class="sprint-badge">Sprint 1 · 蜂鸟增量</span>
+          </div>
+          <p class="subtitle">最小功能闭环：查看成员 (US01) → 创建任务 (US04) → 状态流转 (US05)</p>
+        </div>
+      </div>
+      <div class="topbar-status">
+        <span class="status-indicator"></span>
+        <span class="status-text">本地运行正常 (Node.js + Express)</span>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <!-- US01 查看项目成员 -->
-    <section class="card">
-      <h2>项目成员</h2>
-      <ul id="member-list" class="member-list">
-        <li class="empty">加载中…</li>
-      </ul>
-    </section>
+  <!-- 工作台主布局：桌面端为现代化左右分栏，移动端平滑折叠 -->
+  <main class="dashboard-layout">
+    <!-- 左侧辅助栏：成员目录 + 任务创建 -->
+    <aside class="dashboard-sidebar">
+      <!-- US01 查看项目成员 -->
+      <section class="card members-card" aria-labelledby="members-heading">
+        <div class="card-header">
+          <div class="card-title-group">
+            <svg class="header-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <h2 id="members-heading">项目成员</h2>
+          </div>
+          <span class="scope-tag">US01 彭佳成</span>
+        </div>
+        <p id="member-message" class="member-message" role="status" aria-live="polite">正在加载项目成员…</p>
+        <ul id="member-list" class="member-list" aria-busy="true">
+          <li class="empty">加载中…</li>
+        </ul>
+        <button id="member-retry" type="button" hidden>重新加载成员</button>
+      </section>
 
-    <!-- US04 创建并分配任务 -->
-    <section class="card">
-      <h2>创建任务</h2>
-      <form id="task-form">
-        <label>
-          任务标题 <span class="required">*</span>
-          <input id="task-title" name="title" type="text" placeholder="例如：完成 Sprint 1 演示" />
-        </label>
-        <label>
-          任务描述
-          <textarea id="task-desc" name="description" rows="3" placeholder="选填"></textarea>
-        </label>
-        <label>
-          负责人 <span class="required">*</span>
-          <select id="task-assignee" name="assigneeId">
-            <option value="">—— 请选择成员 ——</option>
-          </select>
-        </label>
-        <p id="form-message" class="message" role="alert"></p>
-        <button type="submit">创建任务</button>
-      </form>
-    </section>
+      <!-- US04 创建并分配任务 -->
+      <section class="card create-task-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <svg class="header-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            <h2>创建任务</h2>
+          </div>
+          <span class="scope-tag">US04 朱传玺</span>
+        </div>
+        <form id="task-form">
+          <label>
+            <span>任务标题 <span class="required">*</span></span>
+            <input id="task-title" name="title" type="text" placeholder="例如：完成 US01 成员验收演示" autocomplete="off" />
+          </label>
+          <label>
+            <span>任务描述</span>
+            <textarea id="task-desc" name="description" rows="3" placeholder="填写任务细节与验收说明（选填）"></textarea>
+          </label>
+          <label>
+            <span>分配负责人 <span class="required">*</span></span>
+            <select id="task-assignee" name="assigneeId" disabled aria-describedby="member-message">
+              <option value="">—— 请选择成员 ——</option>
+            </select>
+          </label>
+          <p id="form-message" class="message" role="alert"></p>
+          <button id="create-task" type="submit" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>创建任务</span>
+          </button>
+        </form>
+      </section>
+    </aside>
 
-    <!-- 任务列表与 US05 状态更新 -->
-    <section class="card">
-      <h2>任务列表</h2>
-      <ul id="task-list" class="task-list">
-        <li class="empty">加载中…</li>
-      </ul>
-      <p id="task-message" class="message" role="alert"></p>
-    </section>
+    <!-- 右侧主看板区：任务列表与 US05 状态更新 -->
+    <div class="dashboard-main">
+      <section class="card task-list-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <svg class="header-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 11 12 14 22 4"></polyline>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+            <h2>任务列表</h2>
+          </div>
+          <span class="scope-tag">US05 何健翔</span>
+        </div>
+        <div class="task-board-meta">
+          <span class="meta-hint">任务创建后即时持久化到 data/db.json，可随时切换状态</span>
+        </div>
+        <ul id="task-list" class="task-list">
+          <li class="empty">加载中…</li>
+        </ul>
+        <p id="task-message" class="message" role="alert"></p>
+      </section>
+    </div>
   </main>
 
   <script src="app.js"></script>
