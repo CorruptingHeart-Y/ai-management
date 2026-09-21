@@ -45,7 +45,7 @@
 
 ```bash
 # 1. 安装依赖（仅 express 一个）
-npm install
+npm ci
 
 # 2. 启动服务（默认 http://localhost:3000）
 npm start
@@ -61,7 +61,9 @@ npm test
 
 覆盖 US04 的正常创建、空标题校验、无效负责人校验、创建后读取、以及持久化（刷新后仍在），
 覆盖 US05 的 TODO → DOING、DOING → DONE、非法状态、404 和状态持久化，
-并验证成员列表、id 唯一、成员数据可供分配使用。当前合并后的测试结果为 12/12 通过。
+并验证成员姓名与分工、种子一致性、成员 id 唯一、自定义数据源、全部成员可分配、空列表及错误数据处理。
+2026-09-20 在 `feature/us01-members` 的全量测试为 24/24 通过（含子测试）；基线 `6906e49` 的原有测试为 12/12。
+实际日志见 [US01 全量测试记录](docs/evidence/us01-tests.tap)，浏览器 8 项验证见 [运行证据](docs/evidence/us01-verification.md)。
 
 ## 统一数据约定
 
@@ -76,10 +78,16 @@ npm test
 
 | 方法 | 路径 | 说明 | 归属 |
 |---|---|---|---|
-| GET | `/api/members` | 查看项目成员列表 | US01（后端地基） |
+| GET | `/api/members` | 查看项目成员列表，负责人选项共用此数据 | US01 |
 | GET | `/api/tasks` | 查看任务列表 | US04 / US05 共用 |
 | POST | `/api/tasks` | 创建并分配任务 | **US04** |
 | PATCH | `/api/tasks/:id/status` | 更新任务状态 | US05 |
+
+### GET /api/members
+
+成功返回 `200` 与 `Member[]`，空成员返回 `[]`。每条成员包含唯一正整数 `id`、姓名 `name` 和分工 `role`。成员数组内字段非法、id 重复或文件读取失败返回 `500` JSON 错误。成员为空或加载失败时，页面禁止分配并支持重新加载。
+
+详见 [US01 成员接口与验收说明](docs/us01-members.md)。
 
 ### POST /api/tasks
 
@@ -114,6 +122,7 @@ src/db.js              # 数据访问层，JSON 文件读写
 src/routes/members.js  # 成员接口
 src/routes/tasks.js    # 任务接口（US04 创建 + US05 状态更新）
 src/domain/task.js     # 任务状态校验与更新逻辑
+src/domain/member.js   # 共享 Member 契约与校验
 data/db.json           # 预置成员 + 任务数据
 public/                # 前端页面
 test/                  # node:test 测试（US01 / US04 / US05）
@@ -136,7 +145,7 @@ test/                  # node:test 测试（US01 / US04 / US05）
 - `main`：稳定、满足 DoD 的 Sprint 增量
 - `develop`：Sprint 1 集成分支
 - `feature/us01-members`：US01 查看项目成员
-- `feature/us04-create-task`：US04 创建并分配任务（本分支）
+- `feature/us04-create-task`：US04 创建并分配任务
 - `feature/us05-task-status`：US05 更新任务状态
 
 流程：`feature → develop → 测试/审查 → main`。
@@ -148,3 +157,8 @@ test/                  # node:test 测试（US01 / US04 / US05）
 AI 编码智能体负责编写代码、编写测试、运行测试并根据错误修改代码。所有 AI 互动需要实时记录在 [docs/ai-interactions.md](docs/ai-interactions.md) 中。
 
 当前仓库仅完成 Sprint 1 范围内的功能，不包含 Sprint 2 / Sprint 3 或范围外复杂功能。
+
+## 成员一交付材料
+
+[彭佳成 US01 交付说明](deliverables/第7组_成员一彭佳成_US01交付说明.txt) 包含职责、实现差异、验证结果、演示步骤、个人 DoD 及群汇报准备。
+当前 US01 状态为开发与自动验证完成，待人工 diff 审查及 DRI 集成验收，不能直接标记 Done。

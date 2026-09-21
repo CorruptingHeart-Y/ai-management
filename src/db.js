@@ -14,7 +14,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-// 预置成员：文件缺失或内容为空时用于初始化，保证成员列表始终可用。
+// 实验一确认的姓名和长期分工。仅在数据文件缺失时初始化；不覆盖已有数据。
+/** @type {import('./domain/member').Member[]} */
 const SEED_MEMBERS = [
   { id: 1, name: '彭佳成', role: '产品与范围负责人' },
   { id: 2, name: '朱传玺', role: '技术与架构负责人' },
