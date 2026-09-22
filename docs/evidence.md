@@ -43,11 +43,12 @@
 - [x] 刷新后状态仍保持
 - [x] 状态更新后仍能继续创建任务
 - [x] 全量测试通过：24/24，0 失败
-- [ ] 最终 Sprint Review Demo 截图 / 录屏：TBD
+- [x] 最终人工 Sprint Review Demo：7 项通过（2026-09-22，依据用户确认）
+- [ ] 最终 Demo 截图 / 录屏归档路径：TBD
 
 测试命令：`npm test`
 
-最终集成审查记录见 [code-review.md](code-review.md)。现有 US01 截图和浏览器记录能够支撑完整链路事实，但不替代正式 Sprint Review 的现场确认。
+最终集成审查记录见 [code-review.md](code-review.md)。2026-09-22 的最终人工 Demo 七项已由用户确认通过；截图或录屏归档路径仍待补充。
 
 ## Pull Request 说明
 
