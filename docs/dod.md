@@ -5,7 +5,7 @@
 | 项目 | US01 | US04 | US05 | 证据 |
 |---|---|---|---|---|
 | 功能与故事标准 | 技术验证通过 | 技术验证通过 | 技术验证通过 | 浏览器记录与9月22日人工Demo |
-| 基本测试 | 15/15 | 5/5 | 4/4 | 全量24/24，0失败，历史及本次日志 |
+| 基本测试 | 15/15 | 5/5 | 4/4 | 故事回归24/24；新增服务状态11项；最终全量35/35，0失败 |
 | 关键函数注释 | AI静态检查充分 | AI静态检查充分 | AI静态检查充分 | domain、routes、db代码及code-review |
 | 人工diff Review | 未见独立确认记录 | 未见独立确认记录 | 未见独立确认记录 | 不用AI审查或操作Demo代替 |
 | develop集成运行 | 已验证 | 已验证 | 已验证 | cc7c937、34b3df7、6f96b9d |
@@ -17,4 +17,6 @@
 
 如以后补做人工审查，应记录真实新日期、审查人、diff范围、发现、处置及版本，不倒签。文档整理不会把缺失历史变为已发生事实。
 
-依据：[评审纪要](sprint-review.md)、[证据索引](evidence.md)、[AI静态审查](code-review.md)、[本次回归](evidence/sprint1-final-test-20261008.txt)。
+2026-10-08最终集成：服务状态静态提示Minor已在05c7499修复并快进到codex/sprint1-final-deliverables，无冲突。新增11项服务状态测试（6个顶层及5个子测试），最终npm test实跑35/35，0失败。状态枚举重复仍为非阻塞Minor；main、develop未改变，人工diff确认仍无独立记录。
+
+依据：[评审纪要](sprint-review.md)、[证据索引](evidence.md)、[AI静态审查](code-review.md)、[最终回归](evidence/sprint1-integrated-test-20261008.txt)。旧24/24日志保留作历史证据。

@@ -12,9 +12,9 @@
 真实仓库：https://github.com/CorruptingHeart-Y/ai-management
 最终文档分支：codex/sprint1-final-deliverables
 GitHub分支：https://github.com/CorruptingHeart-Y/ai-management/tree/codex/sprint1-final-deliverables
-源代码基线：86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8
-基线地址：https://github.com/CorruptingHeart-Y/ai-management/commit/86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8
-此版本功能代码与develop@6f96b9d一致，后续本次仅修改文档和导出工具。
+服务状态修复功能提交：05c74994a4d46cf1a6da95c3bc1ddc0c35075509
+修复地址：https://github.com/CorruptingHeart-Y/ai-management/commit/05c74994a4d46cf1a6da95c3bc1ddc0c35075509
+最终交付分支已集成此修复；ZIP的源文件清单.txt记录实际打包的已提交代码与文档树完整hash，包含上述修复。
 分支历史保留feature/us01-members、feature/us04-create-task、feature/us05-task-status及integration/us01-merge与develop。
 关键提交：US04 f143bd5/40b9b4e/442ee8e；US05 8f74544/f6cad04/79948a5；US01 8109119/cc7c937/34b3df7；状态6f96b9d，Demo更新184ca75。
 main仍为初始基线，未合入本轮增量。无GitHub PR，不补造地址。
@@ -22,7 +22,7 @@ ZIP不含Git历史，提交与分支检查应访问仓库或克隆后git log --a
 
 三 ZIP内容与数据保护
 包含server.js、src、public、test、package.json、package-lock.json、.gitignore、.github、README、docs证据与说明，以及个人交付历史。
-功能代码和data/db.json读取上述Git基线；README与docs为本次最终整理版。源文件清单.txt列出各文件SHA256，可检查包内内容。
+功能代码、data/db.json、README与docs均读取同一已提交Git版本，不读取未提交本地数据。包含public/service-status.js、test/service-status.test.js及更新后的package.json。源文件清单.txt列出基线和各文件SHA256，可检查包内内容。
 种子数据只有四名正式成员与空tasks数组，不包含本地用户的人工Demo任务。测试使用临时数据。
 不含node_modules、.git对象、experiment1-reference、环境私密文件、临时缓存或测试数据。
 README中最终Word/TXT链接指向仓库deliverables/final；ZIP不重复收录Word交付包，请从本目录或真实仓库取得。
@@ -39,8 +39,8 @@ PowerShell可设置$env:PORT='3001'更换端口，也可设置$env:DATA_FILE='C:
 未设置DATA_FILE时，任务与状态写入data/db.json，重复运行不清空已有数据。不要覆盖团队已有任务。
 
 五 验证与限制
-US01 15/15、US04 5/5、US05 4/4，全量24/24，0失败；含子测试。2026-09-22 DRI人工Demo七项通过，来源为用户确认。
-本次2026-10-08 npm test实际输出见docs/evidence/sprint1-final-test-20261008.txt。
+US01 15/15、US04 5/5、US05 4/4，原业务24/24；新增服务状态11项（6顶层及5子测试），最终全量35/35，0失败。原24/24日志作为历史证据保留。2026-09-22 DRI人工Demo七项通过，来源为用户确认。
+最终2026-10-08 npm test实际输出见docs/evidence/sprint1-integrated-test-20261008.txt；浏览器隔离回归见sprint1-integrated-browser-20261008.txt。静态服务状态Minor已在05c7499修复，状态枚举重复仍为非阻塞改进项。
 功能为本地成员查看、创建分配、状态更新与JSON持久化；未实现登录、权限、多项目或统计等后续范围。
 人工diff审查未见独立确认记录，原始AI会话与独立会议记录有缺口。技术目标已实现，不宣称所有正式DoD通过。
 单文件存储无生产级并发与事务保证。ZIP与证据供课程原型核验，不能据此认定生产上线安全。

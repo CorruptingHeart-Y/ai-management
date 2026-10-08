@@ -30,7 +30,7 @@ MAPPING = {
     'sprint-self-evaluation': '第7组_4+n团队Sprint1自评报告',
     'dri-message': '第7组_DRI期望寄语',
 }
-CODE_BASE = '86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8'
+CODE_BASE = None  # Resolved to an immutable committed tree at export time.
 
 
 def git(*args):
@@ -139,6 +139,8 @@ def add_table(doc, rows):
             p = cell.paragraphs[0]
             p.paragraph_format.space_after = Pt(0)
             p.paragraph_format.line_spacing = 1.1
+            if ri == 0:
+                p.paragraph_format.keep_with_next = True
             if len(text) <= 10:
                 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             font(p.add_run(text), 10, ri == 0)
@@ -216,17 +218,17 @@ def pack_source():
     code_files = [p for p in tracked if p.startswith(('src/', 'public/', 'test/', '.github/'))
                   or p in ('server.js', 'package.json', 'package-lock.json', '.gitignore', 'data/db.json')]
     entries = {p: git('show', f'{CODE_BASE}:{p}') for p in code_files}
-    entries['README.md'] = (ROOT / 'README.md').read_bytes()
-    for path in (ROOT / 'docs').rglob('*'):
-        if path.is_file():
-            entries[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+    entries['README.md'] = git('show', f'{CODE_BASE}:README.md')
+    for path in tracked:
+        if path.startswith('docs/'):
+            entries[path] = git('show', f'{CODE_BASE}:{path}')
     personal = 'deliverables/第7组_成员一彭佳成_US01交付说明.txt'
-    entries[personal] = (ROOT / personal).read_bytes()
-    entries['源代码交付说明.txt'] = (OUT / '第7组_Sprint1源代码交付说明.txt').read_bytes()
+    entries[personal] = git('show', f'{CODE_BASE}:{personal}')
+    entries['源代码交付说明.txt'] = git('show', f'{CODE_BASE}:deliverables/final/第7组_Sprint1源代码交付说明.txt')
     assert json.loads(entries['data/db.json'])['tasks'] == []
     forbidden = ('node_modules', '.git/', 'experiment1-reference', '.delivery-work', '.env')
     assert not any(any(x in p for x in forbidden) for p in entries)
-    manifest = ['源文件清单及SHA256', f'代码基线：{CODE_BASE}', 'README与docs为本次最终整理版']
+    manifest = ['源文件清单及SHA256', f'代码及文档已提交基线：{CODE_BASE}', '所有源文件来自同一Git提交；服务状态修复05c7499已包含']
     manifest += [f'{hashlib.sha256(b).hexdigest()}  {p}' for p, b in sorted(entries.items())]
     entries['源文件清单.txt'] = ('\n'.join(manifest) + '\n').encode('utf-8')
     with zipfile.ZipFile(dest, 'w', zipfile.ZIP_DEFLATED) as archive:
@@ -271,7 +273,9 @@ def verify():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('mode', choices=['build', 'pack', 'verify'], nargs='?', default='build')
+    parser.add_argument('--source-ref', default='HEAD', help='Committed source/document tree to package')
     args = parser.parse_args()
+    CODE_BASE = git('rev-parse', '--verify', args.source_ref + '^{commit}').decode().strip()
     OUT.mkdir(parents=True, exist_ok=True)
     if args.mode == 'build':
         for source, name in MAPPING.items():

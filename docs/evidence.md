@@ -9,8 +9,10 @@
 | evidence/us01-members.png | 桌面共享链路截图，包含四人成员、表单、已完成任务 |
 | evidence/us01-members-mobile.png | 手机布局共享链路截图 |
 | evidence/us01-verification.md | 历史验证方法与运行说明，保留原记录 |
-| evidence/sprint1-final-test-20261008.txt | 本次npm test两次实际输出，环境EACCES后允许回环运行24/24 |
+| evidence/sprint1-final-test-20261008.txt | 修复前历史npm test两次实际输出，环境EACCES后允许回环运行24/24 |
 | evidence/sprint1-final-smoke-20261008.txt | 本次独立数据启动入口与API链路、重启持久化验证；不计入24测试或七项人工Demo |
+| evidence/sprint1-integrated-test-20261008.txt | 修复05c7499集成后实际npm test：35/35，原业务24项及服务状态11项，0失败 |
+| evidence/sprint1-integrated-browser-20261008.txt | 最终隔离浏览器三种连接状态、单成员请求、业务链路、刷新持久化及console error为空；工具记录，不是人工Review |
 
 US04和US05使用共享完整链路记录与截图作为支撑，未额外保有其独立命名截图，不能因此造一个不存在的路径。
 
@@ -20,6 +22,7 @@ US04：f143bd5、40b9b4e，合并442ee8e。
 US05：8f74544、f6cad04、d3fa695，合并79948a5；合并消息记录真实共享文件冲突。
 US01：8109119、d44e3c9、b6c136d；集成cc7c937，develop合并34b3df7，状态同步6f96b9d。
 最终Demo状态文档更新：184ca75。
+服务状态修复：05c74994a4d46cf1a6da95c3bc1ddc0c35075509，快进到最终交付分支；main及develop未修改。
 本轮采用Feature、integration与develop集成，没有GitHub PR，不补造地址。
 
 ## 人工Demo与证据界限
