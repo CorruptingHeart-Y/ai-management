@@ -20,6 +20,10 @@ const taskMessageEl = document.getElementById('task-message');
 const memberMessageEl = document.getElementById('member-message');
 const memberRetryEl = document.getElementById('member-retry');
 const createTaskEl = document.getElementById('create-task');
+const serviceStatus = createServiceStatus(
+  document.querySelector('.topbar-status'),
+  document.getElementById('service-status'),
+);
 
 let members = [];
 
@@ -34,13 +38,7 @@ async function loadMembers() {
   createTaskEl.disabled = true;
   assigneeEl.innerHTML = '<option value="">—— 请选择成员 ——</option>';
   try {
-    const res = await fetch('/api/members');
-    if (!res.ok) {
-      const error = await res.json().catch(() => ({}));
-      throw new Error(error.error || '成员加载失败，请稍后重试');
-    }
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error('成员数据格式错误，请稍后重试');
+    const data = await serviceStatus.check();
     members = data;
 
     // 用同一个响应生成列表与负责人选项，避免成员数据分叉。

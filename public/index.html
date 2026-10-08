@@ -24,9 +24,9 @@
           <p class="subtitle">最小功能闭环：查看成员 (US01) → 创建任务 (US04) → 状态流转 (US05)</p>
         </div>
       </div>
-      <div class="topbar-status">
-        <span class="status-indicator"></span>
-        <span class="status-text">本地运行正常 (Node.js + Express)</span>
+      <div class="topbar-status" data-state="checking" title="根据成员接口响应判断，不代表全部业务功能健康">
+        <span class="status-indicator" aria-hidden="true"></span>
+        <span id="service-status" class="status-text" role="status" aria-live="polite">正在检查服务...</span>
       </div>
     </div>
   </header>
@@ -120,6 +120,7 @@
     </div>
   </main>
 
+  <script src="service-status.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

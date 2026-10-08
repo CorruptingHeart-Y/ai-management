@@ -146,9 +146,27 @@ body {
 .status-indicator {
   width: 7px;
   height: 7px;
-  background-color: #10b981;
+  background-color: #f59e0b;
   border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+
+.topbar-status[data-state="connected"] .status-indicator {
+  background-color: #10b981;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+.topbar-status[data-state="connected"] .status-text {
+  color: #d1fae5;
+}
+
+.topbar-status[data-state="error"] .status-indicator {
+  background-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+
+.topbar-status[data-state="error"] .status-text {
+  color: #fecaca;
 }
 
 /* ================= 仪表板双栏主布局 ================= */
