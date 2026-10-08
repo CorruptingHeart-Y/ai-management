@@ -156,7 +156,7 @@ def add_table(doc, rows):
     font(spacer.add_run(''), 1)
 
 
-def make_docx(items, dest, is_ai=False):
+def make_docx(items, dest, is_ai=False, is_review=False):
     doc = Document()
     sec = doc.sections[0]
     sec.page_width, sec.page_height = Cm(21), Cm(29.7)
@@ -166,9 +166,9 @@ def make_docx(items, dest, is_ai=False):
         st = doc.styles[name]
         font(st, size, bold, '黑体' if bold else '宋体')
         pf = st.paragraph_format
-        pf.space_after = Pt(4 if name == 'Normal' else 6)
+        pf.space_after = Pt((2 if is_review else 4) if name == 'Normal' else 6)
         pf.space_before = Pt(0 if name in ('Normal', 'Title') else 8)
-        pf.line_spacing = 1.15
+        pf.line_spacing = 1.12 if is_review else 1.15
         pf.widow_control = True
         if name != 'Normal':
             pf.keep_with_next = True
@@ -281,7 +281,7 @@ if __name__ == '__main__':
         for source, name in MAPPING.items():
             items = list(blocks((ROOT / 'docs' / f'{source}.md').read_text(encoding='utf-8-sig')))
             (OUT / f'{name}.txt').write_text(txt_content(items), encoding='utf-8', newline='\n')
-            make_docx(items, OUT / f'{name}.docx', source == 'ai-interactions')
+            make_docx(items, OUT / f'{name}.docx', source == 'ai-interactions', source == 'sprint-review')
             for ext in ('txt', 'docx'):
                 shutil.copy2(OUT / f'{name}.{ext}', ROOT / 'deliverables' / f'{name}.{ext}')
             print(f'Exported: {name}')

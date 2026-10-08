@@ -39,3 +39,5 @@ Word只读渲染检查覆盖全部六份DOCX的20页（计划3、评审3、回�
 独立DATA_FILE启动server.js成功，静态HTML、四人成员接口、任务创建分配、TODO到DOING再到DONE及重启后读取均通过，见evidence/sprint1-final-smoke-20261008.txt；不是新增人类Demo或额外测试数量。原证据五文件未改动，Git比对无内容差异，文本文件保留本地换行；个人交付原正文按原内容保留后追加。
 
 最终隔离浏览器回归：检查中、正常、异常、失败恢复，成员展示、创建分配、TODO→DOING→DONE与刷新持久化均通过。临时服务实际计数每次加载/重试成员请求仅一次，console error日志为空，见evidence/sprint1-integrated-browser-20261008.txt。修复通过快进无冲突集成，main、develop与用户演示数据均未改变。本段不代表人工diff审查通过。
+
+最终Word逐页检查仍为20页，评审表头已与首条记录保持同页，采用正常11pt字号及小幅段距调整消除短尾页；其余17页与已检查渲染图像字节一致。源码ZIP49项，CRC、SHA256及全部源文件与清单指定的Git提交逐字节比对通过；已正常解压，在解压工程运行npm ci离线安装68包后npm test仍35/35、0失败。Git工作副本的CRLF与ZIP中Git原始LF只在工作副本辅助比较时归一化，不改ZIP内容。
