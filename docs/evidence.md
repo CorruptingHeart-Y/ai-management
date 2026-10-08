@@ -1,62 +1,35 @@
-# Sprint 1 Evidence Checklist
+# Sprint 1 证据索引
 
-## US01
+## 已归档技术证据
 
-- [x] 功能运行截图：[桌面](evidence/us01-members.png)、[手机](evidence/us01-members-mobile.png)
-- [x] 测试证据：[全量 TAP](evidence/us01-tests.tap)、[浏览器 8 项记录](evidence/us01-browser-results.json)
-- [x] US01 测试：15/15 通过
-- [x] Feature 提交：`8109119`、`d44e3c9`、`b6c136d`
-- [x] 集成分支提交：`cc7c937`
-- [x] 合入 `develop`：`34b3df7`
-- [x] 状态同步：`6f96b9d`
-- [ ] 人工 diff review：待 DRI 确认
-- [ ] 最终 DoD：待 DRI 确认
+| 证据 | 来源与用途 |
+|---|---|
+| evidence/us01-tests.tap | 2026-09-20实际TAP，24/24，US01 15、US04 5、US05 4 |
+| evidence/us01-browser-results.json | 历史AI浏览器8/8，成员、分配、刷新、状态、空态错误、移动布局、文本安全 |
+| evidence/us01-members.png | 桌面共享链路截图，包含四人成员、表单、已完成任务 |
+| evidence/us01-members-mobile.png | 手机布局共享链路截图 |
+| evidence/us01-verification.md | 历史验证方法与运行说明，保留原记录 |
+| evidence/sprint1-final-test-20261008.txt | 本次npm test两次实际输出，环境EACCES后允许回环运行24/24 |
+| evidence/sprint1-final-smoke-20261008.txt | 本次独立数据启动入口与API链路、重启持久化验证；不计入24测试或七项人工Demo |
 
-## US04
+US04和US05使用共享完整链路记录与截图作为支撑，未额外保有其独立命名截图，不能因此造一个不存在的路径。
 
-- [x] US04 测试：5/5 通过
-- [x] Feature 提交：`f143bd5`、`40b9b4e`
-- [x] 已集成 `develop`：`442ee8e`
-- [x] 完整链路中已验证创建任务、分配负责人和刷新持久化
-- [ ] 独立运行截图：TBD
-- [ ] 人工 diff review：待 DRI 确认
-- [ ] 最终 DoD：待 DRI 确认
+## Git证据
 
-## US05
+US04：f143bd5、40b9b4e，合并442ee8e。
+US05：8f74544、f6cad04、d3fa695，合并79948a5；合并消息记录真实共享文件冲突。
+US01：8109119、d44e3c9、b6c136d；集成cc7c937，develop合并34b3df7，状态同步6f96b9d。
+最终Demo状态文档更新：184ca75。
+本轮采用Feature、integration与develop集成，没有GitHub PR，不补造地址。
 
-- [x] US05 测试：4/4 通过
-- [x] Feature 提交：`8f74544`、`f6cad04`、`d3fa695`
-- [x] 已集成 `develop`：`79948a5`
-- [x] 完整链路中已验证 TODO → DOING → DONE 及刷新后保持
-- [ ] 独立运行截图：TBD
-- [ ] 人工 diff review：待 DRI 确认
-- [ ] 最终 DoD：待 DRI 确认
+## 人工Demo与证据界限
 
-## Integrated Sprint Increment
+2026-09-22本轮DRI杨浩伟亲自完成最终人工Demo，七项操作检查全部通过，来源为用户在本任务中的确认。动作拆分描述为八步，检查统计仍为七项。没有独立Demo录像或截图归档，历史AI浏览器截图不冒充该日人工证据。
 
-- [x] 查看项目成员
-- [x] 创建任务
-- [x] 分配负责人
-- [x] 刷新后任务仍存在
-- [x] 修改为进行中
-- [x] 修改为已完成
-- [x] 刷新后状态仍保持
-- [x] 状态更新后仍能继续创建任务
-- [x] 全量测试通过：24/24，0 失败
-- [x] 最终人工 Sprint Review Demo：7 项通过（2026-09-22，依据用户确认）
-- [ ] 最终 Demo 截图 / 录屏归档路径：TBD
+未见独立人工diff Review确认；未留存独立干系人反馈记录；AI记录存在原始会话缺口。技术目标已实现，但不宣称全正式DoD、独立现场会议或完整原始会话得到证明。
 
-测试命令：`npm test`
+## 当前交付与保护
 
-最终集成审查记录见 [code-review.md](code-review.md)。2026-09-22 的最终人工 Demo 七项已由用户确认通过；截图或录屏归档路径仍待补充。
+六份正式文档见../deliverables/final/，原始参考规划只在本地使用，不进入版本库。data/db.json包含用户未提交演示数据，本次测试和导出不覆盖、不提交；源代码ZIP使用Git基线的四人成员和空任务种子。
 
-## Pull Request 说明
-
-本轮未使用 GitHub PR，采用 Feature 分支、`integration/us01-merge` 及本地/分支集成审查流程。不得补造 PR 地址。
-
-## Remaining Human Evidence
-
-- DRI 最终 diff 阅读与无阻塞确认
-- 三个 Story 的正式 DoD 确认
-- Sprint Review 现场演示结果与干系人反馈
-- 如课程要求，补充最终 Demo 截图或录屏路径
+字段覆盖与质量核对见[sprint1-delivery-audit.md](sprint1-delivery-audit.md)，AI静态审查见[code-review.md](code-review.md)。
