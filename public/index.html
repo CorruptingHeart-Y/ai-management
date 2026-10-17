@@ -84,6 +84,18 @@
               <option value="">—— 请选择成员 ——</option>
             </select>
           </label>
+          <label>
+            <span>优先级</span>
+            <select id="task-priority" name="priority">
+              <option value="MEDIUM" selected>中</option>
+              <option value="HIGH">高</option>
+              <option value="LOW">低</option>
+            </select>
+          </label>
+          <label>
+            <span>截止日期</span>
+            <input id="task-due" name="dueDate" type="date" />
+          </label>
           <p id="form-message" class="message" role="alert"></p>
           <button id="create-task" type="submit" disabled>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
