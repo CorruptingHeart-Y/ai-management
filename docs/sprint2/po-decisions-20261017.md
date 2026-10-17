@@ -7,10 +7,13 @@
 
 ---
 
-## 决策 1（G0 起点）：批准 `b87fe43` 作为 Sprint 2 工程起点
+## 决策 1（G0 起点）：起点 SHA 用 `b87fe43`，代码基线内容等于 `f9c0edd`
 
-- **批准**：以 `codex/sprint2-baseline-prep` 的 `b87fe43`（含 `f9c0edd` 服务状态移植）作为本轮起点。
-- **依据**（我复验过，不是转述）：4 份原测试全文哈希与 `baseline-test-hashes.json` 全部 `MATCH`；逐文件运行为 35 pass / 0 fail；工程差异确实只在服务状态那 6 个文件与文档，后端、锁文件、种子数据未动。
+- **批准**：以 `codex/sprint2-baseline-prep` 的 `b87fe43` 作为**分支起点**；`f9c0edd`（服务状态移植提交）是**代码基线内容**。两者不是二选一：`b87fe43` = `f9c0edd` + 一个只含门禁脚本/准备文档/集成测试的提交。
+- **工程零差异（我实跑 `git diff` 核对）**：`f9c0edd..b87fe43` 共 45 个文件变更，全部位于 `docs/`、`scripts/verify-sprint2.cjs`、`test/sprint2-integration.test.js`；`src/`、`public/`、`data/`、`package.json`、`package-lock.json`、`server.js`、`test/helpers.js` 与四份原测试**零差异**，`package.json` 的 `test` 脚本两处完全相同。
+- **依据**（我复验过，不是转述）：4 份原测试全文哈希与 `baseline-test-hashes.json` 全部 `MATCH`；逐文件运行为 35 pass / 0 fail；服务状态 6 个文件与最终交付版本一致。
+- **为什么起点不用 `f9c0edd`**：①`baseline-test-hashes.json`、`verify-sprint2.cjs`、集成测试都在 `b87fe43`，以 `f9c0edd` 起步等于让三个人各自手工搬一遍门禁，反而制造冲突；②三份 feature 必须能跑同一套门禁，否则"某人的分支上没有门禁"会让 G2/G3 的结论不可比；③起点不一致会在后续合并里持续产生"文档差异"噪声，而工程零差异说明用 `b87fe43` 不会带进任何未验证代码。
+- **例外情形**：若教师明确要求"基线只能含代码、不得含过程文档"，则改用 `f9c0edd` 建 `integration/sprint2`，再把 `b87fe43` 的 `docs/sprint2/`、`scripts/`、集成测试作为**第一个集成提交**并入，工程仍零变化。这两种做法的工程结论完全等价，差别只在文档归属。
 - **事实来源**：确认以本地最新正式材料（`316d923` / 远程 `4dd3476`）与源码包 `e3b147b` 为 Sprint 1 事实依据；不把 `develop` 的 24/24 当作本轮回归基线。
 - **边界三条**：
   1. 不把准备成果直接推 `develop`。`develop` 在三个故事合并前保持不动，本轮集成走 `integration/sprint2`。
@@ -90,3 +93,20 @@
 - 原四份测试哈希 `MATCH`，未改一行断言。
 - 你的门禁静态检查结果：`test/stats.test.js` 已就位；仍缺 `test/task-attrs.test.js`、`test/iterations.test.js` → 门禁状态从"缺 3 份"变为"缺 2 份"。
 - 提醒（G4）：你自己的 `test/sprint2-integration.test.js` 有 3 个 TODO；按 `verify-sprint2.cjs` 的判定，**added 一轮出现 todo 也会 BLOCKED**。三份故事测试齐了之后，这 3 个 TODO 需要转成真实断言才能过门禁——要么你补，要么在门禁里显式区分"已知待办"与"静默跳过"（我倾向后者会削弱门禁，建议前者）。
+
+---
+
+## 附二：记录口径（表 2／表 3／表 6 直接抄这段，避免各人写各人的）
+
+> Sprint 2 起点：`b87fe43`（`codex/sprint2-baseline-prep`，2026-10-17）。代码基线内容与 `f9c0edd` 完全一致；
+> `f9c0edd..b87fe43` 的差异仅 `docs/`、`scripts/verify-sprint2.cjs`、`test/sprint2-integration.test.js`，
+> `src/`、`public/`、`data/`、`package.json`、锁文件、四份原测试零差异。Sprint 1 回归基线 35/35，四份原测试 SHA256 未变。
+
+三个 feature 的开工命令统一为：
+
+```bash
+git fetch origin
+git checkout -b feature/us06-task-attrs   b87fe43   # 换成 us07-iteration / us10-stats
+```
+
+这样三条分支的 `git diff b87fe43..HEAD` 只包含自己的故事改动，合并时不会夹带文档噪声。
