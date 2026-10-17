@@ -1,0 +1,377 @@
+Sprint 1 最终交付回归验证
+执行日期：2026-10-08
+分支：codex/sprint1-final-deliverables
+代码基线：86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8，功能与develop@6f96b9d一致
+命令：npm test
+环境：Node.js v24.19.0；npm 11.17.0；Express 4.22.3（锁定依赖）
+数据保护：测试使用临时数据；本地data/db.json保留用户演示状态，不提交
+测试前后SHA256：9AEDF8ADCD6CE0C431AD11521D4E305DB7197CE1F72A15C129CB4E73017F518E
+
+第一次运行：沙箱限制下退出码1，HTTP回环连接EACCES，1通过/23失败；无代码修改
+以下保留实际输出，属于环境限制，不标为产品功能缺陷：
+
+> ai-management@1.0.0 test
+> node --test test/members.test.js test/tasks.test.js test/task-status.test.js
+
+✖ US01 默认初始化：准确返回实验一的四名成员及分工 (36.0763ms)
+✖ US01 提交的预置数据与默认初始化一致 (5.5865ms)
+✖ US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更 (6.7722ms)
+✖ US01 空成员列表：返回空数组且不重新填入预置成员 (6.1191ms)
+✖ US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取 (5.0241ms)
+✖ US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝 (5.657ms)
+✖ US01 只读约定：重复获取成员不改变已有成员、任务及文件内容 (6.1297ms)
+✔ US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id (0.8666ms)
+▶ US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+  ✖ 重复 id (6.6896ms)
+  ✖ 空成员条目 (5.9291ms)
+  ✖ 非法 id (7.7614ms)
+  ✖ 空白姓名 (4.9348ms)
+  ✖ 缺少分工 (4.6849ms)
+✖ US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复 (31.2866ms)
+✖ US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件 (4.3259ms)
+✖ 状态可以从 TODO 更新为 DOING (38.994ms)
+✖ 状态可以从 DOING 更新为 DONE 且刷新后仍保留 (7.3543ms)
+✖ 非法状态返回 400 且不修改任务 (6.6017ms)
+✖ 不存在的任务返回 404 (6.0624ms)
+✖ 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确 (36.5355ms)
+✖ 空标题（含纯空白）创建失败，返回 400，且不落库 (6.5318ms)
+✖ 无效负责人创建失败，返回 400，且不落库 (5.3632ms)
+✖ 创建以后能够读取：任务列表包含新任务 (5.9224ms)
+✖ 持久化：用同一数据文件重新创建 app 后任务仍存在 (5.5783ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 1
+ℹ fail 23
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 446.9594
+
+✖ failing tests:
+
+test at test\members.test.js:30:1
+✖ US01 默认初始化：准确返回实验一的四名成员及分工 (36.0763ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63846
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63846
+    }
+  }
+
+test at test\members.test.js:50:1
+✖ US01 提交的预置数据与默认初始化一致 (5.5865ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63853
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63853
+    }
+  }
+
+test at test\members.test.js:64:1
+✖ US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更 (6.7722ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63859
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63859
+    }
+  }
+
+test at test\members.test.js:84:1
+✖ US01 空成员列表：返回空数组且不重新填入预置成员 (6.1191ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63866
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63866
+    }
+  }
+
+test at test\members.test.js:95:1
+✖ US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取 (5.0241ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63871
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63871
+    }
+  }
+
+test at test\members.test.js:120:1
+✖ US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝 (5.657ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63875
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63875
+    }
+  }
+
+test at test\members.test.js:144:1
+✖ US01 只读约定：重复获取成员不改变已有成员、任务及文件内容 (6.1297ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63877
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63877
+    }
+  }
+
+test at test\members.test.js:205:13
+✖ 重复 id (6.6896ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63879
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63879
+    }
+  }
+
+test at test\members.test.js:205:13
+✖ 空成员条目 (5.9291ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63881
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63881
+    }
+  }
+
+test at test\members.test.js:205:13
+✖ 非法 id (7.7614ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63883
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63883
+    }
+  }
+
+test at test\members.test.js:205:13
+✖ 空白姓名 (4.9348ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63885
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63885
+    }
+  }
+
+test at test\members.test.js:205:13
+✖ 缺少分工 (4.6849ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:64089
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 64089
+    }
+  }
+
+test at test\members.test.js:220:1
+✖ US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件 (4.3259ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:64091
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 64091
+    }
+  }
+
+test at test\task-status.test.js:7:1
+✖ 状态可以从 TODO 更新为 DOING (38.994ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63848
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63848
+    }
+  }
+
+test at test\task-status.test.js:24:1
+✖ 状态可以从 DOING 更新为 DONE 且刷新后仍保留 (7.3543ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63857
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63857
+    }
+  }
+
+test at test\task-status.test.js:44:1
+✖ 非法状态返回 400 且不修改任务 (6.6017ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63863
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63863
+    }
+  }
+
+test at test\task-status.test.js:61:1
+✖ 不存在的任务返回 404 (6.0624ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63869
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63869
+    }
+  }
+
+test at test\tasks.test.js:21:1
+✖ 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确 (36.5355ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63847
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63847
+    }
+  }
+
+test at test\tasks.test.js:40:1
+✖ 空标题（含纯空白）创建失败，返回 400，且不落库 (6.5318ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63852
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63852
+    }
+  }
+
+test at test\tasks.test.js:53:1
+✖ 无效负责人创建失败，返回 400，且不落库 (5.3632ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63860
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63860
+    }
+  }
+
+test at test\tasks.test.js:64:1
+✖ 创建以后能够读取：任务列表包含新任务 (5.9224ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63864
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63864
+    }
+  }
+
+test at test\tasks.test.js:76:1
+✖ 持久化：用同一数据文件重新创建 app 后任务仍存在 (5.5783ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:63870
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 63870
+    }
+  }
+
+
+第二次运行：允许本地HTTP连接后退出码0
+以下为实际npm test输出：
+
+> ai-management@1.0.0 test
+> node --test test/members.test.js test/tasks.test.js test/task-status.test.js
+
+✔ US01 默认初始化：准确返回实验一的四名成员及分工 (49.3149ms)
+✔ US01 提交的预置数据与默认初始化一致 (13.4707ms)
+✔ US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更 (14.3456ms)
+✔ US01 空成员列表：返回空数组且不重新填入预置成员 (10.2737ms)
+✔ US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取 (77.7246ms)
+✔ US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝 (44.1422ms)
+✔ US01 只读约定：重复获取成员不改变已有成员、任务及文件内容 (14.6573ms)
+✔ US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id (0.3707ms)
+▶ US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+  ✔ 重复 id (6.4926ms)
+  ✔ 空成员条目 (5.8887ms)
+  ✔ 非法 id (6.1111ms)
+  ✔ 空白姓名 (5.8653ms)
+  ✔ 缺少分工 (5.4235ms)
+✔ US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复 (30.6595ms)
+✔ US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件 (5.5609ms)
+✔ 状态可以从 TODO 更新为 DOING (64.8213ms)
+✔ 状态可以从 DOING 更新为 DONE 且刷新后仍保留 (25.1047ms)
+✔ 非法状态返回 400 且不修改任务 (10.9838ms)
+✔ 不存在的任务返回 404 (8.5276ms)
+✔ 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确 (58.2338ms)
+✔ 空标题（含纯空白）创建失败，返回 400，且不落库 (32.5229ms)
+✔ 无效负责人创建失败，返回 400，且不落库 (12.5024ms)
+✔ 创建以后能够读取：任务列表包含新任务 (11.7901ms)
+✔ 持久化：用同一数据文件重新创建 app 后任务仍存在 (14.4837ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 429.0414

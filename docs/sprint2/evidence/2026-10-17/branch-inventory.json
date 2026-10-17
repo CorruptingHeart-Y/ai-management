@@ -1,0 +1,258 @@
+[
+  {
+    "ref": "refs/heads/codex/fix-service-status",
+    "sha": "05c74994a4d46cf1a6da95c3bc1ddc0c35075509",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js test/service-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/service-status.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": true,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/codex/sprint1-final-deliverables",
+    "sha": "316d923cf3aeaecf0281fefe7ae9f6f19a631f4c",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js test/service-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/service-status.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": true,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/codex/sprint2-baseline-prep",
+    "sha": "f9c0eddbaed28de4f6f3683885bb21db32ee4f03",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js test/service-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/service-status.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": true,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/develop",
+    "sha": "6f96b9d767c315ba21e806b95d15ad0ab8ea6e99",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/docs/sprint1-documentation",
+    "sha": "d1a3c77601b64818784b391d370be64f2d026f3b",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/docs/sprint1-finalization",
+    "sha": "86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/feature/us01-members",
+    "sha": "84fce388b2e2325c25e4bd464d1bf7a0d1efc2e7",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/feature/us04-create-task",
+    "sha": "84fce388b2e2325c25e4bd464d1bf7a0d1efc2e7",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/feature/us05-task-status",
+    "sha": "84fce388b2e2325c25e4bd464d1bf7a0d1efc2e7",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/integration/us01-merge",
+    "sha": "cc7c93773312fdf93445677579fa713b0fbb3b04",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/heads/main",
+    "sha": "dfd7b8112bedefbd6f617e8cd0b46bfc6b809224",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/HEAD",
+    "sha": "dfd7b8112bedefbd6f617e8cd0b46bfc6b809224",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/codex/sprint1-final-deliverables",
+    "sha": "4dd34763a0e263e2f74d49cb2019597f4de313a6",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js test/service-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/service-status.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": true,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/develop",
+    "sha": "6f96b9d767c315ba21e806b95d15ad0ab8ea6e99",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/docs/sprint1-documentation",
+    "sha": "d1a3c77601b64818784b391d370be64f2d026f3b",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/docs/sprint1-finalization",
+    "sha": "86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/feature/us01-members",
+    "sha": "b6c136dc69a45e250d916ba79796f5c9b34de9b7",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/feature/us04-create-task",
+    "sha": "40b9b4e966b30e8d99ecb9efc4705ad467803fb6",
+    "scripts": {
+      "start": "node server.js",
+      "test": "node --test test/members.test.js test/tasks.test.js"
+    },
+    "tests": [
+      "test/helpers.js",
+      "test/members.test.js",
+      "test/tasks.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/feature/us05-task-status",
+    "sha": "d3fa69558a716aa641c47dd5cbfbcecf6859c98f",
+    "scripts": {
+      "start": "node src/server.js",
+      "test": "jest"
+    },
+    "tests": [
+      "tests/task-status.test.js"
+    ],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  },
+  {
+    "ref": "refs/remotes/origin/main",
+    "sha": "dfd7b8112bedefbd6f617e8cd0b46bfc6b809224",
+    "scripts": {},
+    "tests": [],
+    "serviceStatus": false,
+    "actualExecution": "see run index; only develop/final/preparation were executed"
+  }
+]

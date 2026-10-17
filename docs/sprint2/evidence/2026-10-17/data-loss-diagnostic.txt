@@ -1,0 +1,3 @@
+READ_PRESERVES_ITERATIONS=false
+WRITE_PRESERVES_ITERATIONS=false
+DIAGNOSTIC_ONLY: synthetic temporary data; no application data touched.
