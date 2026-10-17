@@ -1,9 +1,10 @@
 # US10 状态统计 · 实现说明与集成清单
 
 > 负责人：何健翔（本轮 DRI）
-> 分支：`feature/us10-stats`　基线：Sprint 1 `develop`（35/35 全绿）
-> 契约依据：《实验三_Task字段与接口契约》（朱传玺，2026-10-17）
-> 状态：接口、页面、测试均已完成并在本地跑通（47/47，0 失败）；**待集成**。
+> 分支：`integration/sprint2-us10`（= 杨浩伟的 Sprint 2 起点 `b87fe43` + US10 四个提交，`git am` 无冲突）
+> 契约依据：《实验三_Task字段与接口契约》（朱传玺，2026-10-17）；PO 裁决见 `docs/sprint2/po-decisions-20261017.md`
+> 状态：接口、页面、测试已完成；在 `b87fe43` 上复验 **52 pass / 0 fail / 3 todo**（基线 35 + US10 12 + 集成测试 5）。
+> 门禁：`test/stats.test.js` 已就位，`verify-sprint2.cjs` 仍缺 `task-attrs` 与 `iterations` 两份故事测试。
 
 ## 1. 做了什么
 
@@ -74,13 +75,16 @@ npm test
 
 ## 5. 集成步骤（给杨浩伟，5 分钟）
 
-1. `git checkout develop && git pull`，然后 `git merge feature/us10-stats`。
-2. 预期只有两处冲突可能：
-   - `src/app.js`：只要保留 `createStatsRouter(db)` 的 require 与 `app.use('/api/stats', ...)` 两行；若朱传玺也改了这个文件，两边的 `app.use` 都保留即可。
-   - `package.json` 的 `test` 脚本：把 `test/stats.test.js` 与 US06/US07 的新测试文件一起列进去（用空格分隔，别覆盖别人的）。
-3. `npm ci && npm test` → 期望 47 + US06/US07 的新增项，**0 失败**。
-4. 浏览器开 `http://localhost:3000/stats.html`，跑第 6 节的回归点。
-5. 在 `README.md` 的 API 表补一行 `GET /api/stats`（README 归 DRI 定稿，我来加，不占你的时间）。
+> 起点已变：不再从 `develop` 合，而是从你建的 Sprint 2 起点 `b87fe43`。我本地已把 US10 落到该 SHA 上（分支
+> `integration/sprint2-us10`，`git am` 四个补丁全部无冲突），你在同一 SHA 上合并即可。
+
+1. 以 `b87fe43` 建 `integration/sprint2`，按 US06 → US07 → US10 顺序合入；US10 排最后，因为它依赖前两个的字段。
+2. 合入 US10 时预期零冲突（新增文件为主）；只有两处需要看一眼：
+   - `src/app.js`：保留 `createStatsRouter(db)` 的 require 与 `app.use('/api/stats', ...)` 两行（这是我对该文件的唯一改动，出口已由 PO 指定为我）。
+   - `package.json` 的 `test` 脚本：把 `test/stats.test.js` 与 US06/US07 的新测试文件一起列进去（空格分隔，别覆盖）。
+3. `npm ci && npm test` → 期望原 35 + US10 12 + US06/US07 新增 + 你的集成测试，**0 fail**。
+4. 浏览器开 `http://localhost:3000/stats.html`，跑第 6 节的回归点，并把结果记进 G5 证据。
+5. `index.html` 的导航链接由你在集成窗口统一加一行（`<a href="stats.html">统计</a>`），我不碰 `index.html`。
 
 ## 6. 回归要点（杨浩伟照着点一遍，200 秒）
 

@@ -1,0 +1,186 @@
+﻿US10 在 Sprint 2 起点 b87fe43 上的集成验证
+执行：何健翔（DRI/PO），2026-10-17 17:44 +08:00
+分支：integration/sprint2-us10（b87fe43 + US10 四个提交，git am 无冲突）
+
+环境限制说明：本机受限沙箱禁止管道创建子进程（spawn EPERM），scripts/verify-sprint2.cjs 内部的
+spawnSync(git) 与 node --test 多文件模式均无法执行；故此处①复刻其静态检查（基线测试哈希 + 故事测试文件存在性），
+②按文件逐个在进程内运行测试并汇总。团队环境执行 node scripts/verify-sprint2.cjs 为权威结论。
+
+===== 静态检查 =====
+{
+  "baselineHash": {
+    "test/members.test.js": "MATCH",
+    "test/tasks.test.js": "MATCH",
+    "test/task-status.test.js": "MATCH",
+    "test/service-status.test.js": "MATCH"
+  },
+  "storiesMissing": [
+    "test/task-attrs.test.js",
+    "test/iterations.test.js"
+  ],
+  "integrationExists": true,
+  "storiesPresent": [
+    "test/stats.test.js"
+  ],
+  "gateVerdict": "BLOCKED: missing story tests: test/task-attrs.test.js, test/iterations.test.js"
+}
+
+===== 逐文件运行 =====
+test/members.test.js                     pass=15  fail=0 todo=0
+✔ US01 默认初始化：准确返回实验一的四名成员及分工 (32.0786ms)
+✔ US01 提交的预置数据与默认初始化一致 (8.2626ms)
+✔ US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更 (11.0309ms)
+✔ US01 空成员列表：返回空数组且不重新填入预置成员 (4.7285ms)
+✔ US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取 (19.9934ms)
+✔ US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝 (9.0502ms)
+✔ US01 只读约定：重复获取成员不改变已有成员、任务及文件内容 (7.4838ms)
+✔ US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id (0.1982ms)
+▶ US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+  ✔ 重复 id (4.1448ms)
+  ✔ 空成员条目 (3.638ms)
+  ✔ 非法 id (3.3737ms)
+  ✔ 空白姓名 (3.4348ms)
+  ✔ 缺少分工 (3.8445ms)
+✔ US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复 (19.2095ms)
+✔ US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件 (3.1541ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 118.8434
+test/tasks.test.js                       pass=5   fail=0 todo=0
+✔ 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确 (36.7645ms)
+✔ 空标题（含纯空白）创建失败，返回 400，且不落库 (14.7553ms)
+✔ 无效负责人创建失败，返回 400，且不落库 (8.2303ms)
+✔ 创建以后能够读取：任务列表包含新任务 (7.0545ms)
+✔ 持久化：用同一数据文件重新创建 app 后任务仍存在 (9.2801ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.5949
+test/task-status.test.js                 pass=4   fail=0 todo=0
+✔ 状态可以从 TODO 更新为 DOING (37.5813ms)
+✔ 状态可以从 DOING 更新为 DONE 且刷新后仍保留 (15.5231ms)
+✔ 非法状态返回 400 且不修改任务 (7.7826ms)
+✔ 不存在的任务返回 404 (4.9233ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.1913
+test/service-status.test.js              pass=11  fail=0 todo=0
+✔ 页面初始显示检查中，并由现有成员加载请求驱动状态 (1.1912ms)
+✔ 成员接口成功且响应结构有效后才显示连接正常，只请求一次 (0.7571ms)
+✔ 请求失败时切换为服务连接异常 (0.3541ms)
+✔ 空成员数组符合接口契约，连接状态仍由有效响应决定 (0.4721ms)
+▶ HTTP失败、非JSON和不符合成员契约的响应均不能显示正常
+  ✔ HTTP 500 (0.1475ms)
+  ✔ 非JSON响应 (0.1292ms)
+  ✔ 成员字段不完整 (0.2296ms)
+  ✔ 重复成员编号 (0.0934ms)
+  ✔ 无法解析的JSON (0.1789ms)
+✔ HTTP失败、非JSON和不符合成员契约的响应均不能显示正常 (1.5685ms)
+✔ 超时会中止请求并显示服务连接异常 (11.5052ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19.612
+test/stats.test.js                       pass=12  fail=0 todo=0
+✔ US10 空数据：总数为 0，各组计数为 0，不报错 (1.2018ms)
+✔ US10 按状态计数：三项之和等于总数 (0.1263ms)
+✔ US10 缺失字段容错：Sprint 1 旧任务按 TODO / MEDIUM / 未分配 计 (0.0957ms)
+✔ US10 非法值容错：未知状态/优先级不丢任务，未知迭代单独成组 (0.1291ms)
+✔ US10 按优先级计数：三个档位分别统计 (0.1232ms)
+✔ US10 按负责人计数：含 0 任务成员，未知负责人单独成组 (0.1123ms)
+✔ US10 按迭代计数：未分配排第一，迭代名称来自 iterations (0.1178ms)
+✔ US10 字符串 id 归一化：assigneeId="2" 不应产生未知成员 (0.0713ms)
+✔ US10 纯函数：不修改传入的数据对象 (0.1194ms)
+✔ GET /api/stats：返回统计结构，且 byStatus 之和等于 total (33.609ms)
+✔ GET /api/stats：空任务库返回 200 与全 0，不返回 500 (7.6407ms)
+✔ GET /api/stats：数据文件损坏返回 500 与可读提示 (6.611ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53.4025
+test/sprint2-integration.test.js         pass=5   fail=0 todo=3
+✔ S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务 (67.5127ms)
+SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at Object.readData (C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\db.js:45:25)
+    at C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\routes\tasks.js:42:21
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:280:10)
+✔ S2异常：损坏JSON时POST返回失败并逐字保留原文件 (4.7362ms)
+✔ S2异常：损坏JSON时PATCH返回失败并逐字保留原文件 (3.2946ms)
+SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at Object.readData (C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\db.js:45:25)
+    at C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\routes\tasks.js:79:21
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:365:14)
+    at param (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:376:14)
+Error: injected write-before EIO
+    at Object.<anonymous> (C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\test\sprint2-integration.test.js:66:48)
+    at Object.apply (node:internal/test_runner/mock/mock:805:20)
+    at Object.writeData (C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\db.js:55:8)
+    at C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\routes\tasks.js:65:8
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:346:12)
+✔ S2异常：POST注入写入前EIO时不报成功、不改变原文件 (3.788ms)
+✔ S2异常：PATCH注入写入前EIO时不报成功、不改变原文件 (3.322ms)
+✔ 待集成：优先级、截止时间、迭代ID边界组合与失败不落库 (0.0574ms) # 三位负责人先确认字段、默认值、日期时区和引用契约，再实现断言
+✔ 待集成：含属性和迭代任务TODO→DOING→DONE与统计逐项一致 (0.0509ms) # 等待US06/US07/US10及统计响应契约
+✔ 待集成：新增字段、迭代集合经创建/状态更新/重启后完整保留 (0.044ms) # 等待迭代结构和属性契约；当前db.readData会丢弃额外顶层集合
+Error: injected write-before EIO
+    at Object.<anonymous> (C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\test\sprint2-integration.test.js:66:48)
+    at Object.apply (node:internal/test_runner/mock/mock:805:20)
+    at Object.writeData (C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\db.js:55:8)
+    at C:\Users\jianx\Desktop\第三次实验\ai-management-sprint2\src\routes\tasks.js:86:8
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\jianx\Desktop\软管\ai-management\node_modules\express\lib\router\index.js:365:14)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 3
+ℹ duration_ms 86.3616
+
+合计：pass=52 fail=0 todo=3（基线35 + US10 12 + 集成测试 5）
+结论：US10 部分已就位；门禁仍缺 test/task-attrs.test.js 与 test/iterations.test.js。
