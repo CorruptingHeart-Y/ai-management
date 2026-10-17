@@ -6,6 +6,7 @@ const express = require('express');
 const { createDb } = require('./db');
 const { createMembersRouter } = require('./routes/members');
 const { createTasksRouter } = require('./routes/tasks');
+const { createStatsRouter } = require('./routes/stats');
 
 /**
  * 创建 Express 应用。
@@ -25,6 +26,7 @@ function createApp({ dataFile } = {}) {
 
   app.use('/api/members', createMembersRouter(db));
   app.use('/api/tasks', createTasksRouter(db));
+  app.use('/api/stats', createStatsRouter(db));
 
   return app;
 }
