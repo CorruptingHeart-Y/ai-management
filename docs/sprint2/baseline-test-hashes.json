@@ -1,0 +1,10 @@
+{
+  "sourceCommit": "316d923cf3aeaecf0281fefe7ae9f6f19a631f4c",
+  "normalization": "UTF-8, CRLF to LF only",
+  "files": {
+    "test/members.test.js": "34ab91a1a392488bbd941a65bef167a00b6489bef84c1ef6eb15692ae9e976f6",
+    "test/tasks.test.js": "127231c160dbfd6b116ea0c8cce907838cb328b142cf36d7d4d136ca2019eea3",
+    "test/task-status.test.js": "d4f4e7399f47a62374896f905bb509ea4cb468608853030d12bcc393033fe439",
+    "test/service-status.test.js": "bb8250d3ed9e6601d8ab0d64e307ac7f70c2fa7612d03f408f11d2c0c9613acb"
+  }
+}

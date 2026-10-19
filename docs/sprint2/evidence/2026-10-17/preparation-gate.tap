@@ -1,0 +1,327 @@
+{"date":"2026-10-17T09:09:39.404Z","branch":"codex/sprint2-baseline-prep","sha":"f9c0eddbaed28de4f6f3683885bb21db32ee4f03","dirty":true,"command":["node","scripts/verify-sprint2.cjs","--baseline-only"],"mode":"PREPARATION_ONLY"}
+TAP version 13
+# Subtest: US01 默认初始化：准确返回实验一的四名成员及分工
+ok 1 - US01 默认初始化：准确返回实验一的四名成员及分工
+  ---
+  duration_ms: 40.8824
+  type: 'test'
+  ...
+# Subtest: US01 提交的预置数据与默认初始化一致
+ok 2 - US01 提交的预置数据与默认初始化一致
+  ---
+  duration_ms: 12.0256
+  type: 'test'
+  ...
+# Subtest: US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+ok 3 - US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+  ---
+  duration_ms: 8.9138
+  type: 'test'
+  ...
+# Subtest: US01 空成员列表：返回空数组且不重新填入预置成员
+ok 4 - US01 空成员列表：返回空数组且不重新填入预置成员
+  ---
+  duration_ms: 6.2266
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+ok 5 - US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+  ---
+  duration_ms: 75.8488
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+ok 6 - US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+  ---
+  duration_ms: 33.3293
+  type: 'test'
+  ...
+# Subtest: US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+ok 7 - US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+  ---
+  duration_ms: 29.3612
+  type: 'test'
+  ...
+# Subtest: US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+ok 8 - US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+  ---
+  duration_ms: 0.3354
+  type: 'test'
+  ...
+# Subtest: US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+    # Subtest: 重复 id
+    ok 1 - 重复 id
+      ---
+      duration_ms: 4.5458
+      type: 'test'
+      ...
+    # Subtest: 空成员条目
+    ok 2 - 空成员条目
+      ---
+      duration_ms: 3.8989
+      type: 'test'
+      ...
+    # Subtest: 非法 id
+    ok 3 - 非法 id
+      ---
+      duration_ms: 4.1228
+      type: 'test'
+      ...
+    # Subtest: 空白姓名
+    ok 4 - 空白姓名
+      ---
+      duration_ms: 4.2545
+      type: 'test'
+      ...
+    # Subtest: 缺少分工
+    ok 5 - 缺少分工
+      ---
+      duration_ms: 4.9955
+      type: 'test'
+      ...
+    1..5
+ok 9 - US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+  ---
+  duration_ms: 22.4302
+  type: 'test'
+  ...
+# Subtest: US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+ok 10 - US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+  ---
+  duration_ms: 4.0608
+  type: 'test'
+  ...
+# Subtest: 页面初始显示检查中，并由现有成员加载请求驱动状态
+ok 11 - 页面初始显示检查中，并由现有成员加载请求驱动状态
+  ---
+  duration_ms: 1.1597
+  type: 'test'
+  ...
+# Subtest: 成员接口成功且响应结构有效后才显示连接正常，只请求一次
+ok 12 - 成员接口成功且响应结构有效后才显示连接正常，只请求一次
+  ---
+  duration_ms: 0.6674
+  type: 'test'
+  ...
+# Subtest: 请求失败时切换为服务连接异常
+ok 13 - 请求失败时切换为服务连接异常
+  ---
+  duration_ms: 0.9484
+  type: 'test'
+  ...
+# Subtest: 空成员数组符合接口契约，连接状态仍由有效响应决定
+ok 14 - 空成员数组符合接口契约，连接状态仍由有效响应决定
+  ---
+  duration_ms: 0.5392
+  type: 'test'
+  ...
+# Subtest: HTTP失败、非JSON和不符合成员契约的响应均不能显示正常
+    # Subtest: HTTP 500
+    ok 1 - HTTP 500
+      ---
+      duration_ms: 0.18
+      type: 'test'
+      ...
+    # Subtest: 非JSON响应
+    ok 2 - 非JSON响应
+      ---
+      duration_ms: 0.1367
+      type: 'test'
+      ...
+    # Subtest: 成员字段不完整
+    ok 3 - 成员字段不完整
+      ---
+      duration_ms: 0.1069
+      type: 'test'
+      ...
+    # Subtest: 重复成员编号
+    ok 4 - 重复成员编号
+      ---
+      duration_ms: 0.0995
+      type: 'test'
+      ...
+    # Subtest: 无法解析的JSON
+    ok 5 - 无法解析的JSON
+      ---
+      duration_ms: 0.1747
+      type: 'test'
+      ...
+    1..5
+ok 15 - HTTP失败、非JSON和不符合成员契约的响应均不能显示正常
+  ---
+  duration_ms: 1.3191
+  type: 'test'
+  ...
+# Subtest: 超时会中止请求并显示服务连接异常
+ok 16 - 超时会中止请求并显示服务连接异常
+  ---
+  duration_ms: 14.3331
+  type: 'test'
+  ...
+# Subtest: 状态可以从 TODO 更新为 DOING
+ok 17 - 状态可以从 TODO 更新为 DOING
+  ---
+  duration_ms: 47.0334
+  type: 'test'
+  ...
+# Subtest: 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+ok 18 - 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+  ---
+  duration_ms: 14.9319
+  type: 'test'
+  ...
+# Subtest: 非法状态返回 400 且不修改任务
+ok 19 - 非法状态返回 400 且不修改任务
+  ---
+  duration_ms: 8.8742
+  type: 'test'
+  ...
+# Subtest: 不存在的任务返回 404
+ok 20 - 不存在的任务返回 404
+  ---
+  duration_ms: 7.1932
+  type: 'test'
+  ...
+# Subtest: 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+ok 21 - 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+  ---
+  duration_ms: 50.5059
+  type: 'test'
+  ...
+# Subtest: 空标题（含纯空白）创建失败，返回 400，且不落库
+ok 22 - 空标题（含纯空白）创建失败，返回 400，且不落库
+  ---
+  duration_ms: 29.4892
+  type: 'test'
+  ...
+# Subtest: 无效负责人创建失败，返回 400，且不落库
+ok 23 - 无效负责人创建失败，返回 400，且不落库
+  ---
+  duration_ms: 8.5698
+  type: 'test'
+  ...
+# Subtest: 创建以后能够读取：任务列表包含新任务
+ok 24 - 创建以后能够读取：任务列表包含新任务
+  ---
+  duration_ms: 7.5312
+  type: 'test'
+  ...
+# Subtest: 持久化：用同一数据文件重新创建 app 后任务仍存在
+ok 25 - 持久化：用同一数据文件重新创建 app 后任务仍存在
+  ---
+  duration_ms: 8.748
+  type: 'test'
+  ...
+1..25
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 386.2245
+TAP version 13
+# Subtest: S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务
+ok 1 - S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务
+  ---
+  duration_ms: 197.9961
+  type: 'test'
+  ...
+# Subtest: S2异常：损坏JSON时POST返回失败并逐字保留原文件
+ok 2 - S2异常：损坏JSON时POST返回失败并逐字保留原文件
+  ---
+  duration_ms: 5.1592
+  type: 'test'
+  ...
+# SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+#     at JSON.parse (<anonymous>)
+#     at Object.readData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\db.js:45:25)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\routes\\tasks.js:42:21
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at router.process_params (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:346:12)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:280:10)
+# Subtest: S2异常：损坏JSON时PATCH返回失败并逐字保留原文件
+ok 3 - S2异常：损坏JSON时PATCH返回失败并逐字保留原文件
+  ---
+  duration_ms: 5.0984
+  type: 'test'
+  ...
+# SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+#     at JSON.parse (<anonymous>)
+#     at Object.readData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\db.js:45:25)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\routes\\tasks.js:79:21
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at param (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:365:14)
+#     at param (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:376:14)
+# Subtest: S2异常：POST注入写入前EIO时不报成功、不改变原文件
+ok 4 - S2异常：POST注入写入前EIO时不报成功、不改变原文件
+  ---
+  duration_ms: 4.8637
+  type: 'test'
+  ...
+# Error: injected write-before EIO
+#     at Object.<anonymous> (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\test\\sprint2-integration.test.js:66:48)
+#     at Object.apply (node:internal/test_runner/mock/mock:767:20)
+#     at Object.writeData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\db.js:55:8)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\routes\\tasks.js:65:8
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at router.process_params (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:346:12)
+# Subtest: S2异常：PATCH注入写入前EIO时不报成功、不改变原文件
+ok 5 - S2异常：PATCH注入写入前EIO时不报成功、不改变原文件
+  ---
+  duration_ms: 4.2702
+  type: 'test'
+  ...
+# Subtest: 待集成：优先级、截止时间、迭代ID边界组合与失败不落库
+ok 6 - 待集成：优先级、截止时间、迭代ID边界组合与失败不落库 # TODO 三位负责人先确认字段、默认值、日期时区和引用契约，再实现断言
+  ---
+  duration_ms: 0.104
+  type: 'test'
+  ...
+# Subtest: 待集成：含属性和迭代任务TODO→DOING→DONE与统计逐项一致
+ok 7 - 待集成：含属性和迭代任务TODO→DOING→DONE与统计逐项一致 # TODO 等待US06/US07/US10及统计响应契约
+  ---
+  duration_ms: 0.0426
+  type: 'test'
+  ...
+# Subtest: 待集成：新增字段、迭代集合经创建/状态更新/重启后完整保留
+ok 8 - 待集成：新增字段、迭代集合经创建/状态更新/重启后完整保留 # TODO 等待迭代结构和属性契约；当前db.readData会丢弃额外顶层集合
+  ---
+  duration_ms: 0.0431
+  type: 'test'
+  ...
+# Error: injected write-before EIO
+#     at Object.<anonymous> (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\test\\sprint2-integration.test.js:66:48)
+#     at Object.apply (node:internal/test_runner/mock/mock:767:20)
+#     at Object.writeData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\db.js:55:8)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\src\\routes\\tasks.js:86:8
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at param (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\prep\\node_modules\\express\\lib\\router\\index.js:365:14)
+1..8
+# tests 8
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 3
+# duration_ms 343.7592
+{"baseline":{"tests":35,"pass":35,"fail":0,"cancelled":0,"skipped":0,"todo":0},"additional":{"tests":8,"pass":5,"fail":0,"cancelled":0,"skipped":0,"todo":3},"missingStoryFiles":["test/task-attrs.test.js","test/iterations.test.js","test/stats.test.js"]}
+PREPARATION_ONLY: no Sprint 2 acceptance claimed.

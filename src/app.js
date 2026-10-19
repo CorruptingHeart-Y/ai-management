@@ -6,6 +6,8 @@ const express = require('express');
 const { createDb } = require('./db');
 const { createMembersRouter } = require('./routes/members');
 const { createTasksRouter } = require('./routes/tasks');
+const { createStatsRouter } = require('./routes/stats');
+const { createIterationsRouter } = require('./routes/iterations');
 
 /**
  * 创建 Express 应用。
@@ -25,6 +27,9 @@ function createApp({ dataFile } = {}) {
 
   app.use('/api/members', createMembersRouter(db));
   app.use('/api/tasks', createTasksRouter(db));
+  app.use('/api/stats', createStatsRouter(db));
+  // US07：迭代路由由共享应用入口挂载（PO 指定 src/app.js 出口为何健翔）
+  app.use('/api/iterations', createIterationsRouter(db));
 
   return app;
 }

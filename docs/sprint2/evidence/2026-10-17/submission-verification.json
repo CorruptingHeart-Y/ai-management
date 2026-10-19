@@ -1,0 +1,321 @@
+{
+  "checkedAt": "2026-10-17T17:12:50.012011+08:00",
+  "zip": "C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint2\\local-final\\deliverables\\submission\\第7组_Sprint1源代码.zip",
+  "sha256": "22b289d328ebf925c34486d33934bcadaea2a773c76d7044bdc43a3106f45c9e",
+  "sourceSha": "e3b147be77fd8c1bf2613a352bb7c6d6b1081d5b",
+  "count": 51,
+  "allManifestHashesOK": true,
+  "allTrackedSourceFilesMatchGit": true,
+  "generated": [
+    "deliverables/第7组_成员一彭佳成_US01交付说明.txt",
+    "源代码交付说明.md"
+  ],
+  "files": [
+    {
+      "file": ".github/pull_request_template.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": ".gitignore",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "README.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "data/db.json",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "deliverables/第7组_成员一彭佳成_US01交付说明.txt",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": null,
+      "kind": "package-generated supplemental file"
+    },
+    {
+      "file": "docs/ai-interactions.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/code-review.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/daily-progress.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/dod.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/dri-message.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/sprint1-final-smoke-20261008.txt",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/sprint1-final-test-20261008.txt",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/sprint1-integrated-browser-20261008.txt",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/sprint1-integrated-test-20261008.txt",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/us01-browser-results.json",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/us01-members-mobile.png",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/us01-members.png",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/us01-tests.tap",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/evidence/us01-verification.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/final-human-checklist.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/guide-template-audit.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/service-status-human-review.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/source-delivery.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/sprint-backlog.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/sprint-planning.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/sprint-retrospective.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/sprint-review.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/sprint-self-evaluation.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/sprint1-delivery-audit.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/us01-members.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "docs/us01-pr.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "package-lock.json",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "package.json",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "public/app.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "public/index.html",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "public/service-status.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "public/style.css",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "server.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "src/app.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "src/db.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "src/domain/member.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "src/domain/task.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "src/routes/members.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "src/routes/tasks.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "test/helpers.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "test/members.test.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "test/service-status.test.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "test/task-status.test.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "test/tasks.test.js",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": true,
+      "kind": "tracked source"
+    },
+    {
+      "file": "源代码交付说明.md",
+      "manifestHashOK": true,
+      "gitSourceExactMatch": null,
+      "kind": "package-generated supplemental file"
+    }
+  ]
+}

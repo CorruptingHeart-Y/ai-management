@@ -65,6 +65,14 @@ npm test
 2026-09-20 在 `feature/us01-members` 的全量测试为 24/24 通过（含子测试）；基线 `6906e49` 的原有测试为 12/12。
 实际日志见 [US01 全量测试记录](docs/evidence/us01-tests.tap)，浏览器 8 项验证见 [运行证据](docs/evidence/us01-verification.md)。
 
+## Sprint 2 · US10 状态统计
+
+统计页：启动后访问 <http://localhost:3000/stats.html>（工作台 `index.html` 不受影响）。
+接口：`GET /api/stats`，只读，返回 `total`、`byStatus`、`byPriority`、`byAssignee`、`byIteration`。
+口径：旧任务缺字段按 `TODO` / `MEDIUM` / 未分配 计；引用不存在的迭代或负责人会单列为「未知」，不静默丢弃。
+证据：全量 47/47 通过（基线 35 + US10 12），见 [测试记录](docs/evidence/sprint2-us10-test-20261017.txt)
+与 [接口联调记录](docs/evidence/sprint2-us10-api-demo-20261017.txt)；实现与集成说明见 [US10 说明](docs/us10-stats.md)。
+
 ## 统一数据约定
 
 三个用户故事（US01 / US04 / US05）共用同一份数据与同一套字段，不允许各自造假数据。
@@ -82,6 +90,7 @@ npm test
 | GET | `/api/tasks` | 查看任务列表 | US04 / US05 共用 |
 | POST | `/api/tasks` | 创建并分配任务 | **US04** |
 | PATCH | `/api/tasks/:id/status` | 更新任务状态 | US05 |
+| GET | `/api/stats` | 任务统计：总数、按状态/优先级/负责人/迭代 | **US10**（Sprint 2） |
 
 ### GET /api/members
 
@@ -156,7 +165,8 @@ test/                  # node:test 测试（US01 / US04 / US05）
 
 AI 编码智能体负责编写代码、编写测试、运行测试并根据错误修改代码。所有 AI 互动需要实时记录在 [docs/ai-interactions.md](docs/ai-interactions.md) 中。
 
-当前仓库仅完成 Sprint 1 范围内的功能，不包含 Sprint 2 / Sprint 3 或范围外复杂功能。
+当前仓库在 Sprint 1 的成员—任务—状态闭环之上，正在累积 Sprint 2 增量：US10 状态统计已实现（分支 `feature/us10-stats`），
+US06 任务优先级与截止时间、US07 迭代归属见《实验三_Task字段与接口契约》，集成后统一回归。
 
 ## 成员一交付材料
 

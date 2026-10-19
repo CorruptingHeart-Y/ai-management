@@ -1,0 +1,2 @@
+{"date":"2026-10-17T09:09:40.365Z","branch":"codex/sprint2-baseline-prep","sha":"f9c0eddbaed28de4f6f3683885bb21db32ee4f03","dirty":true,"command":["node","scripts/verify-sprint2.cjs"],"mode":"AUTOMATED_INTEGRATION_GATE"}
+BLOCKED: missing story tests: test/task-attrs.test.js, test/iterations.test.js, test/stats.test.js

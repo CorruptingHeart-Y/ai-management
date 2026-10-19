@@ -1,0 +1,31 @@
+﻿US06 × US07 × US05 × US10 跨故事联调记录（集成分支 integration/sprint2）
+执行：何健翔，2026-10-19 16:29 +08:00
+分支：b87fe43 + US06(45d0f6a) + US07(bda59fd) + US10，均 --no-ff 合并
+复现：node docs/sprint2/checks/us06-us10-e2e.cjs（需已 npm ci）
+覆盖：优先级与截止时间、迭代归属（含非法引用 400）、状态流转、统计联动、迭代集合写回不丢
+
+PASS  初始统计：总数 2
+PASS  初始统计：HIGH 1 / MEDIUM 1（缺字段按 MEDIUM）
+PASS  初始统计：byStatus 之和等于 total
+PASS  US06 创建返回 201
+PASS  US06 创建保留 priority=LOW 与 dueDate
+PASS  US06 非法优先级返回 400
+PASS  非法创建后统计总数仍为 3（未落库）
+PASS  非法请求没有留下任务
+PASS  新建后统计总数 3
+PASS  新建后 LOW 计数为 1
+PASS  新建后该负责人计数为 1
+PASS  US05 状态更新返回 200
+PASS  状态改 DONE 后统计 DONE=2、TODO=1
+PASS  US07 迭代列表返回 2 条（TD-S2-01 已通）
+PASS  US07 归属迭代创建返回 201
+PASS  US07 任务保留 iterationId=2
+PASS  US07 不存在的迭代返回 400
+PASS  US07 错误提示含“非法迭代”
+PASS  US10 按迭代分组：Sprint 2 计 1、未分配计 3
+PASS  调用统计不写数据文件
+PASS  迭代集合在多次写入后仍然存在
+PASS  /stats.html 返回 200
+PASS  任务列表 4 条
+
+共 23 项通过，0 项失败

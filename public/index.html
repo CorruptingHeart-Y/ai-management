@@ -24,9 +24,9 @@
           <p class="subtitle">最小功能闭环：查看成员 (US01) → 创建任务 (US04) → 状态流转 (US05)</p>
         </div>
       </div>
-      <div class="topbar-status">
-        <span class="status-indicator"></span>
-        <span class="status-text">本地运行正常 (Node.js + Express)</span>
+      <div class="topbar-status" data-state="checking" title="根据成员接口响应判断，不代表全部业务功能健康">
+        <span class="status-indicator" aria-hidden="true"></span>
+        <span id="service-status" class="status-text" role="status" aria-live="polite">正在检查服务...</span>
       </div>
     </div>
   </header>
@@ -84,6 +84,25 @@
               <option value="">—— 请选择成员 ——</option>
             </select>
           </label>
+          <label>
+            <span>优先级</span>
+            <select id="task-priority" name="priority">
+              <option value="MEDIUM" selected>中</option>
+              <option value="HIGH">高</option>
+              <option value="LOW">低</option>
+            </select>
+          </label>
+          <label>
+            <span>截止日期</span>
+            <input id="task-due" name="dueDate" type="date" />
+          </label>
+          <!-- US07 迭代归属：选项来自 GET /api/iterations；接口不可用时整块隐藏，不伪造选项 -->
+          <label id="iteration-field" hidden>
+            <span>迭代</span>
+            <select id="task-iteration" name="iterationId">
+              <option value="">未归属</option>
+            </select>
+          </label>
           <p id="form-message" class="message" role="alert"></p>
           <button id="create-task" type="submit" disabled>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -120,6 +139,7 @@
     </div>
   </main>
 
+  <script src="service-status.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

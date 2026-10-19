@@ -1,0 +1,4 @@
+正式源码ZIP SHA256: 22b289d328ebf925c34486d33934bcadaea2a773c76d7044bdc43a3106f45c9e
+源码基线: e3b147be77fd8c1bf2613a352bb7c6d6b1081d5b
+全部清单哈希与Git已跟踪源码比对: True/True
+包生成附加文件另列，见submission-verification.json；未解包执行npm。

@@ -1,0 +1,13 @@
+Sprint1交付启动链路验证
+执行日期：2026-10-08
+入口：Node.js运行server.js，对应npm start脚本
+范围：静态页面、成员API、创建与分配、TODO到DOING再到DONE、进程重启后持久读取
+使用独立DATA_FILE和临时端口，未操作用户演示数据；这不是新增人工Demo或新增自动测试用例统计。
+以下为实际工具输出：
+PASS server.js entry and static HTML HTTP 200
+PASS four-member API
+PASS create and assign task with TODO
+PASS status DOING
+PASS status DONE
+PASS process restart preserves task, owner and DONE
+PASS original demo data unchanged SHA256 9aedf8adcd6ce0c431ad11521d4e305db7197ce1f72a15c129cb4e73017f518e

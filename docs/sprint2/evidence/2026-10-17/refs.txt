@@ -1,0 +1,20 @@
+refs/heads/codex/fix-service-status 05c74994a4d46cf1a6da95c3bc1ddc0c35075509 
+refs/heads/codex/sprint1-final-deliverables 316d923cf3aeaecf0281fefe7ae9f6f19a631f4c [ahead 11]
+refs/heads/codex/sprint2-baseline-prep 6f96b9d767c315ba21e806b95d15ad0ab8ea6e99 
+refs/heads/develop 6f96b9d767c315ba21e806b95d15ad0ab8ea6e99 
+refs/heads/docs/sprint1-documentation d1a3c77601b64818784b391d370be64f2d026f3b 
+refs/heads/docs/sprint1-finalization 86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8 
+refs/heads/feature/us01-members 84fce388b2e2325c25e4bd464d1bf7a0d1efc2e7 
+refs/heads/feature/us04-create-task 84fce388b2e2325c25e4bd464d1bf7a0d1efc2e7 
+refs/heads/feature/us05-task-status 84fce388b2e2325c25e4bd464d1bf7a0d1efc2e7 
+refs/heads/integration/us01-merge cc7c93773312fdf93445677579fa713b0fbb3b04 
+refs/heads/main dfd7b8112bedefbd6f617e8cd0b46bfc6b809224 
+refs/remotes/origin/HEAD dfd7b8112bedefbd6f617e8cd0b46bfc6b809224 
+refs/remotes/origin/codex/sprint1-final-deliverables 4dd34763a0e263e2f74d49cb2019597f4de313a6 
+refs/remotes/origin/develop 6f96b9d767c315ba21e806b95d15ad0ab8ea6e99 
+refs/remotes/origin/docs/sprint1-documentation d1a3c77601b64818784b391d370be64f2d026f3b 
+refs/remotes/origin/docs/sprint1-finalization 86709c3d1e96bfdc6db6425cf7cc8b1989ce80e8 
+refs/remotes/origin/feature/us01-members b6c136dc69a45e250d916ba79796f5c9b34de9b7 
+refs/remotes/origin/feature/us04-create-task 40b9b4e966b30e8d99ecb9efc4705ad467803fb6 
+refs/remotes/origin/feature/us05-task-status d3fa69558a716aa641c47dd5cbfbcecf6859c98f 
+refs/remotes/origin/main dfd7b8112bedefbd6f617e8cd0b46bfc6b809224 
