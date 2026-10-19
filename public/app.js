@@ -11,6 +11,13 @@ const STATUS_LABEL = {
   DONE: '已完成',
 };
 
+// US06 优先级中文映射，与后端统一：HIGH→高、MEDIUM→中、LOW→低
+const PRIORITY_LABEL = {
+  HIGH: '高',
+  MEDIUM: '中',
+  LOW: '低',
+};
+
 const memberListEl = document.getElementById('member-list');
 const taskListEl = document.getElementById('task-list');
 const assigneeEl = document.getElementById('task-assignee');
@@ -92,11 +99,16 @@ async function loadTasks() {
 
   tasks.forEach((t) => {
     const assignee = members.find((m) => m.id === t.assigneeId);
+    // US06：旧数据可能没有 priority/dueDate，做容错，缺省显示为中
+    const priority = PRIORITY_LABEL[t.priority] ? t.priority : 'MEDIUM';
+    const dueDate = t.dueDate || null;
     const li = document.createElement('li');
     li.innerHTML = `
       <div class="task-title">${escapeHtml(t.title)}</div>
       <div class="task-meta">
         <span class="tag">${assignee ? escapeHtml(assignee.name) : '未知成员'}</span>
+        <span class="priority-badge priority-${priority.toLowerCase()}">${PRIORITY_LABEL[priority]}</span>
+        ${dueDate ? `<span class="due-badge">截止 ${escapeHtml(dueDate)}</span>` : ''}
       </div>
       ${t.description ? `<div class="task-desc">${escapeHtml(t.description)}</div>` : ''}
     `;
@@ -146,6 +158,8 @@ async function handleSubmit(e) {
   const title = document.getElementById('task-title').value.trim();
   const description = document.getElementById('task-desc').value.trim();
   const assigneeId = assigneeEl.value;
+  const priority = document.getElementById('task-priority').value;
+  const dueDate = document.getElementById('task-due').value;
 
   // 前端先做一层校验，给出即时反馈；后端仍会二次校验。
   if (!title) {
@@ -164,6 +178,8 @@ async function handleSubmit(e) {
       title,
       description,
       assigneeId: Number(assigneeId),
+      priority,
+      dueDate: dueDate || null,
     }),
   });
 
@@ -177,6 +193,8 @@ async function handleSubmit(e) {
   document.getElementById('task-title').value = '';
   document.getElementById('task-desc').value = '';
   assigneeEl.value = '';
+  document.getElementById('task-priority').value = 'MEDIUM';
+  document.getElementById('task-due').value = '';
   await loadTasks();
 }
 

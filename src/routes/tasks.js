@@ -1,14 +1,20 @@
 'use strict';
 
 const express = require('express');
-const { isValidStatus, updateTaskStatus } = require('../domain/task');
+const {
+  isValidStatus,
+  updateTaskStatus,
+  isValidPriority,
+  isValidDueDate,
+  DEFAULT_PRIORITY,
+} = require('../domain/task');
 
 /**
  * 任务路由。
  *
- * 本任务负责 US04 创建并分配任务：
+ * 本任务负责 US04 创建并分配任务、US06 任务优先级与截止时间：
  *   - GET  /api/tasks   查看任务列表
- *   - POST  /api/tasks          创建任务
+ *   - POST  /api/tasks          创建任务（含优先级与截止时间）
  *   - PATCH /api/tasks/:id/status 更新任务状态
  */
 
@@ -26,7 +32,7 @@ function createTasksRouter(db) {
     res.json(tasks);
   });
 
-  // POST /api/tasks —— 创建并分配任务
+  // POST /api/tasks —— 创建并分配任务（US06 扩展优先级与截止时间）
   router.post('/', (req, res) => {
     const body = req.body || {};
     const title = typeof body.title === 'string' ? body.title.trim() : '';
@@ -37,6 +43,21 @@ function createTasksRouter(db) {
     // 输入校验：title 不能为空
     if (!title) {
       return res.status(400).json({ error: '任务标题不能为空' });
+    }
+
+    // US06：优先级缺省为中，传入非法值则拒绝
+    let priority = body.priority;
+    if (priority == null || priority === '') priority = DEFAULT_PRIORITY;
+    if (!isValidPriority(priority)) {
+      return res.status(400).json({ error: `非法任务优先级: ${priority}` });
+    }
+
+    // US06：截止时间可空，空值归一化为 null；传了值则必须是合法日期
+    let dueDate = body.dueDate;
+    if (dueDate == null || dueDate === '') {
+      dueDate = null;
+    } else if (!isValidDueDate(dueDate)) {
+      return res.status(400).json({ error: `非法截止时间: ${dueDate}` });
     }
 
     const data = db.readData();
@@ -58,6 +79,9 @@ function createTasksRouter(db) {
       assigneeId,
       // 新任务初始状态统一为 TODO（待办）
       status: 'TODO',
+      // US06：任务优先级与截止时间
+      priority,
+      dueDate,
       createdAt: new Date().toISOString(),
     };
 
