@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>爱管理 · 状态统计（US10）</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 统计页自带样式，全部以 stats- 前缀命名，避免与 style.css 或其他人新增的类冲突。
+       颜色沿用 style.css 里的 CSS 变量，视觉与工作台保持一致；变量缺失时有兜底值。 */
+    .stats-main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .stats-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .stats-head h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--slate-900, #0f172a);
+    }
+    .stats-head p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: var(--slate-500, #64748b);
+    }
+    .stats-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .stats-btn {
+      border: 1px solid var(--slate-300, #cbd5e1);
+      background: #fff;
+      color: var(--slate-700, #334155);
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .stats-btn:hover { background: var(--slate-50, #f8fafc); }
+    .stats-link {
+      font-size: 13px;
+      color: var(--primary-600, #2563eb);
+      text-decoration: none;
+    }
+    .stats-link:hover { text-decoration: underline; }
+
+    .stats-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .stats-kpi {
+      background: #fff;
+      border: 1px solid var(--slate-200, #e2e8f0);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm, 0 1px 3px rgb(15 23 42 / 0.08));
+    }
+    .stats-kpi-label {
+      font-size: 12px;
+      color: var(--slate-500, #64748b);
+      margin-bottom: 6px;
+    }
+    .stats-kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--slate-900, #0f172a);
+      font-variant-numeric: tabular-nums;
+    }
+    .stats-kpi[data-tone="done"] .stats-kpi-value { color: var(--emerald-600, #059669); }
+    .stats-kpi[data-tone="doing"] .stats-kpi-value { color: var(--amber-600, #d97706); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .stats-card {
+      background: #fff;
+      border: 1px solid var(--slate-200, #e2e8f0);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm, 0 1px 3px rgb(15 23 42 / 0.08));
+    }
+    .stats-card h3 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--slate-700, #334155);
+    }
+    .stats-card-wide { grid-column: 1 / -1; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 84px 1fr 44px;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 13px;
+      color: var(--slate-700, #334155);
+    }
+    .stats-row-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .stats-bar {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--slate-100, #f1f5f9);
+      overflow: hidden;
+    }
+    .stats-bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: var(--primary-500, #3b82f6);
+      transition: width 0.25s ease;
+    }
+    .stats-bar-fill[data-tone="todo"] { background: var(--slate-400, #94a3b8); }
+    .stats-bar-fill[data-tone="doing"] { background: var(--amber-600, #d97706); }
+    .stats-bar-fill[data-tone="done"] { background: var(--emerald-600, #059669); }
+    .stats-num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      color: var(--slate-900, #0f172a);
+      font-weight: 600;
+    }
+    .stats-muted { color: var(--slate-400, #94a3b8); font-weight: 400; }
+
+    .stats-state {
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .stats-state[data-visible="true"] { display: block; }
+    .stats-state[data-tone="error"] {
+      background: var(--danger-50, #fef2f2);
+      border: 1px solid #fecaca;
+      color: var(--danger-600, #dc2626);
+    }
+    .stats-state[data-tone="empty"] {
+      background: var(--slate-50, #f8fafc);
+      border: 1px solid var(--slate-200, #e2e8f0);
+      color: var(--slate-600, #475569);
+    }
+    .stats-foot {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--slate-400, #94a3b8);
+      line-height: 1.7;
+    }
+    @media (max-width: 860px) {
+      .stats-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-group">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"></path>
+            <path d="M7 15l4-5 3 3 5-7"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="title-row">
+            <h1>爱管理</h1>
+            <span class="sprint-badge">Sprint 2 · US10 状态统计</span>
+          </div>
+          <p class="subtitle">按状态、优先级、负责人、迭代统计任务分布</p>
+        </div>
+      </div>
+      <div class="stats-actions">
+        <a class="stats-link" href="index.html">返回工作台</a>
+        <button id="stats-refresh" class="stats-btn" type="button">刷新</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="stats-main">
+    <div class="stats-head">
+      <div>
+        <h2>任务状态统计</h2>
+        <p id="stats-updated">正在读取…</p>
+      </div>
+    </div>
+
+    <div id="stats-state" class="stats-state" data-visible="false" role="status" aria-live="polite"></div>
+
+    <!-- 总览 -->
+    <section class="stats-kpis" aria-label="任务总览">
+      <div class="stats-kpi">
+        <div class="stats-kpi-label">任务总数</div>
+        <div class="stats-kpi-value" id="kpi-total">–</div>
+      </div>
+      <div class="stats-kpi">
+        <div class="stats-kpi-label">待办 TODO</div>
+        <div class="stats-kpi-value" id="kpi-todo">–</div>
+      </div>
+      <div class="stats-kpi" data-tone="doing">
+        <div class="stats-kpi-label">进行中 DOING</div>
+        <div class="stats-kpi-value" id="kpi-doing">–</div>
+      </div>
+      <div class="stats-kpi" data-tone="done">
+        <div class="stats-kpi-label">已完成 DONE</div>
+        <div class="stats-kpi-value" id="kpi-done">–</div>
+      </div>
+    </section>
+
+    <div class="stats-grid">
+      <!-- 状态分布 -->
+      <section class="stats-card" aria-labelledby="card-status">
+        <h3 id="card-status">状态分布</h3>
+        <div id="list-status"></div>
+      </section>
+
+      <!-- 优先级分布 -->
+      <section class="stats-card" aria-labelledby="card-priority">
+        <h3 id="card-priority">优先级分布（US06）</h3>
+        <div id="list-priority"></div>
+      </section>
+
+      <!-- 按负责人 -->
+      <section class="stats-card stats-card-wide" aria-labelledby="card-assignee">
+        <h3 id="card-assignee">按负责人（含 0 任务成员）</h3>
+        <div id="list-assignee"></div>
+      </section>
+
+      <!-- 按迭代 -->
+      <section class="stats-card stats-card-wide" aria-labelledby="card-iteration">
+        <h3 id="card-iteration">按迭代（US07）</h3>
+        <div id="list-iteration"></div>
+      </section>
+    </div>
+
+    <p class="stats-foot">
+      口径说明：旧任务缺字段时按 TODO / 中 / 未分配 计；引用不存在的迭代或负责人会单独列为「未知」，不会被静默丢弃。
+      数据只读，页面不会修改任务。
+    </p>
+  </main>
+
+  <script src="stats.js"></script>
+</body>
+</html>

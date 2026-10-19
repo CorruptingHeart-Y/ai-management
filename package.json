@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js test/service-status.test.js test/task-attrs.test.js"
+    "test": "node --test test/members.test.js test/tasks.test.js test/task-status.test.js test/service-status.test.js test/task-attrs.test.js test/stats.test.js"
   },
   "engines": {
     "node": ">=18"

@@ -1,0 +1,66 @@
+﻿US10 接口与页面联调记录（演示数据，临时数据文件，未触碰 data/db.json）
+生成时间：2026-10-17 17:28 +08:00
+预期：6 个任务；TODO3/DOING1/DONE2；HIGH2/MEDIUM3/LOW1；杨浩伟当前 0 任务也要出现。
+已知边界：当前 src/db.js 的 readData 只返回 members/tasks，会丢掉 iterations，
+          因此 byIteration 名称回退为「未知迭代 #id」。朱传玺按契约补 readData 后即显示真实迭代名。
+
+GET /api/stats -> 200 no-store
+{
+  "total": 6,
+  "byStatus": {
+    "TODO": 3,
+    "DOING": 1,
+    "DONE": 2
+  },
+  "byPriority": {
+    "HIGH": 2,
+    "MEDIUM": 3,
+    "LOW": 1
+  },
+  "byAssignee": [
+    {
+      "memberId": 1,
+      "name": "彭佳成",
+      "role": "产品与范围负责人",
+      "count": 2
+    },
+    {
+      "memberId": 2,
+      "name": "朱传玺",
+      "role": "技术与架构负责人",
+      "count": 2
+    },
+    {
+      "memberId": 3,
+      "name": "杨浩伟",
+      "role": "质量与风险负责人",
+      "count": 0
+    },
+    {
+      "memberId": 4,
+      "name": "何健翔",
+      "role": "AI协调与记录负责人",
+      "count": 2
+    }
+  ],
+  "byIteration": [
+    {
+      "iterationId": null,
+      "name": "未分配",
+      "count": 2
+    },
+    {
+      "iterationId": 1,
+      "name": "未知迭代 #1",
+      "count": 2
+    },
+    {
+      "iterationId": 2,
+      "name": "未知迭代 #2",
+      "count": 2
+    }
+  ]
+}
+GET /stats.html -> 200 bytes= 7629 含 stats.js: true
+GET /stats.js -> 200
+GET /api/tasks -> 200 tasks= 6 （旧接口不受影响）
