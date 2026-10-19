@@ -110,3 +110,16 @@ git checkout -b feature/us06-task-attrs   b87fe43   # 换成 us07-iteration / us
 ```
 
 这样三条分支的 `git diff b87fe43..HEAD` 只包含自己的故事改动，合并时不会夹带文档噪声。
+
+---
+
+## 执行更新（2026-10-19）：US06 已合入，US07 仍缺
+
+| 项 | 状态 |
+|---|---|
+| 集成分支 | `integration/sprint2`：`b87fe43` → merge US06（`45d0f6a`）→ merge US10，均 `--no-ff` 保留历史 |
+| 冲突 | 仅 `package.json` 的 `test` 脚本一处，双方测试文件全部保留（未用 ours／theirs 覆盖） |
+| 回归 | 58 pass / 0 fail / 3 todo；原 35 项哈希全部 `MATCH` |
+| 跨故事联调 | 17/17 通过（US06 建任务 → US10 计入 → 非法 400 不落库 → US05 改状态 → 统计联动） |
+| 门禁 | 仍 `BLOCKED`：缺 `test/iterations.test.js`（US07 未推送）；`sprint2-integration.test.js` 的 3 个 TODO 需转真实断言 |
+| 待彭佳成 | US07 迭代归属与其 `iterations.test.js`；另需朱传玺关闭 `TD-S2-01`（`readData` 补 `iterations`） |
