@@ -5,5 +5,9 @@
     { "id": 3, "name": "杨浩伟", "role": "质量与风险负责人" },
     { "id": 4, "name": "何健翔", "role": "AI协调与记录负责人" }
   ],
-  "tasks": []
+  "tasks": [],
+  "iterations": [
+    { "id": 1, "name": "Sprint 1" },
+    { "id": 2, "name": "Sprint 2" }
+  ]
 }

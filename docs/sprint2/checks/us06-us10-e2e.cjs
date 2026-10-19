@@ -1,5 +1,6 @@
 'use strict';
-// 跨故事联调：US06 创建（priority/dueDate）+ US05 状态更新 + US10 统计
+// 跨故事联调：US06 创建（priority/dueDate）+ US07 迭代归属 + US05 状态更新 + US10 统计
+// 文件名沿用 10-17 版本，内容在 10-19 扩展为三故事链路（23 项断言）。
 // 使用临时数据文件，不写 data/db.json。
 
 const fs = require('node:fs');
@@ -25,6 +26,11 @@ fs.writeFileSync(
       tasks: [
         { id: 1, title: '查看项目成员', status: 'DONE', assigneeId: 1, priority: 'HIGH', dueDate: '2026-10-10', iterationId: null },
         { id: 2, title: '创建并分配任务', status: 'TODO', assigneeId: 2 },
+      ],
+      // US07：迭代集合必须能透传（TD-S2-01 关闭后的行为）
+      iterations: [
+        { id: 1, name: 'Sprint 1' },
+        { id: 2, name: 'Sprint 2' },
       ],
     },
     null,
@@ -109,18 +115,56 @@ const server = app.listen(0, async () => {
       assert.equal(stats.byStatus.TODO, 1);
     });
 
-    // 6) 统计只读：不修改数据文件
+    // 6) US07 迭代：列表可读、可归属、非法引用被拒、统计按迭代分组
+    const iterations = await (await fetch(`${base}/api/iterations`)).json();
+    check('US07 迭代列表返回 2 条（TD-S2-01 已通）', () => {
+      assert.equal(iterations.length, 2);
+      assert.equal(iterations[1].name, 'Sprint 2');
+    });
+
+    const withIteration = await fetch(`${base}/api/tasks`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ title: '归属 Sprint 2 的任务', assigneeId: 1, priority: 'HIGH', iterationId: 2 }),
+    });
+    check('US07 归属迭代创建返回 201', () => assert.equal(withIteration.status, 201));
+    const iterationTask = await withIteration.json();
+    check('US07 任务保留 iterationId=2', () => assert.equal(iterationTask.iterationId, 2));
+
+    const badIteration = await fetch(`${base}/api/tasks`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ title: '非法迭代', assigneeId: 1, iterationId: 99 }),
+    });
+    check('US07 不存在的迭代返回 400', () => assert.equal(badIteration.status, 400));
+    const badIterationBody = await badIteration.json();
+    check('US07 错误提示含“非法迭代”', () => assert.match(badIterationBody.error, /非法迭代/));
+
+    stats = await (await fetch(`${base}/api/stats`)).json();
+    check('US10 按迭代分组：Sprint 2 计 1、未分配计 3', () => {
+      const sprint2 = stats.byIteration.find((r) => r.iterationId === 2);
+      assert.equal(sprint2.name, 'Sprint 2', '迭代名必须来自迭代集合，而不是“未知迭代 #2”');
+      assert.equal(sprint2.count, 1);
+      const unassigned = stats.byIteration.find((r) => r.iterationId === null);
+      assert.equal(unassigned.count, 3);
+    });
+
+    // 7) 统计只读：不修改数据文件
     const before = fs.readFileSync(dataFile, 'utf8');
     await fetch(`${base}/api/stats`);
     const after = fs.readFileSync(dataFile, 'utf8');
     check('调用统计不写数据文件', () => assert.equal(after, before));
+    check('迭代集合在多次写入后仍然存在', () => {
+      const saved = JSON.parse(after);
+      assert.equal(Array.isArray(saved.iterations), true);
+      assert.equal(saved.iterations.length, 2);
+    });
 
-    // 7) 页面可访问
+    // 8) 页面可访问
     const page = await fetch(`${base}/stats.html`);
     check('/stats.html 返回 200', () => assert.equal(page.status, 200));
-    check('/api/tasks 仍可用（US04 未受影响）', async () => {});
     const list = await (await fetch(`${base}/api/tasks`)).json();
-    check('任务列表 3 条', () => assert.equal(list.length, 3));
+    check('任务列表 4 条', () => assert.equal(list.length, 4));
   } catch (e) {
     checks.push(`FAIL  未预期异常 -> ${e.message}`);
     process.exitCode = 1;

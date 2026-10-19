@@ -8,6 +8,7 @@ const {
   isValidDueDate,
   DEFAULT_PRIORITY,
 } = require('../domain/task');
+const { resolveIterationId } = require('../domain/iteration');
 
 /**
  * 任务路由。
@@ -62,6 +63,17 @@ function createTasksRouter(db) {
 
     const data = db.readData();
 
+    // US07：迭代归属可空；传了值就必须指向存在的迭代（PO 授权例外接入，待朱传玺复核）
+    let iterationId = null;
+    try {
+      iterationId = resolveIterationId(
+        body.iterationId,
+        Array.isArray(data.iterations) ? data.iterations : []
+      );
+    } catch {
+      return res.status(400).json({ error: `非法迭代: ${body.iterationId}` });
+    }
+
     // 输入校验：assigneeId 必须对应真实存在的成员
     const assignee = data.members.find((m) => m.id === assigneeId);
     if (assignee == null) {
@@ -82,6 +94,8 @@ function createTasksRouter(db) {
       // US06：任务优先级与截止时间
       priority,
       dueDate,
+      // US07：迭代归属，未指定为 null
+      iterationId,
       createdAt: new Date().toISOString(),
     };
 

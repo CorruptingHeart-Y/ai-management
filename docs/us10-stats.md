@@ -3,9 +3,9 @@
 > 负责人：何健翔（本轮 DRI）
 > 分支：`integration/sprint2`（起点 `b87fe43` → 合并 US06 `45d0f6a` → 合并 US10）
 > 契约依据：《实验三_Task字段与接口契约》（朱传玺，2026-10-17）；PO 裁决见 `docs/sprint2/po-decisions-20261017.md`
-> 状态（2026-10-19 更新）：US06 与 US10 已合并，逐文件运行 **58 pass / 0 fail / 3 todo**
-> （基线 35 + US06 6 + US10 12 + 集成测试 5）；跨故事联调 17/17 通过。
-> 门禁：`task-attrs` 与 `stats` 两份故事测试已就位；仍缺 `test/iterations.test.js`（US07 未推送）。
+> 状态（2026-10-19 更新）：三故事已合并（US06 45d0f6a、US07 bda59fd、US10），逐文件运行 **62 pass / 0 fail / 3 todo**
+> （基线 35 + US06 6 + US07 4 + US10 12 + 集成测试 5）；三故事跨链路联调 23/23 通过；TD-S2-01 已关闭。
+> 门禁：三份故事测试均已就位；仍会因 `sprint2-integration.test.js` 的 3 个 TODO 而 `BLOCKED`。
 
 ## 1. 做了什么
 

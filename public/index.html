@@ -96,6 +96,13 @@
             <span>截止日期</span>
             <input id="task-due" name="dueDate" type="date" />
           </label>
+          <!-- US07 迭代归属：选项来自 GET /api/iterations；接口不可用时整块隐藏，不伪造选项 -->
+          <label id="iteration-field" hidden>
+            <span>迭代</span>
+            <select id="task-iteration" name="iterationId">
+              <option value="">未归属</option>
+            </select>
+          </label>
           <p id="form-message" class="message" role="alert"></p>
           <button id="create-task" type="submit" disabled>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">

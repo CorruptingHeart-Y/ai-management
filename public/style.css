@@ -541,6 +541,19 @@ button:focus-visible {
   gap: 4px;
 }
 
+/* US07 迭代归属标签；与 due-badge 区分用实线边框 */
+.iteration-badge {
+  font-size: 12px;
+  color: var(--primary-700, #1d4ed8);
+  background: var(--primary-50, #eff6ff);
+  border: 1px solid var(--primary-200, #bfdbfe);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .task-desc {
   color: var(--slate-600);
   font-size: 13px;

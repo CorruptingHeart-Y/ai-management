@@ -44,10 +44,18 @@ function createDb(dataFile) {
     const raw = fs.readFileSync(file, 'utf8');
     const parsed = JSON.parse(raw);
     // 兼容旧文件可能缺少字段的情况。
-    return {
+    const data = {
       members: Array.isArray(parsed.members) ? parsed.members : [],
       tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
     };
+    // TD-S2-01：迭代集合必须原样透传，否则 US07 读到空列表、写回时还会丢数据。
+    // 只在文件里确实存在该集合时才加，避免给旧数据凭空造出空数组：
+    // Sprint 1 的 members 测试会断言整个数据对象，凭空加字段会把它弄红（本轮已实际发生一次）。
+    // 该修改由 PO 于 2026-10-19 授权例外执行（原定由朱传玺提交），待其复核。
+    if (Array.isArray(parsed.iterations)) {
+      data.iterations = parsed.iterations;
+    }
+    return data;
   }
 
   /** 将整份数据写回 JSON 文件。 */

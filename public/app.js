@@ -33,6 +33,32 @@ const serviceStatus = createServiceStatus(
 );
 
 let members = [];
+// US07：迭代 id -> 迭代对象；为空时不显示迭代控件，也不伪造选项
+let iterationById = new Map();
+
+/** 拉取迭代列表并填充「迭代」下拉框；失败则隐藏该控件，不影响创建任务。 */
+async function loadIterations() {
+  const field = document.getElementById('iteration-field');
+  const select = document.getElementById('task-iteration');
+  if (!field || !select) return;
+  try {
+    const res = await fetch('/api/iterations', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const iterations = await res.json();
+    iterationById = new Map(iterations.map((it) => [it.id, it]));
+    select.innerHTML = '<option value="">未归属</option>';
+    iterations.forEach((it) => {
+      const option = document.createElement('option');
+      option.value = String(it.id);
+      option.textContent = it.name;
+      select.appendChild(option);
+    });
+    field.hidden = iterations.length === 0;
+  } catch {
+    // 迭代接口不可用时保持隐藏：宁可没有这个字段，也不显示假选项
+    field.hidden = true;
+  }
+}
 
 /** 拉取并渲染成员列表，同时填充负责人下拉框。 */
 async function loadMembers() {
@@ -102,6 +128,8 @@ async function loadTasks() {
     // US06：旧数据可能没有 priority/dueDate，做容错，缺省显示为中
     const priority = PRIORITY_LABEL[t.priority] ? t.priority : 'MEDIUM';
     const dueDate = t.dueDate || null;
+    // US07：迭代名来自迭代列表；未归属或列表未加载时不显示标签，但不会显示假名字
+    const iteration = iterationById.get(t.iterationId);
     const li = document.createElement('li');
     li.innerHTML = `
       <div class="task-title">${escapeHtml(t.title)}</div>
@@ -109,6 +137,7 @@ async function loadTasks() {
         <span class="tag">${assignee ? escapeHtml(assignee.name) : '未知成员'}</span>
         <span class="priority-badge priority-${priority.toLowerCase()}">${PRIORITY_LABEL[priority]}</span>
         ${dueDate ? `<span class="due-badge">截止 ${escapeHtml(dueDate)}</span>` : ''}
+        ${iteration ? `<span class="iteration-badge">${escapeHtml(iteration.name)}</span>` : ''}
       </div>
       ${t.description ? `<div class="task-desc">${escapeHtml(t.description)}</div>` : ''}
     `;
@@ -160,6 +189,8 @@ async function handleSubmit(e) {
   const assigneeId = assigneeEl.value;
   const priority = document.getElementById('task-priority').value;
   const dueDate = document.getElementById('task-due').value;
+  const iterationSelect = document.getElementById('task-iteration');
+  const iterationValue = iterationSelect ? iterationSelect.value : '';
 
   // 前端先做一层校验，给出即时反馈；后端仍会二次校验。
   if (!title) {
@@ -180,6 +211,8 @@ async function handleSubmit(e) {
       assigneeId: Number(assigneeId),
       priority,
       dueDate: dueDate || null,
+      // US07：未选迭代时传 null（后端按“未归属”处理）
+      iterationId: iterationValue ? Number(iterationValue) : null,
     }),
   });
 
@@ -195,6 +228,8 @@ async function handleSubmit(e) {
   assigneeEl.value = '';
   document.getElementById('task-priority').value = 'MEDIUM';
   document.getElementById('task-due').value = '';
+  const iterationReset = document.getElementById('task-iteration');
+  if (iterationReset) iterationReset.value = '';
   await loadTasks();
 }
 
@@ -223,6 +258,8 @@ async function refreshTaskList() {
 // 先取得成员再显示任务负责人；成员失败也允许查看已有任务。
 async function initializePage() {
   await loadMembers();
+  // 迭代列表独立加载：接口不可用只隐藏控件，不阻塞成员与任务
+  await loadIterations();
   await refreshTaskList();
 }
 
