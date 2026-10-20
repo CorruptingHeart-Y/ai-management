@@ -55,6 +55,11 @@ function createDb(dataFile) {
     if (Array.isArray(parsed.iterations)) {
       data.iterations = parsed.iterations;
     }
+    // US02：users 集合条件透传（与 iterations 同款处理），文件里存在才透传，
+    // 避免给旧数据凭空造出空数组、弄红 members.test.js 的整体对象断言。
+    if (Array.isArray(parsed.users)) {
+      data.users = parsed.users;
+    }
     return data;
   }
 

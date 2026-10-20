@@ -28,6 +28,8 @@
         <span class="status-indicator" aria-hidden="true"></span>
         <span id="service-status" class="status-text" role="status" aria-live="polite">正在检查服务...</span>
       </div>
+      <!-- US02 登录状态条：独立文件 auth.js 渲染，不侵入 app.js -->
+      <div id="auth-bar" class="auth-bar" aria-label="登录状态" style="display:inline-flex;align-items:center;gap:8px;"></div>
     </div>
   </header>
 
@@ -140,6 +142,7 @@
   </main>
 
   <script src="service-status.js"></script>
+  <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

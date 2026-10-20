@@ -53,6 +53,19 @@ npm start
 
 打开浏览器访问 <http://localhost:3000>，即可查看成员、创建任务、查看任务列表并修改任务状态。
 
+### 登录（US02）
+
+右上角「登录状态条」可登录 / 登出。预置演示账号（密码仅用于教学演示，代码与 `data/db.json` 只存 scrypt 哈希）：
+
+| 用户名 | 密码 | 角色 |
+|---|---|---|
+| `admin` | `admin123` | 管理员 |
+| `pengjiacheng` | `member123` | 成员 |
+| `yanghaowei` | `member123` | 成员 |
+| `hejianxiang` | `member123` | 成员 |
+
+> US02 只建立登录态（token + `/api/auth/me`），不拦截任何路由；权限控制（越权拦截）由 US03 实现。
+
 ## 测试
 
 ```bash
@@ -81,6 +94,7 @@ npm test
 - `Task`：`{ id, title, description, assigneeId, status, createdAt }`
 - `status ∈ { TODO, DOING, DONE }`，页面显示「待办 / 进行中 / 已完成」
 - `assigneeId` 必须对应真实存在的 `Member.id`
+- `User`：`{ id, username, passwordHash, role }`，`role ∈ { admin, member }`（权限角色，区别于 `Member.role` 团队分工）；密码只存 scrypt 哈希 `salt:hash`
 
 ## API 约定
 
@@ -91,6 +105,9 @@ npm test
 | POST | `/api/tasks` | 创建并分配任务 | **US04** |
 | PATCH | `/api/tasks/:id/status` | 更新任务状态 | US05 |
 | GET | `/api/stats` | 任务统计：总数、按状态/优先级/负责人/迭代 | **US10**（Sprint 2） |
+| POST | `/api/auth/login` | 登录：校验凭证、签发 token | **US02**（Sprint 3） |
+| POST | `/api/auth/logout` | 登出：清除当前 token | **US02**（Sprint 3） |
+| GET | `/api/auth/me` | 当前登录用户 | **US02**（Sprint 3） |
 
 ### GET /api/members
 
@@ -132,6 +149,8 @@ src/routes/members.js  # 成员接口
 src/routes/tasks.js    # 任务接口（US04 创建 + US05 状态更新）
 src/domain/task.js     # 任务状态校验与更新逻辑
 src/domain/member.js   # 共享 Member 契约与校验
+src/domain/user.js     # 登录账号契约 + scrypt 哈希（US02）
+src/routes/auth.js     # 登录 / 登出 / 当前用户接口（US02）
 data/db.json           # 预置成员 + 任务数据
 public/                # 前端页面
 test/                  # node:test 测试（US01 / US04 / US05）
