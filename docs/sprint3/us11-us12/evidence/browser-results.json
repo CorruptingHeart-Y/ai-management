@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-20T19:04:27.055Z",
+  "checks": [
+    "real same-origin API data, safe text rendering and server-day overdue labels",
+    "US07 known, unassigned and orphan iteration groups",
+    "combined filters, overdue-only and URL/reload restoration",
+    "reset, empty state and unassigned iteration filter",
+    "failure clears stale rows and retry recovers",
+    "stub 401/403 deny before read, clear results, preserve 403 token and remove 401 token",
+    "account transition or denied metadata clears previous members and iteration options",
+    "390px and 320px layouts, live filters, no horizontal overflow",
+    "no browser exceptions and data file byte-for-byte unchanged"
+  ],
+  "passed": 9,
+  "browser": "155.0.8059.85",
+  "screenshots": [
+    "desktop-grouped.png",
+    "mobile-390.png",
+    "mobile-320.png"
+  ],
+  "limitation": "Automated browser QA with injected authorization stub; not human acceptance or real US02/US03 integration."
+}

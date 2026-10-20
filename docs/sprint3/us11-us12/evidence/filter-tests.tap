@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: US11 protected mounting requires an explicit read-access middleware
+ok 1 - US11 protected mounting requires an explicit read-access middleware
+  ---
+  duration_ms: 3.3123
+  type: 'test'
+  ...
+# Subtest: US11 mounted query stops denied requests before reading and serves permitted requests
+ok 2 - US11 mounted query stops denied requests before reading and serves permitted requests
+  ---
+  duration_ms: 137.7799
+  type: 'test'
+  ...
+# Subtest: US11 parser accepts documented scalar filters and trims literal keyword searches
+ok 3 - US11 parser accepts documented scalar filters and trims literal keyword searches
+  ---
+  duration_ms: 2.8546
+  type: 'test'
+  ...
+# Subtest: US11 parser rejects unknown, repeated, nested and non-scalar parameters
+ok 4 - US11 parser rejects unknown, repeated, nested and non-scalar parameters
+  ---
+  duration_ms: 0.9515
+  type: 'test'
+  ...
+# Subtest: US11 parser rejects invalid enums, ids, booleans and long keywords
+ok 5 - US11 parser rejects invalid enums, ids, booleans and long keywords
+  ---
+  duration_ms: 1.1684
+  type: 'test'
+  ...
+# Subtest: US11 combines every filter with AND and keeps full-source counters
+ok 6 - US11 combines every filter with AND and keeps full-source counters
+  ---
+  duration_ms: 1.0983
+  type: 'test'
+  ...
+# Subtest: US11 keywords are literal and case-insensitive in title or description
+ok 7 - US11 keywords are literal and case-insensitive in title or description
+  ---
+  duration_ms: 0.4424
+  type: 'test'
+  ...
+# Subtest: US11 legacy defaults and unassigned matching preserve original task objects
+ok 8 - US11 legacy defaults and unassigned matching preserve original task objects
+  ---
+  duration_ms: 0.4781
+  type: 'test'
+  ...
+# Subtest: US07 filtering and grouping agree that only absent/null references are unassigned
+ok 9 - US07 filtering and grouping agree that only absent/null references are unassigned
+  ---
+  duration_ms: 1.5873
+  type: 'test'
+  ...
+# Subtest: US12 overdue uses the local calendar day, excludes today/future and DONE
+ok 10 - US12 overdue uses the local calendar day, excludes today/future and DONE
+  ---
+  duration_ms: 0.3811
+  type: 'test'
+  ...
+# Subtest: US12 absent and malformed due dates never become overdue
+ok 11 - US12 absent and malformed due dates never become overdue
+  ---
+  duration_ms: 0.4021
+  type: 'test'
+  ...
+# Subtest: US12 local date follows the server timezone across a UTC day boundary
+ok 12 - US12 local date follows the server timezone across a UTC day boundary
+  ---
+  duration_ms: 276.5858
+  type: 'test'
+  ...
+# Subtest: US11 empty task data returns an empty result and zero counters
+ok 13 - US11 empty task data returns an empty result and zero counters
+  ---
+  duration_ms: 0.4455
+  type: 'test'
+  ...
+# Subtest: US11 rejects malformed records and duplicate ids without repairing data
+ok 14 - US11 rejects malformed records and duplicate ids without repairing data
+  ---
+  duration_ms: 0.9292
+  type: 'test'
+  ...
+# Subtest: GET task-query returns JSON with no-store, reads once and never writes
+ok 15 - GET task-query returns JSON with no-store, reads once and never writes
+  ---
+  duration_ms: 158.8205
+  type: 'test'
+  ...
+# Subtest: GET task-query rejects bad raw parameters before reading the database
+ok 16 - GET task-query rejects bad raw parameters before reading the database
+  ---
+  duration_ms: 52.6751
+  type: 'test'
+  ...
+# Subtest: GET task-query returns a generic JSON 500 for broken tasks and read failures
+ok 17 - GET task-query returns a generic JSON 500 for broken tasks and read failures
+  ---
+  duration_ms: 21.9199
+  type: 'test'
+  ...
+# Subtest: task-query can sit after auth and read-permission guards without reading denied requests
+ok 18 - task-query can sit after auth and read-permission guards without reading denied requests
+  ---
+  duration_ms: 24.5101
+  type: 'test'
+  ...
+# Subtest: task-query uses real createDb and existing create/status APIs without changing query bytes
+ok 19 - task-query uses real createDb and existing create/status APIs without changing query bytes
+  ---
+  duration_ms: 135.1876
+  type: 'test'
+  ...
+# Subtest: task-query keeps a broken real data file unchanged and hides parser details
+ok 20 - task-query keeps a broken real data file unchanged and hides parser details
+  ---
+  duration_ms: 25.5257
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1153.213

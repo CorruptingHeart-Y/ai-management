@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-20T19:06:09.056Z",
+  "timezone": "Asia/Shanghai",
+  "branch": "feature/us11-us12-filter",
+  "base": "e57d62fd3507877d251626536302cb2510455d4e",
+  "normalization": "CRLF to LF only",
+  "files": [
+    {
+      "file": "data/db.json",
+      "baseSha256": "de2a0c7293304aa37894581259178d419c0b09700087fad96aa3f5020414457b",
+      "currentSha256": "de2a0c7293304aa37894581259178d419c0b09700087fad96aa3f5020414457b",
+      "unchanged": true
+    },
+    {
+      "file": "src/db.js",
+      "baseSha256": "526712f77369834b3286516705532898b12bc6cd5ea9a9c78269d5514d36e3b8",
+      "currentSha256": "526712f77369834b3286516705532898b12bc6cd5ea9a9c78269d5514d36e3b8",
+      "unchanged": true
+    },
+    {
+      "file": "src/app.js",
+      "baseSha256": "8ed00da44b9f29845dd83566922c27d0f8a0a4b438d5ed19e99f3205da1204c0",
+      "currentSha256": "8ed00da44b9f29845dd83566922c27d0f8a0a4b438d5ed19e99f3205da1204c0",
+      "unchanged": true
+    },
+    {
+      "file": "package.json",
+      "baseSha256": "0ac3da0825ed7fababa89eec88f6ec13af8250ff138fdf87b814cab09ee4e4f2",
+      "currentSha256": "0ac3da0825ed7fababa89eec88f6ec13af8250ff138fdf87b814cab09ee4e4f2",
+      "unchanged": true
+    },
+    {
+      "file": "src/routes/tasks.js",
+      "baseSha256": "b3ff86e38f6457c4484b82812ec65903c14076b7ea4dd1a79d195572a6455e77",
+      "currentSha256": "b3ff86e38f6457c4484b82812ec65903c14076b7ea4dd1a79d195572a6455e77",
+      "unchanged": true
+    },
+    {
+      "file": "test/members.test.js",
+      "baseSha256": "34ab91a1a392488bbd941a65bef167a00b6489bef84c1ef6eb15692ae9e976f6",
+      "currentSha256": "34ab91a1a392488bbd941a65bef167a00b6489bef84c1ef6eb15692ae9e976f6",
+      "unchanged": true
+    },
+    {
+      "file": "test/tasks.test.js",
+      "baseSha256": "127231c160dbfd6b116ea0c8cce907838cb328b142cf36d7d4d136ca2019eea3",
+      "currentSha256": "127231c160dbfd6b116ea0c8cce907838cb328b142cf36d7d4d136ca2019eea3",
+      "unchanged": true
+    },
+    {
+      "file": "test/task-status.test.js",
+      "baseSha256": "d4f4e7399f47a62374896f905bb509ea4cb468608853030d12bcc393033fe439",
+      "currentSha256": "d4f4e7399f47a62374896f905bb509ea4cb468608853030d12bcc393033fe439",
+      "unchanged": true
+    },
+    {
+      "file": "test/service-status.test.js",
+      "baseSha256": "bb8250d3ed9e6601d8ab0d64e307ac7f70c2fa7612d03f408f11d2c0c9613acb",
+      "currentSha256": "bb8250d3ed9e6601d8ab0d64e307ac7f70c2fa7612d03f408f11d2c0c9613acb",
+      "unchanged": true
+    },
+    {
+      "file": "test/task-attrs.test.js",
+      "baseSha256": "88c2bbf176a3dd1700420d5c4c910b4c2306bd8255c3cfaf3ea0d45c2e909e19",
+      "currentSha256": "88c2bbf176a3dd1700420d5c4c910b4c2306bd8255c3cfaf3ea0d45c2e909e19",
+      "unchanged": true
+    },
+    {
+      "file": "test/iterations.test.js",
+      "baseSha256": "0313d0386b0d575c64cb86a9af009f0c1f35329f51e572c4a90140f4f423bf41",
+      "currentSha256": "0313d0386b0d575c64cb86a9af009f0c1f35329f51e572c4a90140f4f423bf41",
+      "unchanged": true
+    },
+    {
+      "file": "test/stats.test.js",
+      "baseSha256": "a9443e1d8b76ffeb59e2c5345228bb11f9062f55ca944aaa3184859829e2c897",
+      "currentSha256": "a9443e1d8b76ffeb59e2c5345228bb11f9062f55ca944aaa3184859829e2c897",
+      "unchanged": true
+    },
+    {
+      "file": "test/sprint2-integration.test.js",
+      "baseSha256": "35b7e1031bc16d7f75ee80eb17f839987321836ff2d30885782f3398a5368ab8",
+      "currentSha256": "35b7e1031bc16d7f75ee80eb17f839987321836ff2d30885782f3398a5368ab8",
+      "unchanged": true
+    },
+    {
+      "file": "public/index.html",
+      "baseSha256": "c2e1e67d3631ae65b4f8d679d450c9084a38f2a336596ae7a449bde86969c855",
+      "currentSha256": "c2e1e67d3631ae65b4f8d679d450c9084a38f2a336596ae7a449bde86969c855",
+      "unchanged": true
+    },
+    {
+      "file": "public/app.js",
+      "baseSha256": "57b74c1a741a519ccec1b41966fdeeb6579f9c7a0e985e785b4aea230cb85a8c",
+      "currentSha256": "57b74c1a741a519ccec1b41966fdeeb6579f9c7a0e985e785b4aea230cb85a8c",
+      "unchanged": true
+    },
+    {
+      "file": "public/style.css",
+      "baseSha256": "40bca082f3c85dd85f23a515b852190a377bcb4444e56958a041b26943799e57",
+      "currentSha256": "40bca082f3c85dd85f23a515b852190a377bcb4444e56958a041b26943799e57",
+      "unchanged": true
+    }
+  ],
+  "allUnchanged": true
+}
