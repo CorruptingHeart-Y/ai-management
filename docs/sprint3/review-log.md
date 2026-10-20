@@ -20,7 +20,7 @@
 
 | # | 故事 | 分支 / 待审范围 | 审查要点 | 状态 |
 |---|---|---|---|---|
-| R5 | US02 登录 | `e57d62f..6c487fa`（`feature/us02-login`）：`src/routes/auth.js`、`src/domain/user.js`、`src/db.js`、`src/app.js`、`public/auth.js`、`public/index.html`、`test/auth.test.js`、`package.json` | ①原四份测试零改动；②`users` 条件透传，未破坏 `{members,tasks}` 整体断言；③只挂载 `/api/auth`，未挂全局拦截，符合 US02 边界；④状态码 400/401/500，无 403；⑤口令 scrypt+随机盐、比对用 `timingSafeEqual`，代码与 db.json 无明文；⑥前端用户名已 `escapeHtml`；⑦`package.json` 只追加 `auth.test.js`。**问题**：P1 演示口令以明文写入 `docs/sprint3/table1-table2-draft.md`（进版本库）；P2 token 存 localStorage，XSS 可读，且重启失效（契约已声明） | P1 请朱传玺改为“演示口令见纸质纪要/群公告”，不改代码；P2 记入 Release Notes 已知限制 | **预审：有条件通过**（AI 预审，未签字）· 签字栏：＿＿＿ / 2026-10-2＿ / 确认 P1 已修 → 转“通过” |
+| R5 | US02 登录 | `e57d62f..6c487fa`（`feature/us02-login`）：`src/routes/auth.js`、`src/domain/user.js`、`src/db.js`、`src/app.js`、`public/auth.js`、`public/index.html`、`test/auth.test.js`、`package.json` | ①原四份测试零改动；②`users` 条件透传，未破坏 `{members,tasks}` 整体断言；③只挂载 `/api/auth`，未挂全局拦截，符合 US02 边界；④状态码 400/401/500，无 403；⑤口令 scrypt+随机盐、比对用 `timingSafeEqual`，代码与 db.json 无明文；⑥前端用户名已 `escapeHtml`；⑦`package.json` 只追加 `auth.test.js`。**问题**：P1 演示口令以明文写入 `docs/sprint3/table1-table2-draft.md`（进版本库）；P2 token 存 localStorage，XSS 可读，且重启失效（契约已声明） | P1 请朱传玺改为“演示口令见纸质纪要/群公告”，不改代码；P2 记入 Release Notes 已知限制 | 通过（条件：P1 待朱传玺将演示口令改为“口令见纸质纪要/群公告”，P2 已记入 Release Notes）· 何健翔 · 2026-10-20 |
 | R6 | US03 基础权限 | `feature/us03-permission`：中间件、角色管理、前端权限 UI、测试 | ①401 与 403 语义不混；②拦截覆盖全部写路由；③与 US11/US12 的筛选接口不冲突；④未登录仍可读的公开范围是否有意为之 | 待审（依赖 US02 合入） |
 | R7 | US11 筛选任务 | `feature/us11-us12-filter`：查询接口、前端筛选 | ①筛选参数非法时 400 而非静默忽略；②分页/排序未做时是否有边界说明；③不改 `src/routes/tasks.js` 的既有语义（薄挂载） | 待审 |
 | R8 | US12 查看逾期任务 | 同上 | ①逾期口径与 PO 裁决一致（本地日期字符串比较，不含今天）；②已完成任务不计入逾期；③时区不产生一天误差 | 待审 |
