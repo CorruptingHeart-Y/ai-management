@@ -61,7 +61,7 @@ function validateUser(user) {
 }
 
 // 预置账号（US02 登录用）。passwordHash 为预计算的 scrypt `salt:hash`，不含明文。
-// 初始明文密码（教学演示用，见计划会纪要表 2）：admin→admin123，其余→member123。
+// 教学演示凭证见计划会纪要表 2；生产源码仅保留预计算哈希。
 const SEED_USERS = [
   {
     id: 1,
