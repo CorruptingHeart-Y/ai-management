@@ -1,0 +1,15 @@
+{
+  "sourceSha": "e57d62fd3507877d251626536302cb2510455d4e",
+  "normalization": "UTF-8, CRLF to LF only",
+  "expectedOriginalCount": 57,
+  "files": {
+    "test/members.test.js": "34ab91a1a392488bbd941a65bef167a00b6489bef84c1ef6eb15692ae9e976f6",
+    "test/tasks.test.js": "127231c160dbfd6b116ea0c8cce907838cb328b142cf36d7d4d136ca2019eea3",
+    "test/task-status.test.js": "d4f4e7399f47a62374896f905bb509ea4cb468608853030d12bcc393033fe439",
+    "test/service-status.test.js": "bb8250d3ed9e6601d8ab0d64e307ac7f70c2fa7612d03f408f11d2c0c9613acb",
+    "test/task-attrs.test.js": "88c2bbf176a3dd1700420d5c4c910b4c2306bd8255c3cfaf3ea0d45c2e909e19",
+    "test/iterations.test.js": "0313d0386b0d575c64cb86a9af009f0c1f35329f51e572c4a90140f4f423bf41",
+    "test/stats.test.js": "a9443e1d8b76ffeb59e2c5345228bb11f9062f55ca944aaa3184859829e2c897"
+  },
+  "originalIntegrationPrefixHash": "c0b9f15207519ab9ebbd81feb72ff4e700b157fb712f72feb721ac41ff4350b8"
+}

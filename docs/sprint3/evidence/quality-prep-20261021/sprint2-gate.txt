@@ -1,0 +1,459 @@
+{"date":"2026-10-21T09:07:38.768Z","branch":"codex/sprint3-quality-prep","sha":"e57d62fd3507877d251626536302cb2510455d4e","dirty":true,"command":["node","scripts/verify-sprint2.cjs"],"mode":"AUTOMATED_INTEGRATION_GATE"}
+TAP version 13
+# Subtest: US01 默认初始化：准确返回实验一的四名成员及分工
+ok 1 - US01 默认初始化：准确返回实验一的四名成员及分工
+  ---
+  duration_ms: 38.0338
+  type: 'test'
+  ...
+# Subtest: US01 提交的预置数据与默认初始化一致
+ok 2 - US01 提交的预置数据与默认初始化一致
+  ---
+  duration_ms: 9.5173
+  type: 'test'
+  ...
+# Subtest: US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+ok 3 - US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+  ---
+  duration_ms: 10.6367
+  type: 'test'
+  ...
+# Subtest: US01 空成员列表：返回空数组且不重新填入预置成员
+ok 4 - US01 空成员列表：返回空数组且不重新填入预置成员
+  ---
+  duration_ms: 6.4814
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+ok 5 - US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+  ---
+  duration_ms: 70.8467
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+ok 6 - US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+  ---
+  duration_ms: 30.5882
+  type: 'test'
+  ...
+# Subtest: US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+ok 7 - US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+  ---
+  duration_ms: 31.0832
+  type: 'test'
+  ...
+# Subtest: US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+ok 8 - US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+  ---
+  duration_ms: 0.2713
+  type: 'test'
+  ...
+# Subtest: US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+    # Subtest: 重复 id
+    ok 1 - 重复 id
+      ---
+      duration_ms: 4.1919
+      type: 'test'
+      ...
+    # Subtest: 空成员条目
+    ok 2 - 空成员条目
+      ---
+      duration_ms: 3.8007
+      type: 'test'
+      ...
+    # Subtest: 非法 id
+    ok 3 - 非法 id
+      ---
+      duration_ms: 3.6953
+      type: 'test'
+      ...
+    # Subtest: 空白姓名
+    ok 4 - 空白姓名
+      ---
+      duration_ms: 4.7411
+      type: 'test'
+      ...
+    # Subtest: 缺少分工
+    ok 5 - 缺少分工
+      ---
+      duration_ms: 3.8099
+      type: 'test'
+      ...
+    1..5
+ok 9 - US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+  ---
+  duration_ms: 20.7555
+  type: 'test'
+  ...
+# Subtest: US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+ok 10 - US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+  ---
+  duration_ms: 3.3976
+  type: 'test'
+  ...
+# Subtest: 页面初始显示检查中，并由现有成员加载请求驱动状态
+ok 11 - 页面初始显示检查中，并由现有成员加载请求驱动状态
+  ---
+  duration_ms: 1.3835
+  type: 'test'
+  ...
+# Subtest: 成员接口成功且响应结构有效后才显示连接正常，只请求一次
+ok 12 - 成员接口成功且响应结构有效后才显示连接正常，只请求一次
+  ---
+  duration_ms: 0.8836
+  type: 'test'
+  ...
+# Subtest: 请求失败时切换为服务连接异常
+ok 13 - 请求失败时切换为服务连接异常
+  ---
+  duration_ms: 1.001
+  type: 'test'
+  ...
+# Subtest: 空成员数组符合接口契约，连接状态仍由有效响应决定
+ok 14 - 空成员数组符合接口契约，连接状态仍由有效响应决定
+  ---
+  duration_ms: 0.3998
+  type: 'test'
+  ...
+# Subtest: HTTP失败、非JSON和不符合成员契约的响应均不能显示正常
+    # Subtest: HTTP 500
+    ok 1 - HTTP 500
+      ---
+      duration_ms: 0.1968
+      type: 'test'
+      ...
+    # Subtest: 非JSON响应
+    ok 2 - 非JSON响应
+      ---
+      duration_ms: 0.1695
+      type: 'test'
+      ...
+    # Subtest: 成员字段不完整
+    ok 3 - 成员字段不完整
+      ---
+      duration_ms: 0.1053
+      type: 'test'
+      ...
+    # Subtest: 重复成员编号
+    ok 4 - 重复成员编号
+      ---
+      duration_ms: 0.1587
+      type: 'test'
+      ...
+    # Subtest: 无法解析的JSON
+    ok 5 - 无法解析的JSON
+      ---
+      duration_ms: 0.1537
+      type: 'test'
+      ...
+    1..5
+ok 15 - HTTP失败、非JSON和不符合成员契约的响应均不能显示正常
+  ---
+  duration_ms: 1.4942
+  type: 'test'
+  ...
+# Subtest: 超时会中止请求并显示服务连接异常
+ok 16 - 超时会中止请求并显示服务连接异常
+  ---
+  duration_ms: 24.7276
+  type: 'test'
+  ...
+# Subtest: 状态可以从 TODO 更新为 DOING
+ok 17 - 状态可以从 TODO 更新为 DOING
+  ---
+  duration_ms: 45.73
+  type: 'test'
+  ...
+# Subtest: 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+ok 18 - 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+  ---
+  duration_ms: 15.5424
+  type: 'test'
+  ...
+# Subtest: 非法状态返回 400 且不修改任务
+ok 19 - 非法状态返回 400 且不修改任务
+  ---
+  duration_ms: 8.9564
+  type: 'test'
+  ...
+# Subtest: 不存在的任务返回 404
+ok 20 - 不存在的任务返回 404
+  ---
+  duration_ms: 6.6285
+  type: 'test'
+  ...
+# Subtest: 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+ok 21 - 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+  ---
+  duration_ms: 46.187
+  type: 'test'
+  ...
+# Subtest: 空标题（含纯空白）创建失败，返回 400，且不落库
+ok 22 - 空标题（含纯空白）创建失败，返回 400，且不落库
+  ---
+  duration_ms: 16.5178
+  type: 'test'
+  ...
+# Subtest: 无效负责人创建失败，返回 400，且不落库
+ok 23 - 无效负责人创建失败，返回 400，且不落库
+  ---
+  duration_ms: 9.4092
+  type: 'test'
+  ...
+# Subtest: 创建以后能够读取：任务列表包含新任务
+ok 24 - 创建以后能够读取：任务列表包含新任务
+  ---
+  duration_ms: 8.0016
+  type: 'test'
+  ...
+# Subtest: 持久化：用同一数据文件重新创建 app 后任务仍存在
+ok 25 - 持久化：用同一数据文件重新创建 app 后任务仍存在
+  ---
+  duration_ms: 10.3429
+  type: 'test'
+  ...
+1..25
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 360.479
+TAP version 13
+# Subtest: US07 isolated list: shared source, empty/legacy data, no cache or writes
+ok 1 - US07 isolated list: shared source, empty/legacy data, no cache or writes
+  ---
+  duration_ms: 73.5299
+  type: 'test'
+  ...
+# Subtest: US07 isolated list: bad entities and read failures return JSON 500 without writes
+ok 2 - US07 isolated list: bad entities and read failures return JSON 500 without writes
+  ---
+  duration_ms: 121.1829
+  type: 'test'
+  ...
+# Subtest: US07 domain: nullable/existing numeric references only, without input mutation
+ok 3 - US07 domain: nullable/existing numeric references only, without input mutation
+  ---
+  duration_ms: 0.6527
+  type: 'test'
+  ...
+# Subtest: US07 view: filter/group known, unassigned and orphan tasks without changing fields
+ok 4 - US07 view: filter/group known, unassigned and orphan tasks without changing fields
+  ---
+  duration_ms: 0.3679
+  type: 'test'
+  ...
+# Subtest: S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务
+ok 5 - S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务
+  ---
+  duration_ms: 198.4625
+  type: 'test'
+  ...
+# SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+#     at JSON.parse (<anonymous>)
+#     at Object.readData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\db.js:45:25)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\routes\\tasks.js:64:21
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at router.process_params (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:346:12)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:280:10)
+# Subtest: S2异常：损坏JSON时POST返回失败并逐字保留原文件
+ok 6 - S2异常：损坏JSON时POST返回失败并逐字保留原文件
+  ---
+  duration_ms: 4.5676
+  type: 'test'
+  ...
+# Subtest: S2异常：损坏JSON时PATCH返回失败并逐字保留原文件
+ok 7 - S2异常：损坏JSON时PATCH返回失败并逐字保留原文件
+  ---
+  duration_ms: 4.3154
+  type: 'test'
+  ...
+# SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+#     at JSON.parse (<anonymous>)
+#     at Object.readData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\db.js:45:25)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\routes\\tasks.js:117:21
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at param (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:365:14)
+#     at param (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:376:14)
+# Error: injected write-before EIO
+#     at Object.<anonymous> (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\test\\sprint2-integration.test.js:66:48)
+#     at Object.apply (node:internal/test_runner/mock/mock:767:20)
+#     at Object.writeData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\db.js:63:8)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\routes\\tasks.js:103:8
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at router.process_params (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:346:12)
+# Subtest: S2异常：POST注入写入前EIO时不报成功、不改变原文件
+ok 8 - S2异常：POST注入写入前EIO时不报成功、不改变原文件
+  ---
+  duration_ms: 4.1585
+  type: 'test'
+  ...
+# Subtest: S2异常：PATCH注入写入前EIO时不报成功、不改变原文件
+ok 9 - S2异常：PATCH注入写入前EIO时不报成功、不改变原文件
+  ---
+  duration_ms: 3.587
+  type: 'test'
+  ...
+# Error: injected write-before EIO
+#     at Object.<anonymous> (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\test\\sprint2-integration.test.js:66:48)
+#     at Object.apply (node:internal/test_runner/mock/mock:767:20)
+#     at Object.writeData (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\db.js:63:8)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\src\\routes\\tasks.js:124:8
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at next (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:149:13)
+#     at Route.dispatch (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\route.js:119:3)
+#     at Layer.handle [as handle_request] (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\layer.js:95:5)
+#     at C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:284:15
+#     at param (C:\\Users\\HP\\.codex\\visualizations\\2026\\10\\17\\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\\sprint3\\quality-prep\\node_modules\\express\\lib\\router\\index.js:365:14)
+# Subtest: S2补齐：优先级、截止时间、迭代ID边界组合与失败不落库
+ok 10 - S2补齐：优先级、截止时间、迭代ID边界组合与失败不落库
+  ---
+  duration_ms: 189.3795
+  type: 'test'
+  ...
+# Subtest: S2补齐：含属性和迭代任务TODO→DOING→DONE与统计逐项一致
+ok 11 - S2补齐：含属性和迭代任务TODO→DOING→DONE与统计逐项一致
+  ---
+  duration_ms: 154.6817
+  type: 'test'
+  ...
+# Subtest: S2补齐：新增字段、迭代集合经创建/状态更新/重启后完整保留
+ok 12 - S2补齐：新增字段、迭代集合经创建/状态更新/重启后完整保留
+  ---
+  duration_ms: 61.4474
+  type: 'test'
+  ...
+# Subtest: US10 空数据：总数为 0，各组计数为 0，不报错
+ok 13 - US10 空数据：总数为 0，各组计数为 0，不报错
+  ---
+  duration_ms: 1.2648
+  type: 'test'
+  ...
+# Subtest: US10 按状态计数：三项之和等于总数
+ok 14 - US10 按状态计数：三项之和等于总数
+  ---
+  duration_ms: 0.1547
+  type: 'test'
+  ...
+# Subtest: US10 缺失字段容错：Sprint 1 旧任务按 TODO / MEDIUM / 未分配 计
+ok 15 - US10 缺失字段容错：Sprint 1 旧任务按 TODO / MEDIUM / 未分配 计
+  ---
+  duration_ms: 0.118
+  type: 'test'
+  ...
+# Subtest: US10 非法值容错：未知状态/优先级不丢任务，未知迭代单独成组
+ok 16 - US10 非法值容错：未知状态/优先级不丢任务，未知迭代单独成组
+  ---
+  duration_ms: 0.1884
+  type: 'test'
+  ...
+# Subtest: US10 按优先级计数：三个档位分别统计
+ok 17 - US10 按优先级计数：三个档位分别统计
+  ---
+  duration_ms: 0.1283
+  type: 'test'
+  ...
+# Subtest: US10 按负责人计数：含 0 任务成员，未知负责人单独成组
+ok 18 - US10 按负责人计数：含 0 任务成员，未知负责人单独成组
+  ---
+  duration_ms: 0.1325
+  type: 'test'
+  ...
+# Subtest: US10 按迭代计数：未分配排第一，迭代名称来自 iterations
+ok 19 - US10 按迭代计数：未分配排第一，迭代名称来自 iterations
+  ---
+  duration_ms: 0.1497
+  type: 'test'
+  ...
+# Subtest: US10 字符串 id 归一化：assigneeId="2" 不应产生未知成员
+ok 20 - US10 字符串 id 归一化：assigneeId="2" 不应产生未知成员
+  ---
+  duration_ms: 0.0949
+  type: 'test'
+  ...
+# Subtest: US10 纯函数：不修改传入的数据对象
+ok 21 - US10 纯函数：不修改传入的数据对象
+  ---
+  duration_ms: 0.1629
+  type: 'test'
+  ...
+# Subtest: GET /api/stats：返回统计结构，且 byStatus 之和等于 total
+ok 22 - GET /api/stats：返回统计结构，且 byStatus 之和等于 total
+  ---
+  duration_ms: 39.1791
+  type: 'test'
+  ...
+# Subtest: GET /api/stats：空任务库返回 200 与全 0，不返回 500
+ok 23 - GET /api/stats：空任务库返回 200 与全 0，不返回 500
+  ---
+  duration_ms: 8.6105
+  type: 'test'
+  ...
+# Subtest: GET /api/stats：数据文件损坏返回 500 与可读提示
+ok 24 - GET /api/stats：数据文件损坏返回 500 与可读提示
+  ---
+  duration_ms: 6.8132
+  type: 'test'
+  ...
+# Subtest: 不传优先级时默认创建为 MEDIUM，且截止时间为空
+ok 25 - 不传优先级时默认创建为 MEDIUM，且截止时间为空
+  ---
+  duration_ms: 46.0844
+  type: 'test'
+  ...
+# Subtest: 自定义优先级 HIGH 能正确落库
+ok 26 - 自定义优先级 HIGH 能正确落库
+  ---
+  duration_ms: 10.6638
+  type: 'test'
+  ...
+# Subtest: 非法优先级返回 400 且不落库
+ok 27 - 非法优先级返回 400 且不落库
+  ---
+  duration_ms: 10.9502
+  type: 'test'
+  ...
+# Subtest: 合法截止时间能正确落库
+ok 28 - 合法截止时间能正确落库
+  ---
+  duration_ms: 8.3044
+  type: 'test'
+  ...
+# Subtest: 非法截止时间返回 400 且不落库
+ok 29 - 非法截止时间返回 400 且不落库
+  ---
+  duration_ms: 15.8774
+  type: 'test'
+  ...
+# Subtest: 优先级与截止时间在持久化后仍保留
+ok 30 - 优先级与截止时间在持久化后仍保留
+  ---
+  duration_ms: 7.6551
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 758.3861
+{"baseline":{"tests":35,"pass":35,"fail":0,"cancelled":0,"skipped":0,"todo":0},"additional":{"tests":30,"pass":30,"fail":0,"cancelled":0,"skipped":0,"todo":0},"missingStoryFiles":[]}
+AUTOMATED_GATE_PASS: human diff review, browser acceptance and PO approval remain separate.

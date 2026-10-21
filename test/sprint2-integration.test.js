@@ -73,7 +73,8 @@ for (const method of ['POST', 'PATCH']) {
   });
 }
 
-// 无新接口假设、不以静默skip掩盖缺失；正式门禁仍要求故事测试文件存在。
-test('待集成：优先级、截止时间、迭代ID边界组合与失败不落库', { todo: '三位负责人先确认字段、默认值、日期时区和引用契约，再实现断言' });
-test('待集成：含属性和迭代任务TODO→DOING→DONE与统计逐项一致', { todo: '等待US06/US07/US10及统计响应契约' });
-test('待集成：新增字段、迭代集合经创建/状态更新/重启后完整保留', { todo: '等待迭代结构和属性契约；当前db.readData会丢弃额外顶层集合' });
+// Sprint 3补齐原三项无断言TODO；上方五项原有测试断言全文保持不变。
+const scenarios = require('./support/sprint2-integration-scenarios');
+test('S2补齐：优先级、截止时间、迭代ID边界组合与失败不落库', scenarios.attributeBoundaries);
+test('S2补齐：含属性和迭代任务TODO→DOING→DONE与统计逐项一致', scenarios.stateStatistics);
+test('S2补齐：新增字段、迭代集合经创建/状态更新/重启后完整保留', scenarios.persistence);
