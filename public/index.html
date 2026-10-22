@@ -71,6 +71,7 @@
           </div>
           <span class="scope-tag">US04 朱传玺</span>
         </div>
+        <p id="permissions-summary" role="status">请先登录。</p>
         <form id="task-form">
           <label>
             <span>任务标题 <span class="required">*</span></span>
@@ -139,10 +140,19 @@
         <p id="task-message" class="message" role="alert"></p>
       </section>
     </div>
+    <section id="account-management" class="card" hidden aria-labelledby="account-heading">
+      <h2 id="account-heading">账号角色管理</h2>
+      <p>修改角色会撤销目标账号的已有会话；不能移除最后一名管理员。</p>
+      <button id="account-refresh" type="button">刷新账号</button>
+      <ul id="account-list"></ul>
+      <p id="account-message" role="alert"></p>
+    </section>
   </main>
 
+  <script src="session.js"></script>
   <script src="service-status.js"></script>
   <script src="auth.js"></script>
+  <script src="permissions.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

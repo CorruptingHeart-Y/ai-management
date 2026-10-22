@@ -131,8 +131,8 @@
   async function load() {
     refreshBtn.disabled = true;
     try {
-      const res = await fetch('/api/stats', { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const res = await AppSession.fetch('/api/stats', { cache: 'no-store' });
+      if (!res.ok) throw new Error(res.status === 401 ? '请返回工作台登录' : res.status === 403 ? '当前账号无读取权限' : `HTTP ${res.status}`);
       const stats = await res.json();
       render(stats);
     } catch (error) {
@@ -142,11 +142,15 @@
       for (const id of ['kpi-total', 'kpi-todo', 'kpi-doing', 'kpi-done']) {
         el(id).textContent = '—';
       }
+      for (const id of ['list-status', 'list-priority', 'list-assignee', 'list-iteration']) {
+        if (el(id)) el(id).replaceChildren();
+      }
     } finally {
       refreshBtn.disabled = false;
     }
   }
 
   refreshBtn.addEventListener('click', load);
+  AppSession.subscribe(load);
   load();
 })();

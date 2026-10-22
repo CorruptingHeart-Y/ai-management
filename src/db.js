@@ -13,6 +13,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 
 // 实验一确认的姓名和长期分工。仅在数据文件缺失时初始化；不覆盖已有数据。
 /** @type {import('./domain/member').Member[]} */
@@ -68,7 +69,32 @@ function createDb(dataFile) {
     fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n', 'utf8');
   }
 
-  return { readData, writeData };
+  /** US03角色更新专用事务：读取完整原文对象，拒绝畸形集合并原子替换。
+   * 保留未知字段；旧任务写入路径仍使用writeData，不冒称全项目存储债已关闭。
+   */
+  function updateData(mutator) {
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    if (!data || typeof data !== 'object' || Array.isArray(data) ||
+        !Array.isArray(data.members) || !Array.isArray(data.tasks) ||
+        ('iterations' in data && !Array.isArray(data.iterations)) ||
+        !Array.isArray(data.users)) throw new Error('Invalid data structure');
+    if (mutator(data) === false) return;
+    const temporary = `${file}.role-${crypto.randomUUID()}.tmp`;
+    let descriptor;
+    try {
+      descriptor = fs.openSync(temporary, 'wx', 0o600);
+      fs.writeFileSync(descriptor, JSON.stringify(data, null, 2) + '\n', 'utf8');
+      fs.fsyncSync(descriptor);
+      fs.closeSync(descriptor);
+      descriptor = undefined;
+      fs.renameSync(temporary, file);
+    } finally {
+      if (descriptor !== undefined) fs.closeSync(descriptor);
+      if (fs.existsSync(temporary)) fs.unlinkSync(temporary);
+    }
+  }
+
+  return { readData, writeData, updateData };
 }
 
 module.exports = { createDb, SEED_MEMBERS };

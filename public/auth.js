@@ -1,98 +1,67 @@
 'use strict';
-
-/**
- * 登录状态条（US02 登录的前端部分）。
- * 独立文件，只负责登录 / 登出 / 当前用户展示；不做任何权限控制（那是 US03）。
- * token 存 localStorage，刷新后仍保持登录态。
- */
-
-const TOKEN_KEY = 'ai-mgmt-token';
-
-const authBarEl = document.getElementById('auth-bar');
-
-function getToken() {
-  return localStorage.getItem(TOKEN_KEY);
-}
-
-function setToken(token) {
-  if (token) localStorage.setItem(TOKEN_KEY, token);
-  else localStorage.removeItem(TOKEN_KEY);
-}
-
-function roleLabel(role) {
-  return role === 'admin' ? '管理员' : '成员';
-}
-
-async function fetchMe(token) {
-  const res = await fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
-  if (!res.ok) return null;
-  return res.json();
-}
-
-function render() {
-  const token = getToken();
-  if (!token) {
-    authBarEl.innerHTML = `
-      <form id="auth-login-form" class="auth-login">
-        <input id="auth-username" type="text" placeholder="用户名" autocomplete="username" />
-        <input id="auth-password" type="password" placeholder="密码" autocomplete="current-password" />
-        <button type="submit">登录</button>
-      </form>
-    `;
-    authBarEl.querySelector('#auth-login-form').addEventListener('submit', handleLogin);
-    return;
-  }
-
-  fetchMe(token).then((me) => {
-    if (!me) {
-      // token 失效（重启后内存清空）：清掉本地 token，回到未登录态
-      setToken(null);
-      render();
-      return;
+(function () {
+  const bar = document.getElementById('auth-bar');
+  const session = window.AppSession;
+  let busy = false;
+  let message = '';
+  function render() {
+    bar.replaceChildren();
+    const account = session.user();
+    if (account && session.token()) {
+      const label = document.createElement('span');
+      label.textContent = `${account.username}（${account.role === 'admin' ? '管理员' : '成员：只读'}）`;
+      const logout = document.createElement('button');
+      logout.id = 'auth-logout'; logout.type = 'button'; logout.textContent = '登出'; logout.disabled = busy;
+      logout.addEventListener('click', async () => {
+        busy = true; message = ''; render();
+        try {
+          const response = await session.fetch('/api/auth/logout', { method: 'POST' });
+          if (!response.ok && response.status !== 401) throw new Error('登出失败，请重试');
+          session.setSession(null, null);
+        } catch (error) { message = error.message || '网络异常，请重试'; }
+        finally { busy = false; render(); }
+      });
+      bar.append(label, logout);
+    } else {
+      const form = document.createElement('form'); form.id = 'auth-login-form';
+      const username = document.createElement('input'); username.id = 'auth-username';
+      username.placeholder = '用户名'; username.autocomplete = 'username'; username.required = true;
+      const password = document.createElement('input'); password.id = 'auth-password'; password.type = 'password';
+      password.placeholder = '密码'; password.autocomplete = 'current-password'; password.required = true;
+      const button = document.createElement('button'); button.type = 'submit'; button.textContent = '登录'; button.disabled = busy;
+      form.append(username, password, button);
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        const credentials = { username: username.value.trim(), password: password.value };
+        busy = true; message = ''; render();
+        try {
+          const response = await fetch('/api/auth/login', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(credentials),
+          });
+          const body = await response.json();
+          if (!response.ok) throw new Error(body.error || '登录失败');
+          if (typeof body.token !== 'string' || !['admin', 'member'].includes(body.role)) throw new Error('登录响应异常');
+          session.setSession(body.token, body);
+        } catch (error) { message = error.message || '网络异常，请重试'; }
+        finally { busy = false; render(); }
+      });
+      bar.append(form);
     }
-    authBarEl.innerHTML = `
-      <span class="auth-user">${escapeHtml(me.username)}（${roleLabel(me.role)}）</span>
-      <button id="auth-logout" type="button">登出</button>
-    `;
-    authBarEl.querySelector('#auth-logout').addEventListener('click', handleLogout);
-  });
-}
-
-async function handleLogin(e) {
-  e.preventDefault();
-  const username = authBarEl.querySelector('#auth-username').value.trim();
-  const password = authBarEl.querySelector('#auth-password').value;
-  const res = await fetch('/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
-  });
-  if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
-    window.alert(data.error || '登录失败');
-    return;
+    const hint = document.createElement('span'); hint.id = 'auth-error'; hint.setAttribute('role', 'alert');
+    hint.textContent = message; bar.append(hint);
   }
-  const body = await res.json();
-  setToken(body.token);
+  async function refresh() {
+    if (!session.token()) return render();
+    try {
+      const response = await session.fetch('/api/auth/me');
+      if (response.status === 401) return render();
+      if (!response.ok) throw new Error('暂时无法读取会话，请刷新重试');
+      session.setSession(session.token(), await response.json());
+    } catch (error) { message = error.message || '网络异常，请重试'; }
+    render();
+  }
+  session.subscribe(render);
+  window.addEventListener('storage', () => { message = ''; refresh(); });
   render();
-}
-
-async function handleLogout() {
-  const token = getToken();
-  await fetch('/api/auth/logout', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  setToken(null);
-  render();
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-render();
+  session.ready = refresh();
+})();

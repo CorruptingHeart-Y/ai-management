@@ -30,6 +30,7 @@ const createTaskEl = document.getElementById('create-task');
 const serviceStatus = createServiceStatus(
   document.querySelector('.topbar-status'),
   document.getElementById('service-status'),
+  { fetchImpl: AppSession.fetch },
 );
 
 let members = [];
@@ -42,7 +43,7 @@ async function loadIterations() {
   const select = document.getElementById('task-iteration');
   if (!field || !select) return;
   try {
-    const res = await fetch('/api/iterations', { cache: 'no-store' });
+    const res = await AppSession.fetch('/api/iterations', { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const iterations = await res.json();
     iterationById = new Map(iterations.map((it) => [it.id, it]));
@@ -99,8 +100,8 @@ async function loadMembers() {
       memberRetryEl.hidden = false;
     } else {
       memberMessageEl.textContent = `共 ${members.length} 位成员，创建任务时可从以下成员中选择负责人。`;
-      assigneeEl.disabled = false;
-      createTaskEl.disabled = false;
+      assigneeEl.disabled = !AppSession.canWrite();
+      createTaskEl.disabled = !AppSession.canWrite();
     }
   } catch (err) {
     memberListEl.innerHTML = '<li class="empty">成员加载失败</li>';
@@ -113,7 +114,7 @@ async function loadMembers() {
 
 /** 拉取并渲染任务列表。 */
 async function loadTasks() {
-  const res = await fetch('/api/tasks');
+  const res = await AppSession.fetch('/api/tasks');
   if (!res.ok) throw new Error('任务列表加载失败');
   const tasks = await res.json();
 
@@ -146,6 +147,7 @@ async function loadTasks() {
     statusLabel.className = 'task-status-control';
     statusLabel.textContent = '状态：';
     const statusSelect = document.createElement('select');
+    statusSelect.disabled = !AppSession.canWrite();
     statusSelect.setAttribute('aria-label', `修改任务 ${t.title} 状态`);
     ['TODO', 'DOING', 'DONE'].forEach((status) => {
       const option = document.createElement('option');
@@ -154,7 +156,8 @@ async function loadTasks() {
       option.selected = status === t.status;
       statusSelect.appendChild(option);
     });
-    statusSelect.addEventListener('change', () => updateTaskStatus(t.id, statusSelect.value));
+    statusSelect.addEventListener('change', () => updateTaskStatus(t.id, statusSelect.value)
+      .catch(() => { taskMessageEl.textContent = '状态更新请求失败，请刷新后重试'; }));
     statusLabel.appendChild(statusSelect);
     li.appendChild(statusLabel);
     taskListEl.appendChild(li);
@@ -164,7 +167,7 @@ async function loadTasks() {
 /** 更新任务状态；后端会再次校验状态并持久化。 */
 async function updateTaskStatus(taskId, status) {
   taskMessageEl.textContent = '';
-  const res = await fetch(`/api/tasks/${taskId}/status`, {
+  const res = await AppSession.fetch(`/api/tasks/${taskId}/status`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ status }),
@@ -183,6 +186,7 @@ async function updateTaskStatus(taskId, status) {
 async function handleSubmit(e) {
   e.preventDefault();
   messageEl.textContent = '';
+  if (!AppSession.canWrite()) { messageEl.textContent = '当前角色不能创建任务'; return; }
 
   const title = document.getElementById('task-title').value.trim();
   const description = document.getElementById('task-desc').value.trim();
@@ -202,7 +206,7 @@ async function handleSubmit(e) {
     return;
   }
 
-  const res = await fetch('/api/tasks', {
+  const res = await AppSession.fetch('/api/tasks', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -242,7 +246,8 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-formEl.addEventListener('submit', handleSubmit);
+formEl.addEventListener('submit', event => handleSubmit(event)
+  .catch(() => { messageEl.textContent = '创建请求失败，请重试'; }));
 
 /** 任务加载异常独立显示，不覆盖已经成功读取的成员列表。 */
 async function refreshTaskList() {
@@ -251,12 +256,26 @@ async function refreshTaskList() {
     await loadTasks();
   } catch {
     taskListEl.innerHTML = '<li class="empty">任务列表加载失败</li>';
-    taskMessageEl.textContent = '任务列表加载失败，请刷新页面重试';
+    taskMessageEl.textContent = AppSession.token() ? '任务列表加载失败，请刷新页面重试' : '请先登录后查看任务';
   }
 }
 
 // 先取得成员再显示任务负责人；成员失败也允许查看已有任务。
 async function initializePage() {
+  if (!AppSession.token()) {
+    members = []; iterationById.clear();
+    memberListEl.innerHTML = '<li class="empty">登录后查看成员</li>';
+    memberMessageEl.textContent = '请先登录后查看项目成员';
+    memberRetryEl.hidden = true;
+    assigneeEl.disabled = true; createTaskEl.disabled = true;
+    assigneeEl.innerHTML = '<option value="">—— 请选择成员 ——</option>';
+    document.getElementById('iteration-field').hidden = true;
+    taskListEl.innerHTML = '<li class="empty">登录后查看任务</li>';
+    taskMessageEl.textContent = '请先登录后查看任务';
+    document.getElementById('service-status').textContent = '请先登录';
+    document.querySelector('.topbar-status').dataset.state = 'checking';
+    return;
+  }
   await loadMembers();
   // 迭代列表独立加载：接口不可用只隐藏控件，不阻塞成员与任务
   await loadIterations();
@@ -264,4 +283,9 @@ async function initializePage() {
 }
 
 memberRetryEl.addEventListener('click', initializePage);
-initializePage();
+let sessionReady = false;
+AppSession.subscribe(() => {
+  if (!AppSession.user()) formEl.reset();
+  if (sessionReady) initializePage();
+});
+AppSession.ready.then(() => { sessionReady = true; initializePage(); });
