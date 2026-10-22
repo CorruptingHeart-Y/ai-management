@@ -8,6 +8,7 @@ const { createMembersRouter } = require('./routes/members');
 const { createTasksRouter } = require('./routes/tasks');
 const { createStatsRouter } = require('./routes/stats');
 const { createIterationsRouter } = require('./routes/iterations');
+const { createAuthRouter } = require('./routes/auth');
 
 /**
  * 创建 Express 应用。
@@ -30,6 +31,9 @@ function createApp({ dataFile } = {}) {
   app.use('/api/stats', createStatsRouter(db));
   // US07：迭代路由由共享应用入口挂载（PO 指定 src/app.js 出口为何健翔）
   app.use('/api/iterations', createIterationsRouter(db));
+  // US02：登录会话（token 存内存 Map，每个 app 实例独立，重启失效）
+  const tokenStore = new Map();
+  app.use('/api/auth', createAuthRouter(db, tokenStore));
 
   return app;
 }

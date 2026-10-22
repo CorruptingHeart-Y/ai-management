@@ -1,0 +1,60 @@
+✔ S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务 (184.8339ms)
+SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at Object.readData (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\db.js:45:25)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\routes\tasks.js:64:21
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:280:10)
+✔ S2异常：损坏JSON时POST返回失败并逐字保留原文件 (4.8157ms)
+✔ S2异常：损坏JSON时PATCH返回失败并逐字保留原文件 (5.1962ms)
+SyntaxError: Unexpected token 'B', "{"tasks": BROKEN" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at Object.readData (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\db.js:45:25)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\routes\tasks.js:117:21
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:365:14)
+    at param (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:376:14)
+Error: injected write-before EIO
+    at Object.<anonymous> (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\test\sprint2-integration.test.js:66:48)
+    at Object.apply (node:internal/test_runner/mock/mock:767:20)
+    at Object.writeData (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\db.js:68:8)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\routes\tasks.js:103:8
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:346:12)
+✔ S2异常：POST注入写入前EIO时不报成功、不改变原文件 (4.6194ms)
+✔ S2异常：PATCH注入写入前EIO时不报成功、不改变原文件 (3.9578ms)
+✔ 待集成：优先级、截止时间、迭代ID边界组合与失败不落库 (0.0825ms) # 三位负责人先确认字段、默认值、日期时区和引用契约，再实现断言
+✔ 待集成：含属性和迭代任务TODO→DOING→DONE与统计逐项一致 (0.0451ms) # 等待US06/US07/US10及统计响应契约
+✔ 待集成：新增字段、迭代集合经创建/状态更新/重启后完整保留 (0.0429ms) # 等待迭代结构和属性契约；当前db.readData会丢弃额外顶层集合
+Error: injected write-before EIO
+    at Object.<anonymous> (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\test\sprint2-integration.test.js:66:48)
+    at Object.apply (node:internal/test_runner/mock/mock:767:20)
+    at Object.writeData (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\db.js:68:8)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\src\routes\tasks.js:124:8
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\HP\.codex\visualizations\2026\10\17\01a1491b-d3a6-7c00-9b76-ddd46bb33da4\sprint2\us02-handoff\node_modules\express\lib\router\index.js:365:14)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 3
+ℹ duration_ms 335.875
