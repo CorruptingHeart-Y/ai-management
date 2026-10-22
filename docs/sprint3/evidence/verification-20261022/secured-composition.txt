@@ -1,0 +1,31 @@
+✔ US11 protected mounting requires an explicit read-access middleware (1.3067ms)
+✔ US11 mounted query stops denied requests before reading and serves permitted requests (64.2701ms)
+✔ US11 parser accepts documented scalar filters and trims literal keyword searches (1.4163ms)
+✔ US11 parser rejects unknown, repeated, nested and non-scalar parameters (0.4835ms)
+✔ US11 parser rejects invalid enums, ids, booleans and long keywords (0.4021ms)
+✔ US11 combines every filter with AND and keeps full-source counters (0.5296ms)
+✔ US11 keywords are literal and case-insensitive in title or description (0.2185ms)
+✔ US11 legacy defaults and unassigned matching preserve original task objects (0.2287ms)
+✔ US07 filtering and grouping agree that only absent/null references are unassigned (0.8308ms)
+✔ US12 overdue uses the local calendar day, excludes today/future and DONE (0.1639ms)
+✔ US12 absent and malformed due dates never become overdue (0.1958ms)
+✔ US12 local date follows the server timezone across a UTC day boundary (106.2176ms)
+✔ US11 empty task data returns an empty result and zero counters (0.1848ms)
+✔ US11 rejects malformed records and duplicate ids without repairing data (0.3529ms)
+✔ GET task-query returns JSON with no-store, reads once and never writes (66.0127ms)
+✔ GET task-query rejects bad raw parameters before reading the database (111.2566ms)
+✔ GET task-query returns a generic JSON 500 for broken tasks and read failures (58.677ms)
+✔ task-query can sit after auth and read-permission guards without reading denied requests (16.1105ms)
+✔ task-query uses real createDb and existing create/status APIs without changing query bytes (49.9936ms)
+✔ task-query keeps a broken real data file unchanged and hides parser details (4.4853ms)
+✔ secured composition: create/filter/status/stats/restart preserve assignment and iteration (255.0089ms)
+✔ secured composition: query enforces real sessions and role revocation; rejected requests do not write (214.6937ms)
+✔ secured composition: overdue excludes today, future, undated, and DONE tasks (30.2485ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 674.1012

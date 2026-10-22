@@ -1,0 +1,35 @@
+{
+  "recordedAt": "2026-10-22T17:20:20.494Z",
+  "acceptancePassed": false,
+  "findings": [
+    {
+      "name": "US05 member changes task status: blocked by current conservative role matrix",
+      "status": 403
+    },
+    {
+      "name": "TD08 update priority/due date: endpoint absent",
+      "status": 404
+    },
+    {
+      "name": "US07 create iteration: endpoint absent",
+      "status": 404
+    },
+    {
+      "name": "US07 reassign existing task iteration: endpoint absent",
+      "status": 404
+    },
+    {
+      "name": "US06 acceptance criteria persistence",
+      "status": 201,
+      "fieldPersisted": false
+    },
+    {
+      "name": "TD06 malformed tasks collection",
+      "readStatus": 200,
+      "readReturnedEmpty": true,
+      "writeStatus": 201,
+      "rawFileChanged": true,
+      "sentinelRetained": false
+    }
+  ]
+}
