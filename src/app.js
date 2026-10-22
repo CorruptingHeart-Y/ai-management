@@ -11,6 +11,7 @@ const { createIterationsRouter } = require('./routes/iterations');
 const { createAuthRouter } = require('./routes/auth');
 const { createPermissions } = require('./middleware/permissions');
 const { createUsersRouter } = require('./routes/users');
+const { mountTaskFilters } = require('./features/task-filters');
 
 /**
  * 创建 Express 应用。
@@ -34,7 +35,7 @@ function buildApp({ dataFile, mountReadFeatures } = {}, secured) {
   if (secured) {
     app.use('/api', permissions.requireSession, permissions.allowBusiness);
     app.use('/api/users', permissions.requireAdmin, createUsersRouter(db, tokenStore));
-    if (mountReadFeatures) mountReadFeatures(app, db, permissions.readAccess);
+    (mountReadFeatures || mountTaskFilters)(app, db, permissions.readAccess);
   }
   // API鉴权在静态资源之前，避免未来public/api文件绕过API访问策略。
   app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -45,7 +46,8 @@ function buildApp({ dataFile, mountReadFeatures } = {}, secured) {
   // US07：迭代路由由共享应用入口挂载（PO 指定 src/app.js 出口为何健翔）
   app.use('/api/iterations', createIterationsRouter(db));
 
-  if (secured) app.use('/api', (error, req, res, next) => {
+  if (secured) app.use('/api', (req, res) => res.status(404).json({ error: '接口不存在' }));
+  app.use('/api', (error, req, res, next) => {
     if (res.headersSent) return next(error);
     return res.status(error.status === 400 ? 400 : 500).json({
       error: error.status === 400 ? '请求数据格式错误' : '操作暂时无法完成，请稍后重试',

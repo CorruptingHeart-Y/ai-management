@@ -32,6 +32,9 @@ function createPermissions(db, tokenStore) {
   }
   function allowBusiness(req, res, next) {
     if (['GET', 'HEAD'].includes(req.method)) return next();
+    // US05 permits authenticated team members to change task status. No other
+    // member write is allowed; never derive ownership from unrelated User IDs.
+    if (req.method === 'PATCH' && /^\/tasks\/[1-9]\d*\/status\/?$/i.test(req.path)) return next();
     return requireAdmin(req, res, next);
   }
   function readAccess(req, res, next) {

@@ -16,7 +16,7 @@ const t = { after(fn) { cleanup.push(fn); } };
       findings.push({ name, status: response.status });
       return response;
     };
-    await observe('US05 member changes task status: blocked by current conservative role matrix', '/tasks/1/status', member, 'PATCH', { status: 'DOING' });
+    await observe('US05 member changes task status: observe current permission policy', '/tasks/1/status', member, 'PATCH', { status: 'DOING' });
     await observe('TD08 update priority/due date: endpoint absent', '/tasks/1', admin, 'PATCH', { priority: 'HIGH', dueDate: '2026-10-23' });
     await observe('US07 create iteration: endpoint absent', '/iterations', admin, 'POST', { name: 'Sprint 3', goal: 'release', startDate: '2026-10-22', endDate: '2026-10-23' });
     await observe('US07 reassign existing task iteration: endpoint absent', '/tasks/1', admin, 'PATCH', { iterationId: 2 });

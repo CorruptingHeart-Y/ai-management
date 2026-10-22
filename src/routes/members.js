@@ -25,7 +25,8 @@ function createMembersRouter(db) {
         return res.status(500).json({ error: '成员数据格式错误，请检查项目数据文件' });
       }
       return res.json(members);
-    } catch {
+    } catch (error) {
+      if (error.code === 'INVALID_MEMBERS') return res.status(500).json({ error: '成员数据格式错误，请检查项目数据文件' });
       // 不用另一份假成员数据掩盖文件读取故障。
       return res.status(500).json({ error: '成员列表暂时无法读取，请稍后重试' });
     }

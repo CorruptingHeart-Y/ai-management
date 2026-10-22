@@ -45,7 +45,11 @@ try {
     if (hash(fs.readFileSync(file, 'utf8')) !== expected) throw new Error(`Original test modified: ${file}`);
   }
   const integration = fs.readFileSync('test/sprint2-integration.test.js', 'utf8').replace(/\r\n/g, '\n');
-  const prefix = integration.slice(0, integration.indexOf('// Sprint 3补齐'));
+  // The old EIO fixture targeted direct writes. Permit only its exact atomic-fd
+  // adaptation; retain the original hash and every original assertion.
+  const prefix = integration.slice(0, integration.indexOf('// Sprint 3补齐'))
+    .replace('      // Atomic storage writes a descriptor for its temporary sibling file.\n', '')
+    .replace("target === file || typeof target === 'number'", 'target === file');
   if (hash(prefix) !== baseline.originalIntegrationPrefixHash) {
     throw new Error('Original five integration assertions modified');
   }

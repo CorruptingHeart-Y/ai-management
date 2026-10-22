@@ -15,16 +15,13 @@
   let searchTimer;
   let optionsReady = false;
 
-  function getToken() {
-    try { return localStorage.getItem('ai-mgmt-token'); } catch { return null; }
-  }
-
   async function request(url, signal) {
-    const token = getToken();
-    const response = await fetch(url, {
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-      cache: 'no-store', signal,
-    });
+    let response;
+    try { response = await window.AppSession.fetch(url, { signal }); }
+    catch (error) {
+      if (error.name === 'AbortError') throw error;
+      throw new Error('网络连接失败或登录状态已变化，请重试');
+    }
     if (!response.ok) {
       const body = await response.json().catch(() => ({}));
       const error = new Error(body.error || '暂时无法读取任务，请稍后重试');

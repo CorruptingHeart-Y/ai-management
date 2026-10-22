@@ -11,7 +11,7 @@
     list.replaceChildren(); feedback.textContent = '';
     const account = session.user();
     summary.textContent = !account ? '请先登录。' : session.canWrite()
-      ? '管理员：可创建任务、更新状态和管理角色。' : '普通成员：可查看数据，不能创建任务、改状态或管理角色。';
+      ? '管理员：可创建任务、更新状态和管理角色。' : '普通成员：可查看、筛选任务和更新任务状态；不能创建任务或管理角色。';
     panel.hidden = !session.canWrite();
     if (panel.hidden) return;
     try {

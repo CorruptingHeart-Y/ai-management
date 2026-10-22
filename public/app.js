@@ -147,7 +147,7 @@ async function loadTasks() {
     statusLabel.className = 'task-status-control';
     statusLabel.textContent = '状态：';
     const statusSelect = document.createElement('select');
-    statusSelect.disabled = !AppSession.canWrite();
+    statusSelect.disabled = !AppSession.canUpdateStatus();
     statusSelect.setAttribute('aria-label', `修改任务 ${t.title} 状态`);
     ['TODO', 'DOING', 'DONE'].forEach((status) => {
       const option = document.createElement('option');
@@ -156,8 +156,14 @@ async function loadTasks() {
       option.selected = status === t.status;
       statusSelect.appendChild(option);
     });
-    statusSelect.addEventListener('change', () => updateTaskStatus(t.id, statusSelect.value)
-      .catch(() => { taskMessageEl.textContent = '状态更新请求失败，请刷新后重试'; }));
+    statusSelect.addEventListener('change', async () => {
+      statusSelect.disabled = true;
+      try { await updateTaskStatus(t.id, statusSelect.value); }
+      catch (error) {
+        statusSelect.value = t.status || 'TODO';
+        taskMessageEl.textContent = error.message || '状态更新请求失败，请刷新确认后重试';
+      } finally { statusSelect.disabled = !AppSession.canUpdateStatus(); }
+    });
     statusLabel.appendChild(statusSelect);
     li.appendChild(statusLabel);
     taskListEl.appendChild(li);
@@ -171,15 +177,15 @@ async function updateTaskStatus(taskId, status) {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ status }),
-  });
+  }).catch(() => { throw new Error('状态更新请求失败，请刷新确认后重试'); });
 
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
-    taskMessageEl.textContent = data.error || '状态更新失败';
-    return;
+    throw new Error(data.error || '状态更新失败，请刷新确认后重试');
   }
 
-  await loadTasks();
+  try { await loadTasks(); }
+  catch { throw new Error('状态已保存，但任务列表刷新失败，请刷新页面确认'); }
 }
 
 /** 提交创建任务；失败时在界面提示。 */

@@ -9,7 +9,7 @@
     const account = session.user();
     if (account && session.token()) {
       const label = document.createElement('span');
-      label.textContent = `${account.username}（${account.role === 'admin' ? '管理员' : '成员：只读'}）`;
+      label.textContent = `${account.username}（${account.role === 'admin' ? '管理员' : '成员：可更新状态'}）`;
       const logout = document.createElement('button');
       logout.id = 'auth-logout'; logout.type = 'button'; logout.textContent = '登出'; logout.disabled = busy;
       logout.addEventListener('click', async () => {

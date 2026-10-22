@@ -14,6 +14,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
+const { validateData } = require('./domain/data-integrity');
 
 // 实验一确认的姓名和长期分工。仅在数据文件缺失时初始化；不覆盖已有数据。
 /** @type {import('./domain/member').Member[]} */
@@ -43,43 +44,27 @@ function createDb(dataFile) {
       return ensureInitialized();
     }
     const raw = fs.readFileSync(file, 'utf8');
-    const parsed = JSON.parse(raw);
-    // 兼容旧文件可能缺少字段的情况。
-    const data = {
-      members: Array.isArray(parsed.members) ? parsed.members : [],
-      tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
-    };
-    // TD-S2-01：迭代集合必须原样透传，否则 US07 读到空列表、写回时还会丢数据。
-    // 只在文件里确实存在该集合时才加，避免给旧数据凭空造出空数组：
-    // Sprint 1 的 members 测试会断言整个数据对象，凭空加字段会把它弄红（本轮已实际发生一次）。
-    // 该修改由 PO 于 2026-10-19 授权例外执行（原定由朱传玺提交），待其复核。
-    if (Array.isArray(parsed.iterations)) {
-      data.iterations = parsed.iterations;
-    }
-    // US02：users 集合条件透传（与 iterations 同款处理），文件里存在才透传，
-    // 避免给旧数据凭空造出空数组、弄红 members.test.js 的整体对象断言。
-    if (Array.isArray(parsed.users)) {
-      data.users = parsed.users;
-    }
-    return data;
+    // Preserve every field, including extensions. Never normalize corrupt collections.
+    return validateData(JSON.parse(raw));
   }
 
   /** 将整份数据写回 JSON 文件。 */
   function writeData(data) {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n', 'utf8');
+    validateData(data);
+    // A direct caller must not overwrite a corrupt source either.
+    const existing = fs.existsSync(file) ? readData() : {};
+    atomicReplace(validateData({ ...existing, ...data }, { references: true }));
   }
 
-  /** US03角色更新专用事务：读取完整原文对象，拒绝畸形集合并原子替换。
-   * 保留未知字段；旧任务写入路径仍使用writeData，不冒称全项目存储债已关闭。
-   */
+  /** Synchronous single-process read/validate/mutate/atomic-replace operation. */
   function updateData(mutator) {
-    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
-    if (!data || typeof data !== 'object' || Array.isArray(data) ||
-        !Array.isArray(data.members) || !Array.isArray(data.tasks) ||
-        ('iterations' in data && !Array.isArray(data.iterations)) ||
-        !Array.isArray(data.users)) throw new Error('Invalid data structure');
+    const data = readData();
     if (mutator(data) === false) return;
-    const temporary = `${file}.role-${crypto.randomUUID()}.tmp`;
+    atomicReplace(validateData(data, { references: true }));
+  }
+
+  function atomicReplace(data) {
+    const temporary = `${file}.write-${crypto.randomUUID()}.tmp`;
     let descriptor;
     try {
       descriptor = fs.openSync(temporary, 'wx', 0o600);
@@ -89,8 +74,8 @@ function createDb(dataFile) {
       descriptor = undefined;
       fs.renameSync(temporary, file);
     } finally {
-      if (descriptor !== undefined) fs.closeSync(descriptor);
-      if (fs.existsSync(temporary)) fs.unlinkSync(temporary);
+      try { if (descriptor !== undefined) fs.closeSync(descriptor); }
+      finally { if (fs.existsSync(temporary)) fs.unlinkSync(temporary); }
     }
   }
 

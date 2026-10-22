@@ -105,7 +105,7 @@ test('US02异常：首次账号写入前EIO时不签发token、不改变文件�
   const { baseUrl } = await startServer(t, file);
   const write = fs.writeFileSync;
   const mock = t.mock.method(fs, 'writeFileSync', function (target, ...args) {
-    if (target === file) throw Object.assign(new Error('injected auth write-before EIO'), { code: 'EIO' });
+    if (target === file || typeof target === 'number') throw Object.assign(new Error('injected auth write-before EIO'), { code: 'EIO' });
     return write.call(this, target, ...args);
   });
   const response = await post(baseUrl, '/api/auth/login', admin);

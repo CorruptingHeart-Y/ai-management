@@ -63,7 +63,8 @@ for (const method of ['POST', 'PATCH']) {
     const { baseUrl } = await startServer(t, file);
     const write = fs.writeFileSync;
     t.mock.method(fs, 'writeFileSync', function (target, ...args) {
-      if (target === file) throw Object.assign(new Error('injected write-before EIO'), { code: 'EIO' });
+      // Atomic storage writes a descriptor for its temporary sibling file.
+      if (target === file || typeof target === 'number') throw Object.assign(new Error('injected write-before EIO'), { code: 'EIO' });
       return write.call(this, target, ...args);
     });
     const route = method === 'POST' ? '/api/tasks' : '/api/tasks/1/status';

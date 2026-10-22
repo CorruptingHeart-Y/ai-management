@@ -48,7 +48,7 @@ test('secured composition: query enforces real sessions and role revocation; rej
   const before = fs.readFileSync(file, 'utf8');
   for (const token of [null, 'invented']) assert.equal((await request(base, '/task-query', token)).status, 401);
   assert.equal((await request(base, '/task-query', member)).status, 200);
-  assert.equal((await request(base, '/tasks/1/status', member, 'PATCH', { status: 'DONE' }, { 'X-Role': 'admin' })).status, 403);
+  assert.equal((await request(base, '/tasks', member, 'POST', { title: 'forged admin', assigneeId: 1 }, { 'X-Role': 'admin' })).status, 403);
   assert.equal((await request(base, '/users', member)).status, 403);
   assert.equal((await request(base, '/task-query?priority=INVALID', admin)).status, 400);
   assert.equal(fs.readFileSync(file, 'utf8'), before);

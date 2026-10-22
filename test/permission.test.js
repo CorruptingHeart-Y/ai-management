@@ -23,18 +23,21 @@ test('US03真实入口：所有业务API对未登录/伪造token返回401且不�
   assert.equal(fs.readFileSync(file, 'utf8'), before);
 });
 
-test('US03成员：允许读取四类业务数据，拒绝写入和角色管理，包括伪造role头', async t => {
+test('US03成员：允许读取与US05状态更新，拒绝创建和角色管理，包括伪造role头', async t => {
   const { file, base } = await start(t);
   const token = await login(base, 'yanghaowei');
   const before = fs.readFileSync(file, 'utf8');
   for (const route of ['/members', '/tasks', '/stats', '/iterations']) assert.equal((await request(base, route, token)).status, 200);
   for (const [route, method, body] of [
     ['/users', 'GET'], ['/tasks', 'POST', { title: '拒绝', assigneeId: 1, role: 'admin' }],
-    ['/tasks/1/status', 'PATCH', { status: 'DONE' }], ['/users/3/role', 'PATCH', { role: 'admin' }],
+    ['/users/3/role', 'PATCH', { role: 'admin' }],
   ]) {
     assert.equal((await request(base, route, token, method, body, { 'X-Role': 'admin' })).status, 403);
   }
   assert.equal(fs.readFileSync(file, 'utf8'), before);
+  const changed = await request(base, '/tasks/1/status', token, 'PATCH', { status: 'DOING' });
+  assert.equal(changed.status, 200);
+  assert.equal((await changed.json()).status, 'DOING');
 });
 
 test('US03管理员：创建任务/改状态成功，账号列表只返回公开字段', async t => {

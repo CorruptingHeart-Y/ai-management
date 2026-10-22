@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-22T17:34:47.375Z",
+  "scope": "temporary data only; audit observations, not release acceptance",
+  "findings": [
+    {
+      "debt": "TD-S2-03",
+      "observation": "malformed task data error response",
+      "status": 500,
+      "contentType": "application/json; charset=utf-8",
+      "originalBytesPreserved": true,
+      "result": "JSON_ERROR"
+    },
+    {
+      "debt": "TD-S2-06",
+      "observation": "non-array tasks with sentinel followed by task creation",
+      "status": 500,
+      "originalMalformedTasksPreserved": true,
+      "result": "REJECTED"
+    },
+    {
+      "debt": "TD-S2-08",
+      "observation": "task attribute update endpoint",
+      "status": 404,
+      "originalBytesPreserved": true,
+      "result": "OPEN_UNSUPPORTED_IN_CURRENT_SCOPE"
+    }
+  ]
+}

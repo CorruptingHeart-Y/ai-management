@@ -22,7 +22,9 @@
     const headers = new Headers(options.headers);
     if (captured) headers.set('Authorization', `Bearer ${captured}`);
     const response = await env.fetch(target.href, { ...options, headers, cache: 'no-store' });
-    if (captured !== token()) throw new Error('登录状态已变化，请重试');
+    // Parallel expired requests may both return 401 after the first clears the
+    // same session. Preserve that response; a different active token is stale.
+    if (captured !== token() && !(response.status === 401 && !token())) throw new Error('登录状态已变化，请重试');
     if (response.status === 401 && captured) setSession(null, null);
     const parse = response.json.bind(response);
     response.json = async () => {
@@ -37,6 +39,7 @@
   });
   return { token, setSession, fetch: apiFetch, user: () => user,
     canWrite: () => !!token() && user?.role === 'admin',
+    canUpdateStatus: () => !!token() && ['admin', 'member'].includes(user?.role),
     subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); },
     ready: Promise.resolve() };
 });

@@ -1,0 +1,851 @@
+{"date":"2026-10-22T17:34:44.235Z","node":"v24.19.0","sha":"39d4a23c6254627ba7516ca08446ee2caa2da15d","branch":"codex/sprint3-integration-fixes","dirty":true,"command":"node scripts/verify-sprint3.cjs","scope":"current checkout automated quality only; not human release acceptance"}
+RUN protected-original-seven: ["test/members.test.js","test/tasks.test.js","test/task-status.test.js","test/service-status.test.js","test/task-attrs.test.js","test/iterations.test.js","test/stats.test.js"]
+TAP version 13
+# Subtest: US07 isolated list: shared source, empty/legacy data, no cache or writes
+ok 1 - US07 isolated list: shared source, empty/legacy data, no cache or writes
+  ---
+  duration_ms: 92.4562
+  type: 'test'
+  ...
+# Subtest: US07 isolated list: bad entities and read failures return JSON 500 without writes
+ok 2 - US07 isolated list: bad entities and read failures return JSON 500 without writes
+  ---
+  duration_ms: 165.8967
+  type: 'test'
+  ...
+# Subtest: US07 domain: nullable/existing numeric references only, without input mutation
+ok 3 - US07 domain: nullable/existing numeric references only, without input mutation
+  ---
+  duration_ms: 0.5608
+  type: 'test'
+  ...
+# Subtest: US07 view: filter/group known, unassigned and orphan tasks without changing fields
+ok 4 - US07 view: filter/group known, unassigned and orphan tasks without changing fields
+  ---
+  duration_ms: 0.3736
+  type: 'test'
+  ...
+# Subtest: US01 默认初始化：准确返回实验一的四名成员及分工
+ok 5 - US01 默认初始化：准确返回实验一的四名成员及分工
+  ---
+  duration_ms: 50.7663
+  type: 'test'
+  ...
+# Subtest: US01 提交的预置数据与默认初始化一致
+ok 6 - US01 提交的预置数据与默认初始化一致
+  ---
+  duration_ms: 17.1288
+  type: 'test'
+  ...
+# Subtest: US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+ok 7 - US01 唯一数据源：返回注入数据文件中的成员，并读取后续变更
+  ---
+  duration_ms: 16.6728
+  type: 'test'
+  ...
+# Subtest: US01 空成员列表：返回空数组且不重新填入预置成员
+ok 8 - US01 空成员列表：返回空数组且不重新填入预置成员
+  ---
+  duration_ms: 10.6098
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+ok 9 - US01 与 US04 联调：列表中的每名成员均可分配任务并持久读取
+  ---
+  duration_ms: 75.8061
+  type: 'test'
+  ...
+# Subtest: US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+ok 10 - US01 与 US04 共用数据文件：自定义成员可分配，已不存在的种子成员被拒绝
+  ---
+  duration_ms: 43.8606
+  type: 'test'
+  ...
+# Subtest: US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+ok 11 - US01 只读约定：重复获取成员不改变已有成员、任务及文件内容
+  ---
+  duration_ms: 30.5921
+  type: 'test'
+  ...
+# Subtest: US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+ok 12 - US01 成员契约：允许有效列表与空列表，拒绝不合法字段和重复 id
+  ---
+  duration_ms: 0.2416
+  type: 'test'
+  ...
+# Subtest: US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+    # Subtest: 重复 id
+    ok 1 - 重复 id
+      ---
+      duration_ms: 5.1253
+      type: 'test'
+      ...
+    # Subtest: 空成员条目
+    ok 2 - 空成员条目
+      ---
+      duration_ms: 4.397
+      type: 'test'
+      ...
+    # Subtest: 非法 id
+    ok 3 - 非法 id
+      ---
+      duration_ms: 4.1631
+      type: 'test'
+      ...
+    # Subtest: 空白姓名
+    ok 4 - 空白姓名
+      ---
+      duration_ms: 4.692
+      type: 'test'
+      ...
+    # Subtest: 缺少分工
+    ok 5 - 缺少分工
+      ---
+      duration_ms: 3.7718
+      type: 'test'
+      ...
+    1..5
+ok 13 - US01 非法成员数据：返回明确 JSON 错误，保留原始数据供修复
+  ---
+  duration_ms: 22.7081
+  type: 'test'
+  ...
+# Subtest: US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+ok 14 - US01 数据读取失败：损坏 JSON 返回可理解的错误且不覆盖源文件
+  ---
+  duration_ms: 3.6809
+  type: 'test'
+  ...
+# Subtest: 页面初始显示检查中，并由现有成员加载请求驱动状态
+ok 15 - 页面初始显示检查中，并由现有成员加载请求驱动状态
+  ---
+  duration_ms: 1.1974
+  type: 'test'
+  ...
+# Subtest: 成员接口成功且响应结构有效后才显示连接正常，只请求一次
+ok 16 - 成员接口成功且响应结构有效后才显示连接正常，只请求一次
+  ---
+  duration_ms: 0.6362
+  type: 'test'
+  ...
+# Subtest: 请求失败时切换为服务连接异常
+ok 17 - 请求失败时切换为服务连接异常
+  ---
+  duration_ms: 1.1111
+  type: 'test'
+  ...
+# Subtest: 空成员数组符合接口契约，连接状态仍由有效响应决定
+ok 18 - 空成员数组符合接口契约，连接状态仍由有效响应决定
+  ---
+  duration_ms: 0.4716
+  type: 'test'
+  ...
+# Subtest: HTTP失败、非JSON和不符合成员契约的响应均不能显示正常
+    # Subtest: HTTP 500
+    ok 1 - HTTP 500
+      ---
+      duration_ms: 0.1877
+      type: 'test'
+      ...
+    # Subtest: 非JSON响应
+    ok 2 - 非JSON响应
+      ---
+      duration_ms: 0.1661
+      type: 'test'
+      ...
+    # Subtest: 成员字段不完整
+    ok 3 - 成员字段不完整
+      ---
+      duration_ms: 0.1087
+      type: 'test'
+      ...
+    # Subtest: 重复成员编号
+    ok 4 - 重复成员编号
+      ---
+      duration_ms: 0.1053
+      type: 'test'
+      ...
+    # Subtest: 无法解析的JSON
+    ok 5 - 无法解析的JSON
+      ---
+      duration_ms: 0.1575
+      type: 'test'
+      ...
+    1..5
+ok 19 - HTTP失败、非JSON和不符合成员契约的响应均不能显示正常
+  ---
+  duration_ms: 1.3807
+  type: 'test'
+  ...
+# Subtest: 超时会中止请求并显示服务连接异常
+ok 20 - 超时会中止请求并显示服务连接异常
+  ---
+  duration_ms: 20.3211
+  type: 'test'
+  ...
+# Subtest: US10 空数据：总数为 0，各组计数为 0，不报错
+ok 21 - US10 空数据：总数为 0，各组计数为 0，不报错
+  ---
+  duration_ms: 1.2413
+  type: 'test'
+  ...
+# Subtest: US10 按状态计数：三项之和等于总数
+ok 22 - US10 按状态计数：三项之和等于总数
+  ---
+  duration_ms: 0.1512
+  type: 'test'
+  ...
+# Subtest: US10 缺失字段容错：Sprint 1 旧任务按 TODO / MEDIUM / 未分配 计
+ok 23 - US10 缺失字段容错：Sprint 1 旧任务按 TODO / MEDIUM / 未分配 计
+  ---
+  duration_ms: 0.1104
+  type: 'test'
+  ...
+# Subtest: US10 非法值容错：未知状态/优先级不丢任务，未知迭代单独成组
+ok 24 - US10 非法值容错：未知状态/优先级不丢任务，未知迭代单独成组
+  ---
+  duration_ms: 0.1576
+  type: 'test'
+  ...
+# Subtest: US10 按优先级计数：三个档位分别统计
+ok 25 - US10 按优先级计数：三个档位分别统计
+  ---
+  duration_ms: 0.225
+  type: 'test'
+  ...
+# Subtest: US10 按负责人计数：含 0 任务成员，未知负责人单独成组
+ok 26 - US10 按负责人计数：含 0 任务成员，未知负责人单独成组
+  ---
+  duration_ms: 0.2564
+  type: 'test'
+  ...
+# Subtest: US10 按迭代计数：未分配排第一，迭代名称来自 iterations
+ok 27 - US10 按迭代计数：未分配排第一，迭代名称来自 iterations
+  ---
+  duration_ms: 0.1747
+  type: 'test'
+  ...
+# Subtest: US10 字符串 id 归一化：assigneeId="2" 不应产生未知成员
+ok 28 - US10 字符串 id 归一化：assigneeId="2" 不应产生未知成员
+  ---
+  duration_ms: 0.1017
+  type: 'test'
+  ...
+# Subtest: US10 纯函数：不修改传入的数据对象
+ok 29 - US10 纯函数：不修改传入的数据对象
+  ---
+  duration_ms: 0.1234
+  type: 'test'
+  ...
+# Subtest: GET /api/stats：返回统计结构，且 byStatus 之和等于 total
+ok 30 - GET /api/stats：返回统计结构，且 byStatus 之和等于 total
+  ---
+  duration_ms: 52.9254
+  type: 'test'
+  ...
+# Subtest: GET /api/stats：空任务库返回 200 与全 0，不返回 500
+ok 31 - GET /api/stats：空任务库返回 200 与全 0，不返回 500
+  ---
+  duration_ms: 11.7237
+  type: 'test'
+  ...
+# Subtest: GET /api/stats：数据文件损坏返回 500 与可读提示
+ok 32 - GET /api/stats：数据文件损坏返回 500 与可读提示
+  ---
+  duration_ms: 9.7463
+  type: 'test'
+  ...
+# Subtest: 不传优先级时默认创建为 MEDIUM，且截止时间为空
+ok 33 - 不传优先级时默认创建为 MEDIUM，且截止时间为空
+  ---
+  duration_ms: 68.5361
+  type: 'test'
+  ...
+# Subtest: 自定义优先级 HIGH 能正确落库
+ok 34 - 自定义优先级 HIGH 能正确落库
+  ---
+  duration_ms: 17.6074
+  type: 'test'
+  ...
+# Subtest: 非法优先级返回 400 且不落库
+ok 35 - 非法优先级返回 400 且不落库
+  ---
+  duration_ms: 14.6438
+  type: 'test'
+  ...
+# Subtest: 合法截止时间能正确落库
+ok 36 - 合法截止时间能正确落库
+  ---
+  duration_ms: 11.8765
+  type: 'test'
+  ...
+# Subtest: 非法截止时间返回 400 且不落库
+ok 37 - 非法截止时间返回 400 且不落库
+  ---
+  duration_ms: 19.0905
+  type: 'test'
+  ...
+# Subtest: 优先级与截止时间在持久化后仍保留
+ok 38 - 优先级与截止时间在持久化后仍保留
+  ---
+  duration_ms: 14.036
+  type: 'test'
+  ...
+# Subtest: 状态可以从 TODO 更新为 DOING
+ok 39 - 状态可以从 TODO 更新为 DOING
+  ---
+  duration_ms: 67.1199
+  type: 'test'
+  ...
+# Subtest: 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+ok 40 - 状态可以从 DOING 更新为 DONE 且刷新后仍保留
+  ---
+  duration_ms: 24.1101
+  type: 'test'
+  ...
+# Subtest: 非法状态返回 400 且不修改任务
+ok 41 - 非法状态返回 400 且不修改任务
+  ---
+  duration_ms: 10.0878
+  type: 'test'
+  ...
+# Subtest: 不存在的任务返回 404
+ok 42 - 不存在的任务返回 404
+  ---
+  duration_ms: 7.3079
+  type: 'test'
+  ...
+# Subtest: 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+ok 43 - 正常创建任务：返回 201，status 初始为 TODO，assigneeId 正确
+  ---
+  duration_ms: 70.2287
+  type: 'test'
+  ...
+# Subtest: 空标题（含纯空白）创建失败，返回 400，且不落库
+ok 44 - 空标题（含纯空白）创建失败，返回 400，且不落库
+  ---
+  duration_ms: 36.3997
+  type: 'test'
+  ...
+# Subtest: 无效负责人创建失败，返回 400，且不落库
+ok 45 - 无效负责人创建失败，返回 400，且不落库
+  ---
+  duration_ms: 12.0287
+  type: 'test'
+  ...
+# Subtest: 创建以后能够读取：任务列表包含新任务
+ok 46 - 创建以后能够读取：任务列表包含新任务
+  ---
+  duration_ms: 11.438
+  type: 'test'
+  ...
+# Subtest: 持久化：用同一数据文件重新创建 app 后任务仍存在
+ok 47 - 持久化：用同一数据文件重新创建 app 后任务仍存在
+  ---
+  duration_ms: 15.3468
+  type: 'test'
+  ...
+1..47
+# tests 57
+# suites 0
+# pass 57
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 453.2184
+SUMMARY protected-original-seven: {"tests":57,"pass":57,"fail":0,"cancelled":0,"skipped":0,"todo":0}
+RUN additional-recursive-tests: ["test/auth-handoff.test.js","test/auth.test.js","test/filter-mount.test.js","test/filter.test.js","test/permission.test.js","test/quality-negative-probe.test.js","test/quality-policy.test.js","test/secured-composition.test.js","test/session-ui.test.js","test/sprint2-integration.test.js","test/techdebt.test.js"]
+TAP version 13
+# Subtest: US02交接：四个预置账号角色准确，响应不泄露哈希，登出仅撤销当前会话
+ok 1 - US02交接：四个预置账号角色准确，响应不泄露哈希，登出仅撤销当前会话
+  ---
+  duration_ms: 394.1935
+  type: 'test'
+  ...
+# Subtest: US02交接：应用重启使旧token失效，账号哈希保留且可重新登录
+ok 2 - US02交接：应用重启使旧token失效，账号哈希保留且可重新登录
+  ---
+  duration_ms: 76.152
+  type: 'test'
+  ...
+# Subtest: US02交接：登录后创建与更新任务不丢users/iterations，四条业务读取路由仍免登录
+ok 3 - US02交接：登录后创建与更新任务不丢users/iterations，四条业务读取路由仍免登录
+  ---
+  duration_ms: 125.4085
+  type: 'test'
+  ...
+# Subtest: US02异常：损坏JSON使登录/会话读取返回JSON错误，原文件逐字保留
+ok 4 - US02异常：损坏JSON使登录/会话读取返回JSON错误，原文件逐字保留
+  ---
+  duration_ms: 45.6307
+  type: 'test'
+  ...
+# Subtest: US02异常：首次账号写入前EIO时不签发token、不改变文件，恢复后可登录
+ok 5 - US02异常：首次账号写入前EIO时不签发token、不改变文件，恢复后可登录
+  ---
+  duration_ms: 45.7758
+  type: 'test'
+  ...
+# Subtest: US02 登录成功：正确凭证返回 200、token 与角色
+ok 6 - US02 登录成功：正确凭证返回 200、token 与角色
+  ---
+  duration_ms: 115.6732
+  type: 'test'
+  ...
+# Subtest: US02 登录失败：错误密码返回 401 且不签发 token
+ok 7 - US02 登录失败：错误密码返回 401 且不签发 token
+  ---
+  duration_ms: 52.9092
+  type: 'test'
+  ...
+# Subtest: US02 缺字段：空用户名或空密码返回 400
+ok 8 - US02 缺字段：空用户名或空密码返回 400
+  ---
+  duration_ms: 36.3537
+  type: 'test'
+  ...
+# Subtest: US02 会话：登录后 /me 返回当前用户，登出后失效
+ok 9 - US02 会话：登录后 /me 返回当前用户，登出后失效
+  ---
+  duration_ms: 63.3813
+  type: 'test'
+  ...
+# Subtest: US02 无效 token：/me 与 /logout 返回 401
+ok 10 - US02 无效 token：/me 与 /logout 返回 401
+  ---
+  duration_ms: 7.3708
+  type: 'test'
+  ...
+# Subtest: US02 惰性写入：登录后 users 落库且不含明文密码
+ok 11 - US02 惰性写入：登录后 users 落库且不含明文密码
+  ---
+  duration_ms: 44.3882
+  type: 'test'
+  ...
+# Subtest: US02 不破坏基线：登录前后既有 members/tasks 路由均免登录可访问
+ok 12 - US02 不破坏基线：登录前后既有 members/tasks 路由均免登录可访问
+  ---
+  duration_ms: 88.0311
+  type: 'test'
+  ...
+# Subtest: US11 protected mounting requires an explicit read-access middleware
+ok 13 - US11 protected mounting requires an explicit read-access middleware
+  ---
+  duration_ms: 1.4606
+  type: 'test'
+  ...
+# Subtest: US11 mounted query stops denied requests before reading and serves permitted requests
+ok 14 - US11 mounted query stops denied requests before reading and serves permitted requests
+  ---
+  duration_ms: 76.6939
+  type: 'test'
+  ...
+# Subtest: US11 parser accepts documented scalar filters and trims literal keyword searches
+ok 15 - US11 parser accepts documented scalar filters and trims literal keyword searches
+  ---
+  duration_ms: 1.6627
+  type: 'test'
+  ...
+# Subtest: US11 parser rejects unknown, repeated, nested and non-scalar parameters
+ok 16 - US11 parser rejects unknown, repeated, nested and non-scalar parameters
+  ---
+  duration_ms: 0.5378
+  type: 'test'
+  ...
+# Subtest: US11 parser rejects invalid enums, ids, booleans and long keywords
+ok 17 - US11 parser rejects invalid enums, ids, booleans and long keywords
+  ---
+  duration_ms: 0.4886
+  type: 'test'
+  ...
+# Subtest: US11 combines every filter with AND and keeps full-source counters
+ok 18 - US11 combines every filter with AND and keeps full-source counters
+  ---
+  duration_ms: 0.6315
+  type: 'test'
+  ...
+# Subtest: US11 keywords are literal and case-insensitive in title or description
+ok 19 - US11 keywords are literal and case-insensitive in title or description
+  ---
+  duration_ms: 0.2567
+  type: 'test'
+  ...
+# Subtest: US11 legacy defaults and unassigned matching preserve original task objects
+ok 20 - US11 legacy defaults and unassigned matching preserve original task objects
+  ---
+  duration_ms: 0.2578
+  type: 'test'
+  ...
+# Subtest: US07 filtering and grouping agree that only absent/null references are unassigned
+ok 21 - US07 filtering and grouping agree that only absent/null references are unassigned
+  ---
+  duration_ms: 0.9354
+  type: 'test'
+  ...
+# Subtest: US12 overdue uses the local calendar day, excludes today/future and DONE
+ok 22 - US12 overdue uses the local calendar day, excludes today/future and DONE
+  ---
+  duration_ms: 0.2137
+  type: 'test'
+  ...
+# Subtest: US12 absent and malformed due dates never become overdue
+ok 23 - US12 absent and malformed due dates never become overdue
+  ---
+  duration_ms: 0.2208
+  type: 'test'
+  ...
+# Subtest: US12 local date follows the server timezone across a UTC day boundary
+ok 24 - US12 local date follows the server timezone across a UTC day boundary
+  ---
+  duration_ms: 136.807
+  type: 'test'
+  ...
+# Subtest: US11 empty task data returns an empty result and zero counters
+ok 25 - US11 empty task data returns an empty result and zero counters
+  ---
+  duration_ms: 0.2257
+  type: 'test'
+  ...
+# Subtest: US11 rejects malformed records and duplicate ids without repairing data
+ok 26 - US11 rejects malformed records and duplicate ids without repairing data
+  ---
+  duration_ms: 0.4527
+  type: 'test'
+  ...
+# Subtest: GET task-query returns JSON with no-store, reads once and never writes
+ok 27 - GET task-query returns JSON with no-store, reads once and never writes
+  ---
+  duration_ms: 78.1437
+  type: 'test'
+  ...
+# Subtest: GET task-query rejects bad raw parameters before reading the database
+ok 28 - GET task-query rejects bad raw parameters before reading the database
+  ---
+  duration_ms: 110.4673
+  type: 'test'
+  ...
+# Subtest: GET task-query returns a generic JSON 500 for broken tasks and read failures
+ok 29 - GET task-query returns a generic JSON 500 for broken tasks and read failures
+  ---
+  duration_ms: 77.4557
+  type: 'test'
+  ...
+# Subtest: task-query can sit after auth and read-permission guards without reading denied requests
+ok 30 - task-query can sit after auth and read-permission guards without reading denied requests
+  ---
+  duration_ms: 15.7536
+  type: 'test'
+  ...
+# Subtest: task-query uses real createDb and existing create/status APIs without changing query bytes
+ok 31 - task-query uses real createDb and existing create/status APIs without changing query bytes
+  ---
+  duration_ms: 51.514
+  type: 'test'
+  ...
+# Subtest: task-query keeps a broken real data file unchanged and hides parser details
+ok 32 - task-query keeps a broken real data file unchanged and hides parser details
+  ---
+  duration_ms: 5.2222
+  type: 'test'
+  ...
+# Subtest: US03真实入口：所有业务API对未登录/伪造token返回401且不写数据
+ok 33 - US03真实入口：所有业务API对未登录/伪造token返回401且不写数据
+  ---
+  duration_ms: 313.8036
+  type: 'test'
+  ...
+# Subtest: US03成员：允许读取与US05状态更新，拒绝创建和角色管理，包括伪造role头
+ok 34 - US03成员：允许读取与US05状态更新，拒绝创建和角色管理，包括伪造role头
+  ---
+  duration_ms: 158.2898
+  type: 'test'
+  ...
+# Subtest: US03管理员：创建任务/改状态成功，账号列表只返回公开字段
+ok 35 - US03管理员：创建任务/改状态成功，账号列表只返回公开字段
+  ---
+  duration_ms: 60.8909
+  type: 'test'
+  ...
+# Subtest: US03角色校验：非法角色/编号/额外字段400，未知账号404，失败逐字不落库
+ok 36 - US03角色校验：非法角色/编号/额外字段400，未知账号404，失败逐字不落库
+  ---
+  duration_ms: 105.5419
+  type: 'test'
+  ...
+# Subtest: US03最后管理员保护与幂等更新：409不落库，同角色不撤销会话
+ok 37 - US03最后管理员保护与幂等更新：409不落库，同角色不撤销会话
+  ---
+  duration_ms: 47.0783
+  type: 'test'
+  ...
+# Subtest: US03升降级：撤销目标账号所有旧token，其他会话不受影响，重登采用新角色
+ok 38 - US03升降级：撤销目标账号所有旧token，其他会话不受影响，重登采用新角色
+  ---
+  duration_ms: 295.5404
+  type: 'test'
+  ...
+# Subtest: US03自降级：存在其他管理员才允许，成功后自己的会话立即失效
+ok 39 - US03自降级：存在其他管理员才允许，成功后自己的会话立即失效
+  ---
+  duration_ms: 95.3568
+  type: 'test'
+  ...
+# Subtest: US03角色持久化：保留原任务/成员/迭代/未知扩展，重启后旧会话失效且新角色保留
+ok 40 - US03角色持久化：保留原任务/成员/迭代/未知扩展，重启后旧会话失效且新角色保留
+  ---
+  duration_ms: 63.0668
+  type: 'test'
+  ...
+# Subtest: US03异常：损坏JSON或非法账号角色返回500，不把异常数据当管理员
+ok 41 - US03异常：损坏JSON或非法账号角色返回500，不把异常数据当管理员
+  ---
+  duration_ms: 31.5388
+  type: 'test'
+  ...
+# Subtest: US03异常：角色更新拒绝畸形tasks集合，不静默覆盖异常原文件
+ok 42 - US03异常：角色更新拒绝畸形tasks集合，不静默覆盖异常原文件
+  ---
+  duration_ms: 29.9527
+  type: 'test'
+  ...
+# Subtest: US03异常：原子替换前EIO不改原文、不撤会话，并清除临时文件
+ok 43 - US03异常：原子替换前EIO不改原文、不撤会话，并清除临时文件
+  ---
+  duration_ms: 79.7856
+  type: 'test'
+  ...
+# Subtest: US03扩展挂载：后注册查询路由也受同一会话与读策略保护
+ok 44 - US03扩展挂载：后注册查询路由也受同一会话与读策略保护
+  ---
+  duration_ms: 91.1332
+  type: 'test'
+  ...
+# Subtest: US03生产启动：server.js始终鉴权，即使设置关闭鉴权环境变量也不能绕过
+ok 45 - US03生产启动：server.js始终鉴权，即使设置关闭鉴权环境变量也不能绕过
+  ---
+  duration_ms: 193.6232
+  type: 'test'
+  ...
+# Subtest: temporary TODO
+ok 46 - temporary TODO # TODO
+  ---
+  duration_ms: 1.0747
+  type: 'test'
+  ...
+# Subtest: temporary skip
+ok 47 - temporary skip # SKIP
+  ---
+  duration_ms: 0.1934
+  type: 'test'
+  ...
+# Subtest: 门禁策略：只有实际执行且全通过才允许自动门禁通过
+ok 48 - 门禁策略：只有实际执行且全通过才允许自动门禁通过
+  ---
+  duration_ms: 1.8084
+  type: 'test'
+  ...
+# Subtest: 门禁策略：Node退出0仍须拒绝TODO与skip
+ok 49 - 门禁策略：Node退出0仍须拒绝TODO与skip
+  ---
+  duration_ms: 0.4548
+  type: 'test'
+  ...
+# Subtest: 门禁策略：明确报告fail与cancelled
+ok 50 - 门禁策略：明确报告fail与cancelled
+  ---
+  duration_ms: 0.2181
+  type: 'test'
+  ...
+# Subtest: 门禁策略：缺失或重复汇总不能当成功
+ok 51 - 门禁策略：缺失或重复汇总不能当成功
+  ---
+  duration_ms: 0.4205
+  type: 'test'
+  ...
+# Subtest: 门禁策略：零测试不能当通过
+ok 52 - 门禁策略：零测试不能当通过
+  ---
+  duration_ms: 0.8381
+  type: 'test'
+  ...
+# Subtest: 门禁策略：拒绝不一致或溢出的计数
+ok 53 - 门禁策略：拒绝不一致或溢出的计数
+  ---
+  duration_ms: 0.398
+  type: 'test'
+  ...
+# Subtest: secured composition: create/filter/status/stats/restart preserve assignment and iteration
+ok 54 - secured composition: create/filter/status/stats/restart preserve assignment and iteration
+  ---
+  duration_ms: 281.9789
+  type: 'test'
+  ...
+# Subtest: secured composition: query enforces real sessions and role revocation; rejected requests do not write
+ok 55 - secured composition: query enforces real sessions and role revocation; rejected requests do not write
+  ---
+  duration_ms: 233.365
+  type: 'test'
+  ...
+# Subtest: secured composition: overdue excludes today, future, undated, and DONE tasks
+ok 56 - secured composition: overdue excludes today, future, undated, and DONE tasks
+  ---
+  duration_ms: 37.0158
+  type: 'test'
+  ...
+# Subtest: US03前端会话：统一Bearer请求，只有当前管理员显示写操作
+ok 57 - US03前端会话：统一Bearer请求，只有当前管理员显示写操作
+  ---
+  duration_ms: 27.1691
+  type: 'test'
+  ...
+# Subtest: US03前端会话：401清除会话，403保留会话且不假装登出
+ok 58 - US03前端会话：401清除会话，403保留会话且不假装登出
+  ---
+  duration_ms: 1.648
+  type: 'test'
+  ...
+# Subtest: US03前端会话：不向外站或非API请求发送凭证
+ok 59 - US03前端会话：不向外站或非API请求发送凭证
+  ---
+  duration_ms: 0.7174
+  type: 'test'
+  ...
+# Subtest: US03前端会话：旧账号延迟401不得清除新账号会话
+ok 60 - US03前端会话：旧账号延迟401不得清除新账号会话
+  ---
+  duration_ms: 0.7901
+  type: 'test'
+  ...
+# Subtest: US03前端会话：解析期间换账号也拒绝旧数据，跨标签事件清空权限缓存
+ok 61 - US03前端会话：解析期间换账号也拒绝旧数据，跨标签事件清空权限缓存
+  ---
+  duration_ms: 0.7576
+  type: 'test'
+  ...
+# Subtest: US03前端会话：网络失败不伪装会话失效
+ok 62 - US03前端会话：网络失败不伪装会话失效
+  ---
+  duration_ms: 0.471
+  type: 'test'
+  ...
+# Subtest: S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务
+ok 63 - S2集成：旧创建请求经过完整状态链、重启后保留成员分配和所有任务
+  ---
+  duration_ms: 229.8475
+  type: 'test'
+  ...
+# Subtest: S2异常：损坏JSON时POST返回失败并逐字保留原文件
+ok 64 - S2异常：损坏JSON时POST返回失败并逐字保留原文件
+  ---
+  duration_ms: 7.7284
+  type: 'test'
+  ...
+# Subtest: S2异常：损坏JSON时PATCH返回失败并逐字保留原文件
+ok 65 - S2异常：损坏JSON时PATCH返回失败并逐字保留原文件
+  ---
+  duration_ms: 7.8165
+  type: 'test'
+  ...
+# Subtest: S2异常：POST注入写入前EIO时不报成功、不改变原文件
+ok 66 - S2异常：POST注入写入前EIO时不报成功、不改变原文件
+  ---
+  duration_ms: 8.5391
+  type: 'test'
+  ...
+# Subtest: S2异常：PATCH注入写入前EIO时不报成功、不改变原文件
+ok 67 - S2异常：PATCH注入写入前EIO时不报成功、不改变原文件
+  ---
+  duration_ms: 7.4191
+  type: 'test'
+  ...
+# Subtest: S2补齐：优先级、截止时间、迭代ID边界组合与失败不落库
+ok 68 - S2补齐：优先级、截止时间、迭代ID边界组合与失败不落库
+  ---
+  duration_ms: 186.2293
+  type: 'test'
+  ...
+# Subtest: S2补齐：含属性和迭代任务TODO→DOING→DONE与统计逐项一致
+ok 69 - S2补齐：含属性和迭代任务TODO→DOING→DONE与统计逐项一致
+  ---
+  duration_ms: 154.6675
+  type: 'test'
+  ...
+# Subtest: S2补齐：新增字段、迭代集合经创建/状态更新/重启后完整保留
+ok 70 - S2补齐：新增字段、迭代集合经创建/状态更新/重启后完整保留
+  ---
+  duration_ms: 45.4959
+  type: 'test'
+  ...
+# Subtest: TD06: malformed root/collections/task fields are rejected without changing one byte
+ok 71 - TD06: malformed root/collections/task fields are rejected without changing one byte
+  ---
+  duration_ms: 1399.1107
+  type: 'test'
+  ...
+# Subtest: TD06: orphan references remain inspectable but block all persistence
+ok 72 - TD06: orphan references remain inspectable but block all persistence
+  ---
+  duration_ms: 128.4173
+  type: 'test'
+  ...
+# Subtest: TD02: partial-write failure on create/status/login preserves source and removes temporary file
+ok 73 - TD02: partial-write failure on create/status/login preserves source and removes temporary file
+  ---
+  duration_ms: 75.0146
+  type: 'test'
+  ...
+# Subtest: TD02: fsync failure on create/status/login preserves source and removes temporary file
+ok 74 - TD02: fsync failure on create/status/login preserves source and removes temporary file
+  ---
+  duration_ms: 73.4627
+  type: 'test'
+  ...
+# Subtest: TD02: rename failure on create/status/login preserves source and removes temporary file
+ok 75 - TD02: rename failure on create/status/login preserves source and removes temporary file
+  ---
+  duration_ms: 71.3364
+  type: 'test'
+  ...
+# Subtest: TD02/06: legacy fields and unknown extensions survive successful task writes
+ok 76 - TD02/06: legacy fields and unknown extensions survive successful task writes
+  ---
+  duration_ms: 41.2562
+  type: 'test'
+  ...
+# Subtest: US05: member changes status with validation; all other member writes stay forbidden
+ok 77 - US05: member changes status with validation; all other member writes stay forbidden
+  ---
+  duration_ms: 186.4992
+  type: 'test'
+  ...
+# Subtest: US05 UI capabilities distinguish status update from administrator writes
+ok 78 - US05 UI capabilities distinguish status update from administrator writes
+  ---
+  duration_ms: 0.2916
+  type: 'test'
+  ...
+# Subtest: US11/12: production factory mounts real protected filters without a test hook
+ok 79 - US11/12: production factory mounts real protected filters without a test hook
+  ---
+  duration_ms: 33.7983
+  type: 'test'
+  ...
+# Subtest: UI: concurrent expired requests both remain 401 instead of becoming network errors
+ok 80 - UI: concurrent expired requests both remain 401 instead of becoming network errors
+  ---
+  duration_ms: 0.849
+  type: 'test'
+  ...
+1..80
+# tests 80
+# suites 0
+# pass 78
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 1
+# duration_ms 2293.3585
+SUMMARY additional-recursive-tests: {"tests":80,"pass":78,"fail":0,"cancelled":0,"skipped":1,"todo":1}
+TOTAL: {"tests":137,"pass":135,"fail":0,"cancelled":0,"skipped":1,"todo":1}
+AUTOMATED_QUALITY_GATE_BLOCKED: additional-recursive-tests: skipped=1; additional-recursive-tests: todo=1
