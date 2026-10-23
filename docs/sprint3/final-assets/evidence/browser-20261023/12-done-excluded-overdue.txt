@@ -1,0 +1,66 @@
+- link "跳到任务":
+  - /url: "#main"
+- banner:
+  - link "爱管理":
+    - /url: index.html
+    - generic: 管
+    - text: 爱管理
+  - navigation "主导航":
+    - link "工作台":
+      - /url: index.html
+    - link "任务":
+      - /url: task-filters.html
+    - link "统计":
+      - /url: stats.html
+  - link "登录 / 工作台":
+    - /url: index.html#auth-bar
+- main:
+  - paragraph: 项目工作区
+  - heading "任务视图" [level=1]
+  - button "刷新"
+  - group "任务范围":
+    - button "全部任务 2":
+      - text: 全部任务
+      - generic: "2"
+    - button "仅逾期 0" [active] [pressed]:
+      - text: 仅逾期
+      - generic: "0"
+  - paragraph: 截至 2026-10-23
+  - form "筛选任务":
+    - generic: 搜索
+    - searchbox "搜索"
+    - generic: 状态
+    - combobox "状态":
+      - option "全部状态" [selected]
+      - option "待办"
+      - option "进行中"
+      - option "已完成"
+    - generic: 优先级
+    - combobox "优先级":
+      - option "全部优先级" [selected]
+      - option "高"
+      - option "中"
+      - option "低"
+    - generic: 负责人
+    - combobox "负责人":
+      - option "全部负责人" [selected]
+      - option "彭佳成"
+      - option "朱传玺"
+      - option "杨浩伟"
+      - option "何健翔"
+    - generic: 迭代
+    - combobox "迭代":
+      - option "全部迭代" [selected]
+      - option "未归属"
+      - option "Sprint 1"
+      - option "Sprint 2"
+      - option "Sprint 3"
+    - button "筛选"
+    - button "重置"
+  - region "任务 0":
+    - heading "任务 0" [level=2]:
+      - text: 任务
+      - generic: "0"
+    - checkbox "按迭代分组"
+    - text: 按迭代分组
+    - paragraph: 没有符合条件的任务
