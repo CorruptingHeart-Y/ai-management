@@ -2,6 +2,8 @@
 
 日期2026-10-23，America/New_York。用户授权完成可独立执行的待办，再报告剩余事项。起点integration/sprint3@1eef8df；在codex/sprint3-engineering-closeout隔离分支保留历史合入codex/sprint3-closeout-assets@43587ed。没有改动main/develop、原业务数据、旧七份测试或既有展演文件。
 
+最新补充：源码ZIP实测在4b90d71因缺.git导致门禁退出1，原始输出归档verification-4b90d71/archive-initial-gate.txt；补git-archive版本清单识别及4项测试后，本轮全量为149项（原139+六项流程/枚举/缓存+四项源码包元数据）。先前145项日志保留，不改写为149。最终同SHA工作区与解压包实际结果以交付verification日志为准。
+
 ## 实际代码审查结果
 
 执行者为Codex代码审查/测试辅助，人工复核人仍为何健翔。以下已经实际阅读对应实现与断言，不是空的审查安排。
@@ -24,6 +26,7 @@
 | EC02 | POST已成功而列表GET失败，外层catch却提示创建失败/重试 | 明确“任务已创建，但列表刷新失败…不要重复提交”；POST网络不确定时保留表单并提示先核对 |
 | EC03 | auth路由在全局权限中间件前返回，缺少禁止缓存头 | 认证router统一no-store，含成功/失败/me/logout，新增真实HTTP测试 |
 | TD05 | 领域、任务路由、统计、工作台与筛选重复维护枚举/标签 | 新public/task-contract.js供Node/浏览器共同使用，只读枚举、顺序、默认值；原统计容错逻辑保持 |
+| EC04 | ZIP不含.git，门禁尚未跑测试就因Git元数据退出 | git archive的export-subst写入SOURCE_VERSION.json精确SHA；识别项目自身Git或有效归档清单，父目录其他仓库不冒认；所有测试/哈希/零TODO要求仍完整执行 |
 
 EC01仅是当前页面pending防重复，不是后端幂等保证，跨标签重复提交仍由用户确认。shared模块使用UMD兼容原生浏览器和CommonJS，无依赖/锁文件/业务数据变更；三个HTML均在消费脚本前加载。HTML固定option仍表示原合法值，不增加权限或故事范围。
 
@@ -33,6 +36,7 @@ EC01仅是当前页面pending防重复，不是后端幂等保证，跨标签重
 - 全量npm test：145/145，原57+其他88；fail/cancel/skip/TODO全0，严格双旅程包含其中。日志evidence/engineering-closeout-20261023/npm-test.txt内记录实际执行SHA和dirty状态，不能把未提交执行冒称干净提交。
 - 浏览器实际服务为新临时数据ai-management-demo-egSe8q、端口49240。真实登录、创建高优先级/Sprint3/逾期任务、切进行中、统计1/0/1/0、组合筛选1条均符合预期，页面warning/error日志为空。三张截图与快照在同证据目录；不冒称浏览器故障注入，pending/断连分支由新处理器测试覆盖。
 - 合并后精确SHA的干净验证日志、CI链接、源码ZIP和SHA256由同级worktree外的verification目录记录，避免为嵌入自身SHA反复改提交。最终交付答复同时提供精确SHA与CI链接。
+- EC04的归档元数据只是版本声明，不是人工批准或完整源码签名；解压包的branch/dirty为null，不伪称Git工作区干净。未导出的占位符、缺少/坏版本清单会拒绝，无法用格式选项绕过测试。
 
 ## 待办处置结果与仍需人员完成
 

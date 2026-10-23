@@ -2,7 +2,7 @@
 // Static material/config inventory only. Runtime counts come from npm test.
 const fs = require('node:fs');
 const path = require('node:path');
-const { spawnSync } = require('node:child_process');
+const { readSourceContext } = require('../../../scripts/lib/source-context.cjs');
 const root = path.resolve(__dirname, '../../..');
 process.chdir(root);
 const exists = file => fs.existsSync(path.join(root, file));
@@ -15,7 +15,8 @@ function discover(directory) {
 }
 const required = ['server.js', 'src/app.js', 'src/db.js', 'src/features/task-filters.js',
   'package.json', 'README.md', 'data/db.json', 'scripts/verify-sprint3.cjs',
-  'scripts/lib/quality-policy.cjs', '.github/workflows/quality.yml',
+  'scripts/lib/quality-policy.cjs', 'scripts/lib/source-context.cjs',
+  'SOURCE_VERSION.json', '.gitattributes', '.github/workflows/quality.yml',
   'test/e2e/main-journey.test.js', 'test/e2e/exception-journey.test.js',
   'docs/sprint3/release-readiness.md', 'docs/sprint3/release-notes.md', 'docs/sprint3/user-guide.md',
   'docs/sprint3/review-log.md', 'docs/sprint3/technical-debt-disposition.md'];
@@ -31,9 +32,9 @@ const gate = exists('scripts/verify-sprint3.cjs') ? fs.readFileSync('scripts/ver
 if (!gate.includes("discover(path.join(root, 'test'))")) problems.push('Recursive discovery configuration is missing');
 const notes = exists('docs/sprint3/release-notes.md') ? fs.readFileSync('docs/sprint3/release-notes.md', 'utf8') : '';
 for (const word of ['已知限制', '回滚', '尚未发布']) if (!notes.includes(word)) problems.push(`Release boundary missing: ${word}`);
-const git = spawnSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' });
-if (git.status !== 0) problems.push('Git SHA unavailable');
-const output = { checkedAt: new Date().toISOString(), sha: git.status === 0 ? git.stdout.trim() : null,
+let source;
+try { source = readSourceContext(root); } catch (error) { problems.push(error.message); }
+const output = { checkedAt: new Date().toISOString(), ...(source || { sha: null }),
   command: 'node docs/sprint3/checks/release-check.cjs',
   scope: 'STATIC_INVENTORY_ONLY', requiredFiles: required.length, missing,
   tests: { discoveredFiles: tests.length, files: tests, e2e, recursivelyIncludedByConfiguration: !problems.length,

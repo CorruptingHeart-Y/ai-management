@@ -14,6 +14,8 @@ npm start
 
 默认打开 http://localhost:3000/；统计页 /stats.html，筛选/逾期页 /task-filters.html，首页有入口。无前端编译步骤。
 
+使用源码ZIP时，解压到独立目录，保留SOURCE_VERSION.json和隐藏配置文件，再执行上述命令。git archive导出的版本文件包含原提交SHA；门禁会标明archive来源、分支与dirty未知，仍完整执行原测试哈希和全部回归。直接复制源码且既无Git元数据也无有效导出版本文件时，门禁会明确拒绝。
+
 真实数据默认 data/db.json；先备份，不用测试数据覆盖。演示需要独立文件时在 PowerShell 设置 `$env:DATA_FILE='D:\demo\db.json'`，确认该路径属于自己的演示目录后再运行 npm start。改端口使用 `$env:PORT='3001'`。测试始终使用临时文件，不需要改真实数据。
 
 用于安全演示时，优先运行`node scripts/start-demo.cjs`。它每次创建新的临时数据目录，打印动态端口和数据位置，不覆盖现有文件。运行`node scripts/check-demo.cjs`可自动完成17项隔离HTTP检查；它不等同于人工验收。测试账号的演示凭证仍由DRI提供。

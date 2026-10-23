@@ -5,15 +5,11 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 const { parseSummary, blockers, fields } = require('./lib/quality-policy.cjs');
+const { readSourceContext } = require('./lib/source-context.cjs');
 const baseline = require('../docs/sprint3/protected-baseline.json');
 const root = path.resolve(__dirname, '..');
 process.chdir(root);
 const hash = text => crypto.createHash('sha256').update(text.replace(/\r\n/g, '\n')).digest('hex');
-function git(...args) {
-  const result = spawnSync('git', args, { encoding: 'utf8' });
-  if (result.error || result.status !== 0) throw new Error(`Git metadata unavailable: ${args.join(' ')}`);
-  return result.stdout.trim();
-}
 function discover(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
     const file = path.join(directory, entry.name);
@@ -38,8 +34,7 @@ function run(label, files) {
 try {
   if (process.argv.length !== 2) throw new Error('Usage: node scripts/verify-sprint3.cjs (no bypass flags)');
   console.log(JSON.stringify({ date: new Date().toISOString(), node: process.version,
-    sha: git('rev-parse', 'HEAD'), branch: git('branch', '--show-current'),
-    dirty: !!git('status', '--porcelain'), command: 'node scripts/verify-sprint3.cjs',
+    ...readSourceContext(root), command: 'node scripts/verify-sprint3.cjs',
     scope: 'current checkout automated quality only; not human release acceptance' }));
   for (const [file, expected] of Object.entries(baseline.files)) {
     if (hash(fs.readFileSync(file, 'utf8')) !== expected) throw new Error(`Original test modified: ${file}`);
