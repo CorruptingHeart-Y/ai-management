@@ -4,8 +4,8 @@
   const el = (id) => document.getElementById(id);
   const form = el('filters');
   const fields = ['q', 'status', 'priority', 'assigneeId', 'iterationId'];
-  const statusLabels = { TODO: '待办', DOING: '进行中', DONE: '已完成' };
-  const priorityLabels = { HIGH: '高', MEDIUM: '中', LOW: '低' };
+  const statusLabels = TaskContract.STATUS_LABELS;
+  const priorityLabels = TaskContract.PRIORITY_LABELS;
   let members = [];
   let iterations = [];
   let snapshot = null;
@@ -156,8 +156,8 @@
         iteration ? iteration.name : `未知迭代 #${task.iterationId}`;
       cells[0].appendChild(iterationLabel);
       cells[1].textContent = members.find((member) => member.id === task.assigneeId)?.name || `未知成员 #${task.assigneeId}`;
-      const status = task.status == null || task.status === '' ? 'TODO' : task.status;
-      const priority = task.priority == null || task.priority === '' ? 'MEDIUM' : task.priority;
+      const status = task.status == null || task.status === '' ? TaskContract.DEFAULT_STATUS : task.status;
+      const priority = task.priority == null || task.priority === '' ? TaskContract.DEFAULT_PRIORITY : task.priority;
       cells[2].appendChild(badge(statusLabels[status] || '未知状态', statusLabels[status] ? `status-${status.toLowerCase()}` : 'status-todo'));
       cells[3].appendChild(badge(priorityLabels[priority] || '未知优先级', priorityLabels[priority] ? `priority-${priority.toLowerCase()}` : 'priority-low'));
       const date = document.createElement('span');
@@ -166,7 +166,7 @@
       if (!task.dueDate) date.classList.add('no-date');
       cells[4].appendChild(date);
       if (validDueDate(task.dueDate) &&
-          task.dueDate < snapshot.today && status !== 'DONE') {
+          task.dueDate < snapshot.today && status !== TaskContract.TASK_STATUS.DONE) {
         // Query metadata is authoritative; do not use the browser UTC date.
         date.classList.add('overdue');
         const label = document.createElement('span');

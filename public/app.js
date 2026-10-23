@@ -5,18 +5,10 @@
  * 状态中文映射与后端统一：TODO→待办、DOING→进行中、DONE→已完成。
  */
 
-const STATUS_LABEL = {
-  TODO: '待办',
-  DOING: '进行中',
-  DONE: '已完成',
-};
+const STATUS_LABEL = TaskContract.STATUS_LABELS;
 
 // US06 优先级中文映射，与后端统一：HIGH→高、MEDIUM→中、LOW→低
-const PRIORITY_LABEL = {
-  HIGH: '高',
-  MEDIUM: '中',
-  LOW: '低',
-};
+const PRIORITY_LABEL = TaskContract.PRIORITY_LABELS;
 
 const memberListEl = document.getElementById('member-list');
 const taskListEl = document.getElementById('task-list');
@@ -34,6 +26,7 @@ const serviceStatus = createServiceStatus(
 );
 
 let members = [];
+let creationPending = false;
 // US07：迭代 id -> 迭代对象；为空时不显示迭代控件，也不伪造选项
 let iterationById = new Map();
 
@@ -101,7 +94,7 @@ async function loadMembers() {
     } else {
       memberMessageEl.textContent = `共 ${members.length} 位成员，创建任务时可从以下成员中选择负责人。`;
       assigneeEl.disabled = !AppSession.canWrite();
-      createTaskEl.disabled = !AppSession.canWrite();
+      createTaskEl.disabled = creationPending || !AppSession.canWrite();
     }
   } catch (err) {
     memberListEl.innerHTML = '<li class="empty">成员加载失败</li>';
@@ -127,7 +120,7 @@ async function loadTasks() {
   tasks.forEach((t) => {
     const assignee = members.find((m) => m.id === t.assigneeId);
     // US06：旧数据可能没有 priority/dueDate，做容错，缺省显示为中
-    const priority = PRIORITY_LABEL[t.priority] ? t.priority : 'MEDIUM';
+    const priority = PRIORITY_LABEL[t.priority] ? t.priority : TaskContract.DEFAULT_PRIORITY;
     const dueDate = t.dueDate || null;
     // US07：迭代名来自迭代列表；未归属或列表未加载时不显示标签，但不会显示假名字
     const iteration = iterationById.get(t.iterationId);
@@ -149,7 +142,7 @@ async function loadTasks() {
     const statusSelect = document.createElement('select');
     statusSelect.disabled = !AppSession.canUpdateStatus();
     statusSelect.setAttribute('aria-label', `修改任务 ${t.title} 状态`);
-    ['TODO', 'DOING', 'DONE'].forEach((status) => {
+    TaskContract.VALID_STATUSES.forEach((status) => {
       const option = document.createElement('option');
       option.value = status;
       option.textContent = STATUS_LABEL[status];
@@ -160,7 +153,7 @@ async function loadTasks() {
       statusSelect.disabled = true;
       try { await updateTaskStatus(t.id, statusSelect.value); }
       catch (error) {
-        statusSelect.value = t.status || 'TODO';
+        statusSelect.value = t.status || TaskContract.DEFAULT_STATUS;
         taskMessageEl.textContent = error.message || '状态更新请求失败，请刷新确认后重试';
       } finally { statusSelect.disabled = !AppSession.canUpdateStatus(); }
     });
@@ -191,6 +184,7 @@ async function updateTaskStatus(taskId, status) {
 /** 提交创建任务；失败时在界面提示。 */
 async function handleSubmit(e) {
   e.preventDefault();
+  if (creationPending) return;
   messageEl.textContent = '';
   if (!AppSession.canWrite()) { messageEl.textContent = '当前角色不能创建任务'; return; }
 
@@ -212,35 +206,46 @@ async function handleSubmit(e) {
     return;
   }
 
-  const res = await AppSession.fetch('/api/tasks', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      title,
-      description,
-      assigneeId: Number(assigneeId),
-      priority,
-      dueDate: dueDate || null,
-      // US07：未选迭代时传 null（后端按“未归属”处理）
-      iterationId: iterationValue ? Number(iterationValue) : null,
-    }),
-  });
+  creationPending = true;
+  createTaskEl.disabled = true;
+  try {
+    const res = await AppSession.fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title,
+        description,
+        assigneeId: Number(assigneeId),
+        priority,
+        dueDate: dueDate || null,
+        // US07：未选迭代时传 null（后端按“未归属”处理）
+        iterationId: iterationValue ? Number(iterationValue) : null,
+      }),
+    });
 
-  if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
-    messageEl.textContent = data.error || '创建失败';
-    return;
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      messageEl.textContent = data.error || '创建失败';
+      return;
+    }
+
+    // 成功后清空表单并刷新任务列表；刷新失败不能冒称创建失败。
+    document.getElementById('task-title').value = '';
+    document.getElementById('task-desc').value = '';
+    assigneeEl.value = '';
+    document.getElementById('task-priority').value = TaskContract.DEFAULT_PRIORITY;
+    document.getElementById('task-due').value = '';
+    const iterationReset = document.getElementById('task-iteration');
+    if (iterationReset) iterationReset.value = '';
+    messageEl.textContent = '任务已创建';
+    try { await loadTasks(); }
+    catch { messageEl.textContent = '任务已创建，但列表刷新失败。请刷新页面确认，不要重复提交。'; }
+  } catch {
+    messageEl.textContent = '无法确认创建结果，请先刷新任务列表确认，再决定是否重试。';
+  } finally {
+    creationPending = false;
+    createTaskEl.disabled = !AppSession.canWrite() || members.length === 0;
   }
-
-  // 成功后清空表单并刷新任务列表
-  document.getElementById('task-title').value = '';
-  document.getElementById('task-desc').value = '';
-  assigneeEl.value = '';
-  document.getElementById('task-priority').value = 'MEDIUM';
-  document.getElementById('task-due').value = '';
-  const iterationReset = document.getElementById('task-iteration');
-  if (iterationReset) iterationReset.value = '';
-  await loadTasks();
 }
 
 /** 转义 HTML，防止成员/任务内容注入。 */
@@ -253,7 +258,7 @@ function escapeHtml(str) {
 }
 
 formEl.addEventListener('submit', event => handleSubmit(event)
-  .catch(() => { messageEl.textContent = '创建请求失败，请重试'; }));
+  .catch(() => { messageEl.textContent = '无法确认创建结果，请先刷新任务列表确认，再决定是否重试。'; }));
 
 /** 任务加载异常独立显示，不覆盖已经成功读取的成员列表。 */
 async function refreshTaskList() {

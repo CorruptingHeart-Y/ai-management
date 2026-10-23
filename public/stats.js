@@ -10,16 +10,11 @@
  */
 
 (function init() {
-  const STATUS_META = [
-    { key: 'TODO', label: '待办', tone: 'todo' },
-    { key: 'DOING', label: '进行中', tone: 'doing' },
-    { key: 'DONE', label: '已完成', tone: 'done' },
-  ];
-  const PRIORITY_META = [
-    { key: 'HIGH', label: '高', tone: 'done' },
-    { key: 'MEDIUM', label: '中', tone: 'doing' },
-    { key: 'LOW', label: '低', tone: 'todo' },
-  ];
+  const STATUS_META = TaskContract.VALID_STATUSES.map(key => ({ key,
+    label: TaskContract.STATUS_LABELS[key], tone: key.toLowerCase() }));
+  const priorityTones = { HIGH: 'done', MEDIUM: 'doing', LOW: 'todo' };
+  const PRIORITY_META = TaskContract.VALID_PRIORITIES.map(key => ({ key,
+    label: TaskContract.PRIORITY_LABELS[key], tone: priorityTones[key] }));
 
   const el = (id) => document.getElementById(id);
   const stateBox = el('stats-state');

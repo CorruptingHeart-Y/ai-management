@@ -1,22 +1,11 @@
 // Task 领域逻辑（US05 更新任务状态、US06 任务优先级与截止时间）
 // 统一任务状态与优先级字段，与工作安排第二节「统一数据约定」保持一致。
 
-// 任务状态枚举：只允许三种状态
-const TASK_STATUS = {
-  TODO: 'TODO',
-  DOING: 'DOING',
-  DONE: 'DONE',
-};
-
-// 状态对应的中文显示文案
-const STATUS_LABELS = {
-  TODO: '待办',
-  DOING: '进行中',
-  DONE: '已完成',
-};
-
-// 所有合法状态值
-const VALID_STATUSES = [TASK_STATUS.TODO, TASK_STATUS.DOING, TASK_STATUS.DONE];
+// 服务端和浏览器共用只读枚举与中文标签。
+const {
+  TASK_STATUS, STATUS_LABELS, VALID_STATUSES,
+  TASK_PRIORITY, PRIORITY_LABELS, VALID_PRIORITIES, DEFAULT_PRIORITY,
+} = require('../../public/task-contract');
 
 /**
  * 判断某个状态是否合法。
@@ -43,26 +32,6 @@ function updateTaskStatus(task, newStatus) {
   }
   return { ...task, status: newStatus };
 }
-
-// 任务优先级枚举（US06）：只允许三种优先级，缺省为中
-const TASK_PRIORITY = {
-  HIGH: 'HIGH',
-  MEDIUM: 'MEDIUM',
-  LOW: 'LOW',
-};
-
-// 优先级对应的中文显示文案
-const PRIORITY_LABELS = {
-  HIGH: '高',
-  MEDIUM: '中',
-  LOW: '低',
-};
-
-// 所有合法优先级值
-const VALID_PRIORITIES = [TASK_PRIORITY.HIGH, TASK_PRIORITY.MEDIUM, TASK_PRIORITY.LOW];
-
-// 新建任务时的缺省优先级
-const DEFAULT_PRIORITY = TASK_PRIORITY.MEDIUM;
 
 /**
  * 判断某个优先级是否合法。

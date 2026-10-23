@@ -1,0 +1,119 @@
+{
+  "recordedAt": "2026-10-23T15:47:00.418Z",
+  "sourceCommit": "1277431f397437013e8669768d0b0dc3df096be1",
+  "normalization": "UTF-8; CRLF to LF only for cross-checkout content comparison",
+  "files": [
+    {
+      "path": "docs/ai-interactions.md",
+      "bytes": 6378,
+      "rawSha256": "a354c397c996fe6c0da352e97750f42a3172baf224ba822cada031ba7b332f3e",
+      "normalizedLfSha256": "959e2797266dcf07937d3330ad3205848f2bb262de936a4fd38bd602c0d8cab0",
+      "lastContentCommit": "d44e3c9e5e2ae5a84019facd5470db75f6019833",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint2/baseline-facts/第7组_AI互动原始记录.txt",
+      "bytes": 19673,
+      "rawSha256": "4dc42f056c5cf89ca7e510c5bff0140077d55cc60fe0303c344ce74cf3803d90",
+      "normalizedLfSha256": "4860eeed9a6cc681a7429a933567136c96fbe1ad6177a9668dd6b7a8f628ab18",
+      "lastContentCommit": "b87fe431cabaeb857642d6659b528f18a890e847",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint2/ai/user-request-20261017.md",
+      "bytes": 6170,
+      "rawSha256": "547a9ef3db13bec720a862b6b5390b4143d46af5dbaa4cbb506bd9f26b51fe12",
+      "normalizedLfSha256": "91981603b5af10dd6c40a971b835fa5cce1125fe85c54084099d39f1f04e7d30",
+      "lastContentCommit": "b87fe431cabaeb857642d6659b528f18a890e847",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint2/ai/session-20261017.md",
+      "bytes": 4275,
+      "rawSha256": "f9b555da05fa8c10422ae81acf850efa14643d488061f49adf2122283a6fcfc4",
+      "normalizedLfSha256": "43ec8f25afaf886e2887c72d001bf1d6e09466047a928c8cc769e26150f0417f",
+      "lastContentCommit": "b87fe431cabaeb857642d6659b528f18a890e847",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint2/ai/final-response.md",
+      "bytes": 2525,
+      "rawSha256": "916b7e2880a6a4f157e3d09b2830ce7e8880f17cfd2d69f05475eec67c8f7685",
+      "normalizedLfSha256": "67501641223c44f5aa8d01fed2cee4856483ea6c552848f0d47a50ba4d78a54b",
+      "lastContentCommit": "b87fe431cabaeb857642d6659b528f18a890e847",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint2/table5-us10-ai-records.md",
+      "bytes": 4954,
+      "rawSha256": "4edc394dc1a919b5c7b74f7757f0f0624093d837d8fd0b833f2e43572898ff59",
+      "normalizedLfSha256": "e0ed012be67ae1f9c4fcb6117d859949c53c1cf2caaa08a02e093606fae66402",
+      "lastContentCommit": "992759edf05b0e81830cd007a67532f7047ca33a",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/us07/session-20261019.md",
+      "bytes": 3905,
+      "rawSha256": "137e563d649396396f1b8a252fa0d1edbc3e12f19fdcdf78a60358feeb429670",
+      "normalizedLfSha256": "b312fd93242cda809d41a5b75bd0c00e6d783006f826e05c88e988dd4df98740",
+      "lastContentCommit": "bda59fda2c94543afee481826f8cd0202f39edf5",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint3/us02-handoff-ai.md",
+      "bytes": 2015,
+      "rawSha256": "2b635ca40fb71e73cf8a3f37d503aefb15eda52cd1c8b45a04607a5f27f9608a",
+      "normalizedLfSha256": "cd2c29478f968b0fe63d7baf4dec4074aa6ad74a1b022a98ee232cb397d63848",
+      "lastContentCommit": "34a060461d0527dcf70f3f22f4068a07e54c9e4c",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint3/yang-session-20261021.md",
+      "bytes": 2487,
+      "rawSha256": "12b65156a0846e02fc8293dce22168dd5ba08c881c76c597c66ffcaa8141d982",
+      "normalizedLfSha256": "b2f4424396c23fb6f1c0433a0da4625c9f249d2bd1d0b108964908248a5868a1",
+      "lastContentCommit": "e049307b502fb6e6a01779284cfd295938f74c56",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint3/us11-us12/session-20261021.md",
+      "bytes": 6525,
+      "rawSha256": "eb991c09d94f081da52c412a7cd4086e56c04cd3c2918e3e46d898455db81724",
+      "normalizedLfSha256": "cbf9a36d0db6651b881283ed9265971bb70d2544d27a0caaf4318487f6b32660",
+      "lastContentCommit": "e4830b702a452da6ec776b546cf17e670654a4d6",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint3/us03-session-20261022.md",
+      "bytes": 2542,
+      "rawSha256": "059d8545e58676d5304b40730f84afb1b4021ad147663b546f78a6f772569687",
+      "normalizedLfSha256": "5d214512c45911e1c3462b08025367dc87b0fab35b032d93065b6dc9bd364e8f",
+      "lastContentCommit": "892d9c4540ed71f5fc3c681426a73a72cb511e80",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint3/integration-fixes-20261022.md",
+      "bytes": 8743,
+      "rawSha256": "35b03b7ac7faf91e8074986d1533f8f28072355887bd03e41ba7c6acff83a194",
+      "normalizedLfSha256": "4eb38758c6bdecaa74cb1c2b7b9b99a4adbdc2f36e17167fd5a38de4dd410b8c",
+      "lastContentCommit": "b24986e27354d5d9011f80844b7a891f2a6bedca",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint3/closeout-20261023.md",
+      "bytes": 6307,
+      "rawSha256": "5279d61cfd7937256e77d2a6cf0d9c08a9c54a3f8f77152be47928331f8b62ec",
+      "normalizedLfSha256": "a52cbfb4ed3bd54130a4ccd79fc9c2c79d2eab0b462ce0e7ec6e5eb27fc456c3",
+      "lastContentCommit": "1eef8dfa819570934d51640c51aa3a3c2da6534d",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    },
+    {
+      "path": "docs/sprint3/final-assets/session-record.md",
+      "bytes": 1715,
+      "rawSha256": "c1ac0859c26fe1d6928b0fbd33de2ea547d8a30d7758ea376280e146a09b303c",
+      "normalizedLfSha256": "6ac1a01b61d7f70b96f3418140122b21ce6d08c31f5a11e451d7c59d2c6fafcf",
+      "lastContentCommit": "fbd6f4540ee0248a6e42b4f664e3ba1b451e9aa4",
+      "provenance": "Existing repository source; not a restored full chat or human signature"
+    }
+  ]
+}

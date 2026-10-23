@@ -7,6 +7,8 @@ const {
   isValidPriority,
   isValidDueDate,
   DEFAULT_PRIORITY,
+  VALID_STATUSES,
+  TASK_STATUS,
 } = require('../domain/task');
 const { resolveIterationId } = require('../domain/iteration');
 
@@ -19,7 +21,7 @@ const { resolveIterationId } = require('../domain/iteration');
  *   - PATCH /api/tasks/:id/status 更新任务状态
  */
 
-const VALID_STATUS = ['TODO', 'DOING', 'DONE'];
+const VALID_STATUS = VALID_STATUSES;
 
 /**
  * @param {object} db createDb 返回的数据访问对象
@@ -90,7 +92,7 @@ function createTasksRouter(db) {
       description,
       assigneeId,
       // 新任务初始状态统一为 TODO（待办）
-      status: 'TODO',
+      status: TASK_STATUS.TODO,
       // US06：任务优先级与截止时间
       priority,
       dueDate,

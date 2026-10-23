@@ -16,6 +16,10 @@ const { SEED_USERS, verifyPassword, validateUser } = require('../domain/user');
  */
 function createAuthRouter(db, tokenStore) {
   const router = express.Router();
+  router.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+  });
 
   function getBearerToken(req) {
     const header = req.headers.authorization || '';
