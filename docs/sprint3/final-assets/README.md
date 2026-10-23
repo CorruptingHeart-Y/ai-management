@@ -13,5 +13,7 @@
 | 独立演示环境 | demo-environment.md；scripts/start-demo.cjs | 新目录/空闲端口/真实服务，17项HTTP检查通过 |
 | 归档清单 | delivery-index.md | 可归档资料与未闭合真实事项分别列出 |
 | 后续必须本人完成的事项 | remaining-work.md | 当前人工审查/会议/裁决/Tag缺口未掩盖 |
+| 浏览器主流程与权限异常核验 | browser-acceptance-20261023.md、evidence/browser-20261023 | 16项实际浏览器检查符合预期；回归重新139/139，人工确认待本人执行 |
+| 现存AI记录恢复与缺失说明 | ai-record-recovery.md、evidence/ai-record-recovery-manifest.json | 已找到14份现存来源并固定哈希；回溯摘要不冒充缺失原始聊天 |
 
 全量门禁仍递归执行原有测试。演示工具不改生产功能、数据、原测试、权限或既有展演材料；本分支供复核，不自动更新develop/main、发布或打Tag。

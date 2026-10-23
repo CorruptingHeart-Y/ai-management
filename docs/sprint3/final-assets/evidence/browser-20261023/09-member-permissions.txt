@@ -1,0 +1,87 @@
+- banner:
+  - heading "爱管理" [level=1]
+  - generic: Sprint 1 · 蜂鸟增量
+  - paragraph: 最小功能闭环：查看成员 (US01) → 创建任务 (US04) → 状态流转 (US05)
+  - generic "根据成员接口响应判断，不代表全部业务功能健康":
+    - status: 服务连接正常
+  - generic "登录状态":
+    - generic: pengjiacheng（成员：可更新状态）
+    - button "登出"
+    - alert
+- main:
+  - complementary:
+    - region "项目成员":
+      - heading "项目成员" [level=2]
+      - generic: US01 彭佳成
+      - status: 共 4 位成员，创建任务时可从以下成员中选择负责人。
+      - list:
+        - generic: 彭佳成
+        - generic: 产品与范围负责人
+        - generic: 朱传玺
+        - generic: 技术与架构负责人
+        - generic: 杨浩伟
+        - generic: 质量与风险负责人
+        - generic: 何健翔
+        - generic: AI协调与记录负责人
+    - heading "创建任务" [level=2]
+    - generic: US04 朱传玺
+    - status: 普通成员：可查看、筛选任务和更新任务状态；不能创建任务或管理角色。
+    - generic: 任务标题 *
+    - textbox "任务标题 *":
+      - /placeholder: 例如：完成 US01 成员验收演示
+    - generic: 任务描述
+    - textbox "任务描述":
+      - /placeholder: 填写任务细节与验收说明（选填）
+    - generic: 分配负责人 *
+    - combobox "分配负责人 *" [disabled]:
+      - option "—— 请选择成员 ——" [selected]
+      - option "彭佳成（产品与范围负责人）"
+      - option "朱传玺（技术与架构负责人）"
+      - option "杨浩伟（质量与风险负责人）"
+      - option "何健翔（AI协调与记录负责人）"
+    - generic: 优先级
+    - combobox "优先级":
+      - option "中" [selected]
+      - option "高"
+      - option "低"
+    - generic: 截止日期
+    - textbox "截止日期"
+    - generic: 迭代
+    - combobox "迭代":
+      - option "未归属" [selected]
+      - option "Sprint 1"
+      - option "Sprint 2"
+      - option "Sprint 3"
+    - alert
+    - button "创建任务" [disabled]:
+      - generic: 创建任务
+  - heading "任务列表" [level=2]
+  - generic: US05 何健翔
+  - navigation "任务视图":
+    - link "筛选任务、查看逾期与迭代分组":
+      - /url: task-filters.html
+    - text: ·
+    - link "任务统计":
+      - /url: stats.html
+  - generic: 任务创建后即时持久化到 data/db.json，可随时切换状态
+  - list:
+    - generic: 验收A：高优先级逾期任务
+    - generic: 👤 杨浩伟
+    - generic: 高
+    - generic: 截止 2000-01-01
+    - generic: Sprint 3
+    - generic: 2026-10-23 浏览器验收；仅临时数据
+    - text: 状态：
+    - combobox "修改任务 验收A：高优先级逾期任务 状态":
+      - option "待办"
+      - option "进行中" [selected]
+      - option "已完成"
+    - generic: 验收B：默认属性任务
+    - generic: 👤 彭佳成
+    - generic: 中
+    - text: 状态：
+    - combobox "修改任务 验收B：默认属性任务 状态":
+      - option "待办" [selected]
+      - option "进行中"
+      - option "已完成"
+  - alert

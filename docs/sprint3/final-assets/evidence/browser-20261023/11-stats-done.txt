@@ -1,0 +1,56 @@
+- banner:
+  - heading "爱管理" [level=1]
+  - generic: Sprint 2 · US10 状态统计
+  - paragraph: 按状态、优先级、负责人、迭代统计任务分布
+  - link "返回工作台":
+    - /url: index.html
+  - button "刷新"
+- main:
+  - heading "任务状态统计" [level=2]
+  - paragraph: 已更新 11:15:13
+  - region "任务总览":
+    - generic: 任务总数
+    - generic: "2"
+    - generic: 待办 TODO
+    - generic: "1"
+    - generic: 进行中 DOING
+    - generic: "0"
+    - generic: 已完成 DONE
+    - generic: "1"
+  - region "状态分布":
+    - heading "状态分布" [level=3]
+    - generic "待办"
+    - generic: "1"
+    - generic "进行中"
+    - generic: "0"
+    - generic "已完成"
+    - generic: "1"
+  - region "优先级分布（US06）":
+    - heading "优先级分布（US06）" [level=3]
+    - generic "高"
+    - generic: "1"
+    - generic "中"
+    - generic: "1"
+    - generic "低"
+    - generic: "0"
+  - region "按负责人（含 0 任务成员）":
+    - heading "按负责人（含 0 任务成员）" [level=3]
+    - generic "彭佳成"
+    - generic: "1"
+    - generic "朱传玺（空闲）"
+    - generic: "0"
+    - generic "杨浩伟"
+    - generic: "1"
+    - generic "何健翔（空闲）"
+    - generic: "0"
+  - region "按迭代（US07）":
+    - heading "按迭代（US07）" [level=3]
+    - generic "未分配"
+    - generic: "1"
+    - generic "Sprint 1"
+    - generic: "0"
+    - generic "Sprint 2"
+    - generic: "0"
+    - generic "Sprint 3"
+    - generic: "1"
+  - paragraph: 口径说明：旧任务缺字段时按 TODO / 中 / 未分配 计；引用不存在的迭代或负责人会单独列为「未知」，不会被静默丢弃。 数据只读，页面不会修改任务。

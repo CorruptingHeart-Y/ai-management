@@ -1,0 +1,91 @@
+{
+  "createdAt": "2026-10-23T15:18:11.4215431Z",
+  "baseline": "fbd6f4540ee0248a6e42b4f664e3ba1b451e9aa4",
+  "scope": "Existing repository records; not reconstructed raw conversations or proof of human review",
+  "files": [
+    {
+      "path": "docs/ai-interactions.md",
+      "bytes": 6378,
+      "sha256": "A354C397C996FE6C0DA352E97750F42A3172BAF224BA822CADA031BA7B332F3E",
+      "lastCommit": "d44e3c9e5e2ae5a84019facd5470db75f6019833"
+    },
+    {
+      "path": "docs/sprint2/baseline-facts/第7组_AI互动原始记录.txt",
+      "bytes": 19673,
+      "sha256": "4DC42F056C5CF89CA7E510C5BFF0140077D55CC60FE0303C344CE74CF3803D90",
+      "lastCommit": "b87fe431cabaeb857642d6659b528f18a890e847"
+    },
+    {
+      "path": "docs/sprint2/ai/user-request-20261017.md",
+      "bytes": 6170,
+      "sha256": "547A9EF3DB13BEC720A862B6B5390B4143D46AF5DBAA4CBB506BD9F26B51FE12",
+      "lastCommit": "b87fe431cabaeb857642d6659b528f18a890e847"
+    },
+    {
+      "path": "docs/sprint2/ai/session-20261017.md",
+      "bytes": 4275,
+      "sha256": "F9B555DA05FA8C10422AE81ACF850EFA14643D488061F49ADF2122283A6FCFC4",
+      "lastCommit": "b87fe431cabaeb857642d6659b528f18a890e847"
+    },
+    {
+      "path": "docs/sprint2/ai/final-response.md",
+      "bytes": 2525,
+      "sha256": "916B7E2880A6A4F157E3D09B2830CE7E8880F17CFD2D69F05475EEC67C8F7685",
+      "lastCommit": "b87fe431cabaeb857642d6659b528f18a890e847"
+    },
+    {
+      "path": "docs/sprint2/table5-us10-ai-records.md",
+      "bytes": 4954,
+      "sha256": "4EDC394DC1A919B5C7B74F7757F0F0624093D837D8FD0B833F2E43572898FF59",
+      "lastCommit": "992759edf05b0e81830cd007a67532f7047ca33a"
+    },
+    {
+      "path": "docs/us07/session-20261019.md",
+      "bytes": 3905,
+      "sha256": "137E563D649396396F1B8A252FA0D1EDBC3E12F19FDCDF78A60358FEEB429670",
+      "lastCommit": "bda59fda2c94543afee481826f8cd0202f39edf5"
+    },
+    {
+      "path": "docs/sprint3/us02-handoff-ai.md",
+      "bytes": 2015,
+      "sha256": "2B635CA40FB71E73CF8A3F37D503AEFB15EDA52CD1C8B45A04607A5F27F9608A",
+      "lastCommit": "34a060461d0527dcf70f3f22f4068a07e54c9e4c"
+    },
+    {
+      "path": "docs/sprint3/yang-session-20261021.md",
+      "bytes": 2487,
+      "sha256": "12B65156A0846E02FC8293DCE22168DD5BA08C881C76C597C66FFCAA8141D982",
+      "lastCommit": "e049307b502fb6e6a01779284cfd295938f74c56"
+    },
+    {
+      "path": "docs/sprint3/us11-us12/session-20261021.md",
+      "bytes": 6525,
+      "sha256": "EB991C09D94F081DA52C412A7CD4086E56C04CD3C2918E3E46D898455DB81724",
+      "lastCommit": "e4830b702a452da6ec776b546cf17e670654a4d6"
+    },
+    {
+      "path": "docs/sprint3/us03-session-20261022.md",
+      "bytes": 2542,
+      "sha256": "059D8545E58676D5304B40730F84AFB1B4021AD147663B546F78A6F772569687",
+      "lastCommit": "892d9c4540ed71f5fc3c681426a73a72cb511e80"
+    },
+    {
+      "path": "docs/sprint3/integration-fixes-20261022.md",
+      "bytes": 8743,
+      "sha256": "35B03B7AC7FAF91E8074986D1533F8F28072355887BD03E41BA7C6ACFF83A194",
+      "lastCommit": "b24986e27354d5d9011f80844b7a891f2a6bedca"
+    },
+    {
+      "path": "docs/sprint3/closeout-20261023.md",
+      "bytes": 6307,
+      "sha256": "5279D61CFD7937256E77D2A6CF0D9C08A9C54A3F8F77152BE47928331F8B62EC",
+      "lastCommit": "1eef8dfa819570934d51640c51aa3a3c2da6534d"
+    },
+    {
+      "path": "docs/sprint3/final-assets/session-record.md",
+      "bytes": 1702,
+      "sha256": "6AC1A01B61D7F70B96F3418140122B21CE6D08C31F5A11E451D7C59D2C6FAFCF",
+      "lastCommit": "fbd6f4540ee0248a6e42b4f664e3ba1b451e9aa4"
+    }
+  ]
+}
