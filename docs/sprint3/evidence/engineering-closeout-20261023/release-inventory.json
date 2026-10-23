@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-23T15:47:01.044Z",
+  "sha": "1277431f397437013e8669768d0b0dc3df096be1",
+  "command": "node docs/sprint3/checks/release-check.cjs",
+  "scope": "STATIC_INVENTORY_ONLY",
+  "requiredFiles": 17,
+  "missing": [],
+  "tests": {
+    "discoveredFiles": 20,
+    "files": [
+      "test/auth-handoff.test.js",
+      "test/auth.test.js",
+      "test/closeout-regression.test.js",
+      "test/e2e/exception-journey.test.js",
+      "test/e2e/main-journey.test.js",
+      "test/filter-mount.test.js",
+      "test/filter.test.js",
+      "test/iterations.test.js",
+      "test/members.test.js",
+      "test/permission.test.js",
+      "test/quality-policy.test.js",
+      "test/secured-composition.test.js",
+      "test/service-status.test.js",
+      "test/session-ui.test.js",
+      "test/sprint2-integration.test.js",
+      "test/stats.test.js",
+      "test/task-attrs.test.js",
+      "test/task-status.test.js",
+      "test/tasks.test.js",
+      "test/techdebt.test.js"
+    ],
+    "e2e": [
+      "test/e2e/exception-journey.test.js",
+      "test/e2e/main-journey.test.js"
+    ],
+    "recursivelyIncludedByConfiguration": true,
+    "executed": false,
+    "runtimeTodo": null,
+    "runtimeSkipped": null,
+    "runtimeCountsSource": "npm test actual TAP totals; no static regex inference"
+  },
+  "materialCheck": "PASS",
+  "releaseDecision": "HUMAN_APPROVAL_REQUIRED",
+  "problems": []
+}

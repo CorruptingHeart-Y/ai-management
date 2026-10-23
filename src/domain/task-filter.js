@@ -1,6 +1,7 @@
 'use strict';
 
 const { VALID_STATUSES, VALID_PRIORITIES, isValidDueDate } = require('./task');
+const { TASK_STATUS, DEFAULT_STATUS, DEFAULT_PRIORITY } = require('../../public/task-contract');
 
 const FILTER_NAMES = new Set(['status', 'priority', 'assigneeId', 'iterationId', 'overdue', 'q']);
 
@@ -62,7 +63,7 @@ function localDate(now = new Date()) {
 }
 
 function isOverdue(task, today = localDate()) {
-  return Boolean(task && task.status !== 'DONE' &&
+  return Boolean(task && task.status !== TASK_STATUS.DONE &&
     isValidDueDate(task.dueDate) && task.dueDate < today);
 }
 
@@ -89,8 +90,8 @@ function queryTasks(tasks, filters = {}, now = new Date()) {
   const today = localDate(now);
   const q = (filters.q || '').toLowerCase();
   const matched = tasks.filter((task) => {
-    if (filters.status !== undefined && legacyValue(task.status, 'TODO') !== filters.status) return false;
-    if (filters.priority !== undefined && legacyValue(task.priority, 'MEDIUM') !== filters.priority) return false;
+    if (filters.status !== undefined && legacyValue(task.status, DEFAULT_STATUS) !== filters.status) return false;
+    if (filters.priority !== undefined && legacyValue(task.priority, DEFAULT_PRIORITY) !== filters.priority) return false;
     if (filters.assigneeId !== undefined && task.assigneeId !== filters.assigneeId) return false;
     if (filters.iterationId !== undefined &&
       (task.iterationId === undefined ? null : task.iterationId) !== filters.iterationId) return false;

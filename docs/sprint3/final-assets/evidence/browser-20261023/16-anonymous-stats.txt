@@ -1,0 +1,29 @@
+- banner:
+  - heading "爱管理" [level=1]
+  - generic: Sprint 2 · US10 状态统计
+  - paragraph: 按状态、优先级、负责人、迭代统计任务分布
+  - link "返回工作台":
+    - /url: index.html
+  - button "刷新"
+- main:
+  - heading "任务状态统计" [level=2]
+  - paragraph: 读取失败
+  - status: 统计数据读取失败（请返回工作台登录）。请确认服务已启动，然后点击「刷新」重试。
+  - region "任务总览":
+    - generic: 任务总数
+    - generic: —
+    - generic: 待办 TODO
+    - generic: —
+    - generic: 进行中 DOING
+    - generic: —
+    - generic: 已完成 DONE
+    - generic: —
+  - region "状态分布":
+    - heading "状态分布" [level=3]
+  - region "优先级分布（US06）":
+    - heading "优先级分布（US06）" [level=3]
+  - region "按负责人（含 0 任务成员）":
+    - heading "按负责人（含 0 任务成员）" [level=3]
+  - region "按迭代（US07）":
+    - heading "按迭代（US07）" [level=3]
+  - paragraph: 口径说明：旧任务缺字段时按 TODO / 中 / 未分配 计；引用不存在的迭代或负责人会单独列为「未知」，不会被静默丢弃。 数据只读，页面不会修改任务。

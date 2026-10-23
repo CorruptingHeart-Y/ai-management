@@ -16,10 +16,8 @@
  * 纯函数：不读文件、不依赖 Express，便于单测与在别处复用（例如以后的导出功能）。
  */
 
-const STATUS_ORDER = ['TODO', 'DOING', 'DONE'];
-const PRIORITY_ORDER = ['HIGH', 'MEDIUM', 'LOW'];
-const DEFAULT_STATUS = 'TODO';
-const DEFAULT_PRIORITY = 'MEDIUM';
+const { VALID_STATUSES: STATUS_ORDER, VALID_PRIORITIES: PRIORITY_ORDER,
+  DEFAULT_STATUS, DEFAULT_PRIORITY } = require('../../public/task-contract');
 const UNASSIGNED_LABEL = '未分配';
 
 /**
@@ -76,8 +74,8 @@ function buildStats(data) {
   const tasks = Array.isArray(data && data.tasks) ? data.tasks : [];
   const iterations = Array.isArray(data && data.iterations) ? data.iterations : [];
 
-  const byStatus = { TODO: 0, DOING: 0, DONE: 0 };
-  const byPriority = { HIGH: 0, MEDIUM: 0, LOW: 0 };
+  const byStatus = Object.fromEntries(STATUS_ORDER.map(status => [status, 0]));
+  const byPriority = Object.fromEntries(PRIORITY_ORDER.map(priority => [priority, 0]));
   /** @type {Map<any, number>} */
   const assigneeCounts = new Map();
   /** @type {Map<any, number>} */

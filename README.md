@@ -2,6 +2,8 @@
 
 当前分支 integration/sprint3，尚未正式发布 v1.0.0。已包含登录/权限、任务属性、预置迭代归属、统计、筛选与逾期视图；原七份业务测试哈希受保护，npm test 递归执行所有测试（包括启动真实 server.js 的 E2E），TODO/skip 会阻断门禁。
 
+最新工程收尾补齐任务创建防重复/明确保存反馈、认证响应禁止缓存、跨端共享枚举，回归145/145。最新范围、证据和剩余事项见[工程收尾报告](docs/sprint3/engineering-closeout-20261023.md)；历史139/137/88项均对应各自旧提交。
+
 筛选入口 `/task-filters.html`，真实查询接口 `/api/task-query`。普通成员可以查看、筛选和更新任务状态；创建任务与账号角色管理仅管理员可用。完整能力与限制见 [候选发布说明](docs/sprint3/release-notes.md)、[用户手册](docs/sprint3/user-guide.md)、[收口记录](docs/sprint3/closeout-20261023.md)。以下 Sprint 1 目标和早期计数保留为历史记录，不代表当前完整范围或发布批准。
 
 ## 项目背景
@@ -45,7 +47,7 @@
 
 ## 运行指南
 
-环境要求：Node.js ≥ 18。
+已验证环境：Node.js 22/24（CI）。package.json保留旧的最低版本声明；本轮没有声称在所有较早版本上运行过。
 
 ```bash
 # 1. 安装依赖（仅 express 一个）
@@ -68,7 +70,7 @@ npm start
 | `yanghaowei` | 成员 |
 | `hejianxiang` | 成员 |
 
-> US02 只建立登录态（token + `/api/auth/me`），不拦截任何路由；权限控制（越权拦截）由 US03 实现。
+> US02负责登录态（token + `/api/auth/me`）；当前集成版同时启用US03全业务API权限检查。
 
 ### 基础权限（US03）
 
@@ -119,6 +121,10 @@ npm test
 | POST | `/api/tasks` | 创建并分配任务 | **US04** |
 | PATCH | `/api/tasks/:id/status` | 更新任务状态 | US05 |
 | GET | `/api/stats` | 任务统计：总数、按状态/优先级/负责人/迭代 | **US10**（Sprint 2） |
+| GET | `/api/iterations` | 读取预置迭代 | US07 |
+| GET | `/api/task-query` | 组合筛选、逾期、返回任务及计数 | US11/US12 |
+| GET | `/api/users` | 管理员查看账号公开字段 | US03 |
+| PATCH | `/api/users/:id/role` | 管理员修改角色，变化后撤会话 | US03 |
 | POST | `/api/auth/login` | 登录：校验凭证、签发 token | **US02**（Sprint 3） |
 | POST | `/api/auth/logout` | 登出：清除当前 token | **US02**（Sprint 3） |
 | GET | `/api/auth/me` | 当前登录用户 | **US02**（Sprint 3） |

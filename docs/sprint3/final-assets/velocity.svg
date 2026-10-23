@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400" preserveAspectRatio="xMinYMin meet" viewBox="0 0 760 400" version="1.0" fill-rule="evenodd">
+	<rect x="0" y="0" width="100%" height="100%" fill="white" /><title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="760" height="400" />
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-400)" style="clip-path: url(#clip)">
+		<g transform="">
+			<text x="35" y="365" style="font-family: Times-Roman; font-size: 20px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,730) scale(1,-1)">Historical accepted stories per Sprint</text>
+			<text x="35" y="342" style="font-family: Times-Roman; font-size: 11px;fill: rgb(29%,33%,38%); stroke:none;" transform="translate(0,684) scale(1,-1)">Story counts, not story points or person-hours</text>
+			<g transform="">
+				<g transform="">
+					<rect x="100.83333333333334" y="85.0" width="123.33333333333334" height="161.25" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: rgb(18%,36%,52%); fill-rule: evenodd;" />
+					<rect x="285.8333333333333" y="85.0" width="123.33333333333331" height="107.5" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: rgb(18%,36%,52%); fill-rule: evenodd;" />
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,162.5,246.25)">
+							<text x="-3.5" y="-5.600000000000001" style="font-family: Times-Roman; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-11) scale(1,-1)">3</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,347.5,192.5)">
+							<text x="-3.5" y="-5.600000000000001" style="font-family: Times-Roman; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-11) scale(1,-1)">2</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 70,85 L 440,85 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+					</g>
+					<g transform="">
+						<path d="M 70,85 L 70,80 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+						<path d="M 255,85 L 255,80 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+						<path d="M 440,85 L 440,80 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,162.5,80)">
+							<text x="-15.975000000000001" y="-10.0" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-20) scale(1,-1)">Sprint 1</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,347.5,80)">
+							<text x="-15.975000000000001" y="-10.0" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-20) scale(1,-1)">Sprint 2</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 70,85 L 70,300 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+					</g>
+					<g transform="">
+						<path d="M 70,85 L 65,85 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+						<path d="M 70,138.75 L 65,138.75 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+						<path d="M 70,192.5 L 65,192.5 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+						<path d="M 70,246.25 L 65,246.25 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+						<path d="M 70,300 L 65,300 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;" />
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,65,85)">
+							<text x="-5.0" y="-4.0" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,65,138.75)">
+							<text x="-5.0" y="-4.0" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">1</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,65,192.5)">
+							<text x="-5.0" y="-4.0" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">2</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,65,246.25)">
+							<text x="-5.0" y="-4.0" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">3</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,65,300)">
+							<text x="-5.0" y="-4.0" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">4</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<rect x="510" y="85" width="170" height="215" style="stroke: rgb(61%,63%,68%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,95%,96%); fill-rule: evenodd; stroke-dasharray: 4, 4;" />
+			<text x="532" y="212" style="font-family: Times-Roman; font-size: 18px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,424) scale(1,-1)">Sprint 3</text>
+			<text x="527" y="177" style="font-family: Times-Roman; font-size: 17px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,354) scale(1,-1)">Pending review</text>
+			<text x="516" y="146" style="font-family: Times-Roman; font-size: 12px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,292) scale(1,-1)">Not recorded as zero</text>
+			<text x="35" y="35" style="font-family: Times-Roman; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,70) scale(1,-1)">Sources: final Sprint 1 / Sprint 2 reports. Sprint 3 has four new story candidates plus US07 carryover.</text>
+		</g>
+	</g>
+</svg>

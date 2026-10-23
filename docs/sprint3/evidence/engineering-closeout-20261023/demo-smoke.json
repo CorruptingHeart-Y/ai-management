@@ -1,0 +1,126 @@
+{
+  "executedAt": "2026-10-23T15:47:00.963Z",
+  "command": "node scripts/check-demo.cjs",
+  "scope": "disposable demo HTTP smoke; not manual/browser approval",
+  "metadata": {
+    "scope": "ISOLATED_DEMO_NOT_PRODUCTION",
+    "dataFile": "C:\\Users\\HP\\AppData\\Local\\Temp\\ai-management-demo-cOssun\\demo-db.json",
+    "realDataUnchanged": true,
+    "persistence": "temporary directory retained after stop; no reset of existing files"
+  },
+  "passed": 17,
+  "checks": [
+    {
+      "name": "anonymous access blocked",
+      "actual": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "name": "admin login",
+      "actual": 200,
+      "expected": 200,
+      "pass": true
+    },
+    {
+      "name": "member login",
+      "actual": 200,
+      "expected": 200,
+      "pass": true
+    },
+    {
+      "name": "four members",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "name": "three iterations",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "empty fresh demo",
+      "actual": 0,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "name": "create overdue",
+      "actual": 201,
+      "expected": 201,
+      "pass": true
+    },
+    {
+      "name": "create future",
+      "actual": 201,
+      "expected": 201,
+      "pass": true
+    },
+    {
+      "name": "combined filters",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "overdue result",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "member create blocked",
+      "actual": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "name": "denied request preserves bytes",
+      "actual": "8d09c60a122e4510a682cecf26635a2cf455d5f778173e0cc15ca57b553d783c",
+      "expected": "8d09c60a122e4510a682cecf26635a2cf455d5f778173e0cc15ca57b553d783c",
+      "pass": true
+    },
+    {
+      "name": "member status allowed",
+      "actual": 200,
+      "expected": 200,
+      "pass": true
+    },
+    {
+      "name": "done excluded",
+      "actual": 0,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "name": "statistics consistent",
+      "actual": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "expected": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "pass": true
+    },
+    {
+      "name": "real data unchanged",
+      "actual": "14459dfc3a8f4ab5636e746e374e5813a8c5bd2e3a17b0a9e8872c3237bb052f",
+      "expected": "14459dfc3a8f4ab5636e746e374e5813a8c5bd2e3a17b0a9e8872c3237bb052f",
+      "pass": true
+    },
+    {
+      "name": "reset option rejected",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    }
+  ]
+}

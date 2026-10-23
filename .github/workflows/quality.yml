@@ -31,6 +31,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/quality-evidence"
           set -o pipefail
           node scripts/verify-sprint3.cjs 2>&1 | tee "$RUNNER_TEMP/quality-evidence/quality.tap"
+      - name: Check the isolated demo environment
+        shell: bash
+        run: node scripts/check-demo.cjs > "$RUNNER_TEMP/quality-evidence/demo-smoke.json"
       - name: Preserve actual output even on failure
         if: always()
         uses: actions/upload-artifact@v4
