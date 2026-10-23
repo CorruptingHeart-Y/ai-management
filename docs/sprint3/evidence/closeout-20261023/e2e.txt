@@ -1,0 +1,10 @@
+✔ E2E production permission journey: strict 401/403/400/404/500 and no corruption (826.4257ms)
+✔ E2E production main journey: login/create/filter/overdue/status/stats/logout/restart (838.449ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1064.6894
