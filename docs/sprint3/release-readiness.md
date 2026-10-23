@@ -3,13 +3,13 @@
 2026-10-23 集成更新，原稿何健翔；AI 仅准备证据。人工检查人：何健翔；本次签字/日期/SHA：待本人填写。
 候选分支：integration/sprint3（b24986e + release-readiness@beda781 + 本轮严格 E2E/文档调整）。未发布，未打 v1.0.0。
 
-2026-10-23工程收尾补充：43587ed的收尾资产已纳入准备分支；最新代码审查与新增修复见[工程收尾报告](engineering-closeout-20261023.md)。全量145项，证据在evidence/engineering-closeout-20261023；既有139项记录保留为历史。浏览器已有16组证据，本次再核对共享枚举后的工作台/统计/筛选三页；仍待何健翔实际确认并签字。
+2026-10-23工程收尾补充：43587ed的收尾资产已纳入集成；最新代码审查与新增修复见[工程收尾报告](engineering-closeout-20261023.md)。全量149项；evidence/engineering-closeout-20261023保留首次145项记录，后续精确SHA干净门禁和解压包验证在交付的verification目录与CI中。浏览器已有16组证据，本次再核对共享枚举后的工作台/统计/筛选三页；仍待何健翔实际确认并签字。
 
 ## 自动化证据
 
 | # | 检查项 | 命令 / 证据 | 当前 |
 | --- | --- | --- | --- |
-| A1 | 全量回归，包括严格 E2E | npm test；evidence/engineering-closeout-20261023/npm-test.txt | 本次145/145，新增6项；旧139/137/62属各自历史提交 |
+| A1 | 全量回归，包括严格 E2E | npm test；最新CI及verification日志，首次145项原始记录保留 | 最新149项=原139+流程等6+源码包4；旧计数属各自历史提交 |
 | A2 | 原七份测试保护 | docs/sprint3/protected-baseline.json；npm test 校验哈希与原57项 | 以门禁实际结果为准；包含 Sprint1 四文件35项 |
 | A3 | 真实服务主旅程 | node --test test/e2e/main-journey.test.js | 真实 server.js；必须登录，使用 /api/task-query；无能力降级 |
 | A4 | 真实服务异常/权限旅程 | node --test test/e2e/exception-journey.test.js | 明确401/403/400/404/500，拒绝任意多状态兜底 |
